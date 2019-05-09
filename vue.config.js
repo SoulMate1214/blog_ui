@@ -1,5 +1,5 @@
-const path = require("path");
-const sourceMap = process.env.NODE_ENV === "development";
+const path = require("path")
+const sourceMap = process.env.NODE_ENV === "development"
 
 module.exports = {
   // 基本路径
@@ -9,15 +9,13 @@ module.exports = {
   // eslint-loader 是否在保存的时候检查
   lintOnSave: false,
   // webpack配置
-  // see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
-  chainWebpack: () => {},
-  configureWebpack: config => {
+  configureWebpack: (config) => {
     if (process.env.NODE_ENV === "production") {
       // 为生产环境修改配置...
-      config.mode = "production";
+      config.mode = "production"
     } else {
       // 为开发环境修改配置...
-      config.mode = "development";
+      config.mode = "development"
     }
 
     Object.assign(config, {
@@ -37,7 +35,7 @@ module.exports = {
           mixins: path.resolve(__dirname, "./src/mixins")
         }
       }
-    });
+    })
   },
   // 生产环境是否生成 sourceMap 文件
   productionSourceMap: sourceMap,
@@ -52,37 +50,31 @@ module.exports = {
     // 启用 CSS modules for all css / pre-processor files.
     modules: false
   },
-  // use thread-loader for babel & TS in production build
-  // enabled by default if the machine has more than 1 cores
   parallel: require("os").cpus().length > 1,
   // PWA 插件相关配置
-  // see https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa
   pwa: {},
   // webpack-dev-server 相关配置
   devServer: {
     open: process.platform === "darwin",
     host: "localhost",
-    port: 3001, //8080,
+    port: 3333,
     https: false,
     hotOnly: false,
     proxy: {
       // 设置代理
       // proxy all requests starting with /api to jsonplaceholder
       "/api": {
-        // target: "https://emm.cmccbigdata.com:8443/",
-        target: "http://localhost:3000/",
-        // target: "http://47.106.136.114/",
+        target: "http://localhost:1111/",
         changeOrigin: true,
         ws: true,
         pathRewrite: {
           "^/api": ""
         }
       }
-    },
-    before: app => {}
+    }
   },
   // 第三方插件配置
   pluginOptions: {
     // ...
   }
-};
+}

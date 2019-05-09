@@ -1,29 +1,18 @@
+<!--页面-->
 <template>
   <div class="left clearfix">
-    <h3 v-if="params.tag_id"
-        class="left-title">{{tag_name}} 相关的文章：</h3>
-    <ul class="articles-list"
-        id="list">
-      <transition-group name="el-fade-in">
-        <li @click="articleDetail(article._id)"
-            v-for="(article) in articlesList"
-            :key="article._id"
-            class="item">
-          <img class="wrap-img img-blur-done"
-               :data-src="article.img_url"
-               data-has-lazy-src="false"
-               src="../assets/bg.jpg"
-               alt="文章封面" />
+    <ul class="articles-list" id="list">
+      <transition-group name="el-fade-in" tag="p">
+        <li @click="articleDetail(article._links.self.href.substring(34))" v-for="(article,index) in articlesList" v-bind:key="index" class="item">
           <div class="content">
-            <h4 class="title">{{article.title}}</h4>
-            <p class="abstract">{{article.desc}}</p>
+            <h4 class="title">{{article.name}}</h4>
+            <p class="abstract">{{article.message}}</p>
             <div class="meta">
-              <span>查看 {{article.meta.views}}</span>
-              <span>评论 {{article.meta.comments}}</span>
-              <span>赞 {{article.meta.likes}}</span>
-              <span v-if="article.create_time"
-                    class="time">
-                {{formatTime(article.create_time)}}
+              <span>分类 {{article.classifyId}}</span>
+              <span>标签 {{article.label}}</span>
+              <span>浏览量 {{article.browseCount}}</span>
+              <span v-if="article.createTime" class="time">时间:
+                {{formatTime(article.createTime)}}
               </span>
             </div>
           </div>
@@ -35,6 +24,7 @@
   </div>
 </template>
 
+<!--逻辑-->
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { Route } from "vue-router";
@@ -43,12 +33,13 @@ import {
   getScrollTop,
   getDocumentHeight,
   getWindowHeight,
-  getQueryStringByName,
   timestampToTime
 } from "@/utils/utils";
-import LoadEnd from "@/components/loadEnd.vue";
-import LoadingCustom from "@/components/loading.vue";
 
+// @ts-ignore
+import LoadEnd from '@/components/loadEnd.vue';
+// @ts-ignore
+import LoadingCustom from "@/components/loading.vue";
 // 获取可视区域的高度
 const viewHeight = window.innerHeight || document.documentElement.clientHeight;
 // 用新的 throttle 包装 scroll 的回调
@@ -81,29 +72,17 @@ const lazyload = throttle(() => {
     LoadingCustom
   }
 })
-export default class Articles extends Vue {
-  // initial data
+
+export class Articles extends Vue {
   isLoadEnd: boolean = false;
   isLoading: boolean = false;
   articlesList: Array<object> = [];
-  total: number = 0;
-  tag_name: string = decodeURI(getQueryStringByName("tag_name"));
-  params: any = {
-    keyword: "",
-    likes: "", // 是否是热门文章
-    state: 1, // 文章发布状态 => 0 草稿，1 已发布,'' 代表所有文章
-    tag_id: getQueryStringByName("tag_id"),
-    category_id: getQueryStringByName("category_id"),
-    pageNum: 1,
-    pageSize: 10
-  };
 
-  // lifecycle hook
+  // 如果已经没有数据了，都可以继续滚动加载
   mounted() {
     this.handleSearch();
     window.onscroll = () => {
       if (getScrollTop() + getWindowHeight() > getDocumentHeight() - 100) {
-        // 如果不是已经没有数据了，都可以继续滚动加载
         if (this.isLoadEnd === false && this.isLoading === false) {
           this.handleSearch();
         }
@@ -114,52 +93,39 @@ export default class Articles extends Vue {
 
   @Watch("$route")
   routeChange(val: Route, oldVal: Route) {
-    this.tag_name = decodeURI(getQueryStringByName("tag_name"));
-    this.params.tag_id = getQueryStringByName("tag_id");
-    this.params.category_id = getQueryStringByName("category_id");
     this.articlesList = [];
-    this.params.pageNum = 1;
     this.handleSearch();
   }
 
-  // method
+  // 点击文章跳转页面
   articleDetail(id: string) {
-    // console.log("`id`", `/articleDetail?article_id=${id}`);
     let url: string = "";
     if (process.env.NODE_ENV === "development") {
-      url = "http://localhost:3001/articleDetail?";
+      url = "http://localhost:3333/articleDetail?";
     } else {
-      url = "https://biaochenxuying.cn/articleDetail?";
+      url = "https://Soul.cn/articleDetail?";
     }
     window.open(url + `article_id=${id}`);
   }
+
+  // 获取时间
   formatTime(value: any) {
     return timestampToTime(value, true);
   }
+
+  // axios请求后台
   async handleSearch() {
     this.isLoading = true;
-    const res: any = await this.$https.get(this.$urls.getArticleList, {
-      params: this.params
+    const res: any = await this.$https.get('http://127.0.0.1:1111/sysArticles', {
     });
     this.isLoading = false;
     if (res.status === 200) {
-      if (res.data.code === 0) {
-        const data: any = res.data.data;
-        this.articlesList = [...this.articlesList, ...data.list];
-        this.total = data.count;
-        this.params.pageNum++;
-        if (this.total === this.articlesList.length) {
-          this.isLoadEnd = true;
-        }
+        const data: any = res.data._embedded;
+        this.articlesList = [...this.articlesList, ...data.sysArticles];
+        console.log(this.articlesList);
         setTimeout(() => {
           lazyload();
         }, 10);
-      } else {
-        this.$message({
-          message: res.data.message,
-          type: "error"
-        });
-      }
     } else {
       this.$message({
         message: "网络错误!",
@@ -167,9 +133,11 @@ export default class Articles extends Vue {
       });
     }
   }
+
 }
 </script>
 
+<!--样式-->
 <style lang="less" scoped>
 .left {
   .articles-list {
@@ -229,7 +197,7 @@ export default class Articles extends Vue {
         a {
           margin-right: 10px;
           color: #b4b4b4;
-          &::hover {
+          &:hover {
             transition: 0.1s ease-in;
             -webkit-transition: 0.1s ease-in;
             -moz-transition: 0.1s ease-in;

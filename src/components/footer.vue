@@ -1,6 +1,6 @@
 
 <template>
-  <div class="footer"> 全栈修炼 ©2018 Created by BiaoChenXuYing </div>
+  <div class="footer"> 灵魂伴侣 ©2019 Create by 冫Soul丶 </div>
 </template>
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";

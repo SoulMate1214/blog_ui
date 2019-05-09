@@ -10,7 +10,7 @@
             <div class="avatar">
               <img class="auth-logo"
                    src="../assets/userLogo.jpeg"
-                   alt="BiaoChenXuYing">
+                   alt="冫Soul丶">
             </div>
             <div class="info">
               <span class="name">
@@ -116,13 +116,13 @@ export default class ArticleDetail extends Vue {
   total: number = 0;
   params: any = {
     id: "",
-    type: 1 //文章类型 => 1: 普通文章，2: 简历，3: 管理员介绍
+    classify_id: 1 //文章类型
   };
   content: string = "";
   articleDetail: any = {
     toc: "",
     _id: "",
-    author: "biaochenxuying",
+    author: "冫Soul丶",
     category: [],
     comments: [],
     create_time: "",
@@ -210,10 +210,10 @@ export default class ArticleDetail extends Vue {
   }
 
   beforeDestroy() {
-    document.title = "BiaoChenXuYing 的博客网站";
+    document.title = "冫Soul丶 的博客网站";
     document
       .getElementById("keywords")
-      .setAttribute("content", "BiaoChenXuYing 的博客网站");
+      .setAttribute("content", "冫Soul丶 的博客网站");
     document
       .getElementById("description")
       .setAttribute(

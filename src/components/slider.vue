@@ -3,7 +3,7 @@
     <img class="right-logo"
          src="../assets/userLogo.jpeg"
          alt="">
-    <div class="title">BiaoChenXuYing</div>
+    <div class="title">冫Soul丶</div>
     <div class="right-content">
       <!-- <div class="item">
         <div class="num">123</div>粉丝
@@ -26,16 +26,6 @@
                    :to="`/articles?tag_id=${item._id}&tag_name=${item.name}&category_id=`">
         <span :key="item._id">{{item.name}}</span>
       </router-link>
-    </div>
-    <div class="introduce">
-      <div class="title">本站公众号</div>
-      <div class="content">
-        <!-- 分享 WEB 全栈开发等相关的技术文章，热点资源<br />
-        全栈程序员的成长之路 -->
-        <img style="width:100%;margin-top:20px"
-             src="../assets/BiaoChenXuYing.png"
-             alt="公众号" />
-      </div>
     </div>
   </div>
 </template>
