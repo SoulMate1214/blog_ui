@@ -5,27 +5,23 @@
          alt="">
     <div class="title">冫Soul丶</div>
     <div class="right-content">
-      <!-- <div class="item">
-        <div class="num">123</div>粉丝
+      <div class="item">
+        <div class="num">3</div>文章数
       </div>
       <div class="item">
-        <div class="num">123</div>文章
+        <div class="num">1</div>分类数
       </div>
       <div class="item">
-        <div class="num">123</div>字数
+        <div class="num">4234</div>点赞数
       </div>
-      <div class="item">
-        <div class="num">123</div>收获喜欢
-      </div> -->
     </div>
     <div class="tags">
-      <div class="title">标签云</div>
-      <router-link v-for="item in list"
-                   class="item"
-                   :key="item._id"
-                   :to="`/articles?tag_id=${item._id}&tag_name=${item.name}&category_id=`">
-        <span :key="item._id">{{item.name}}</span>
-      </router-link>
+      <!--标签-->
+      <div class="tags">
+        <div class="title">标签云</div>
+        <br><br>
+        <el-tag size="medium" v-for="(tag,index) in list" :key="index" class="tag" type="success">{{tag.name}}</el-tag>
+      </div>
     </div>
   </div>
 </template>
@@ -38,38 +34,22 @@ export default class Slider extends Vue {
   isLoadEnd: boolean = false;
   isLoading: boolean = false;
   list: Array<object> = [];
-  total: number = 0;
-  params: any = {
-    keyword: "",
-    pageNum: 1,
-    pageSize: 100
-  };
+
 
   mounted() {
     this.handleSearch();
   }
 
+  //请求获取标签
   async handleSearch() {
     this.isLoading = true;
-    const res: any = await this.$https.get(this.$urls.getTagList, {
-      params: this.params
+    const res: any = await this.$https.get("http://127.0.0.1:1111/sysLabels", {
     });
     this.isLoading = false;
     if (res.status === 200) {
-      if (res.data.code === 0) {
-        const data: any = res.data.data;
-        this.list = [...this.list, ...data.list];
-        this.total = data.count;
-        this.params.pageNum++;
-        if (this.total === this.list.length) {
-          this.isLoadEnd = true;
-        }
-      } else {
-        this.$message({
-          message: res.data.message,
-          type: "error"
-        });
-      }
+      const data: any = res.data._embedded;
+      this.list = [...this.list, ...data.sysLabels];
+      this.isLoadEnd = true;
     } else {
       this.$message({
         message: "网络错误!",
@@ -83,12 +63,7 @@ export default class Slider extends Vue {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
 .slider {
-  // display: block;
-  // position: -webkit-sticky;
-  // position: sticky;
-  // top: 50px;
   padding-top: 50px;
-  // max-height: 1000px;
 }
 .right {
   text-align: center;

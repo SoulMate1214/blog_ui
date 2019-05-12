@@ -3,17 +3,14 @@
   <div class="left clearfix">
     <ul class="articles-list" id="list">
       <transition-group name="el-fade-in" tag="p">
-        <li @click="articleDetail(article._links.self.href.substring(34))" v-for="(article,index) in articlesList" v-bind:key="index" class="item">
+        <li @click="articleDetail(article.id)" v-for="(article,index) in articlesList" v-bind:key="index" class="item">
           <div class="content">
             <h4 class="title">{{article.name}}</h4>
             <p class="abstract">{{article.message}}</p>
             <div class="meta">
-              <span>分类 {{article.classifyId}}</span>
-              <span>标签 {{article.label}}</span>
-              <span>浏览量 {{article.browseCount}}</span>
-              <span v-if="article.createTime" class="time">时间:
-                {{formatTime(article.createTime)}}
-              </span>
+              <span>分类: {{article.remark}}</span>
+              <span>浏览量: {{article.browseCount}}</span>
+              <span v-if="article.createTime" class="time">文章创建时间:{{formatTime(article.createTime)}}</span>
             </div>
           </div>
         </li>
@@ -73,7 +70,7 @@ const lazyload = throttle(() => {
   }
 })
 
-export class Articles extends Vue {
+export default class Articles extends Vue {
   isLoadEnd: boolean = false;
   isLoading: boolean = false;
   articlesList: Array<object> = [];
@@ -105,7 +102,7 @@ export class Articles extends Vue {
     } else {
       url = "https://Soul.cn/articleDetail?";
     }
-    window.open(url + `article_id=${id}`);
+    window.open(url + `sysArticles=${id}`);
   }
 
   // 获取时间
@@ -116,13 +113,12 @@ export class Articles extends Vue {
   // axios请求后台
   async handleSearch() {
     this.isLoading = true;
-    const res: any = await this.$https.get('http://127.0.0.1:1111/sysArticles', {
+    const res: any = await this.$https.get('http://127.0.0.1:1111/article/findSysArticles', {
     });
     this.isLoading = false;
     if (res.status === 200) {
-        const data: any = res.data._embedded;
-        this.articlesList = [...this.articlesList, ...data.sysArticles];
-        console.log(this.articlesList);
+        const data: any = res.data;
+        this.articlesList = [...this.articlesList, ...data];
         setTimeout(() => {
           lazyload();
         }, 10);

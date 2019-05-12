@@ -1,6 +1,5 @@
 <template>
-  <div id="app"
-       class="container">
+  <div id="app" class="container">
     <Nav v-if="isShowNav" />
     <div class=" layout">
       <router-view />
@@ -14,10 +13,14 @@
 import { Vue, Watch } from "vue-property-decorator";
 import Component from "vue-class-component";
 import { Route } from "vue-router";
-import Nav from "@/components/nav.vue"; // @ is an alias to /src
-import Slider from "@/components/slider.vue"; // @ is an alias to /src
-import Footer from "@/components/footer.vue"; // @ is an alias to /src
-import ArrowUp from "@/components/arrowUp.vue"; // @ is an alias to /src
+// @ts-ignore
+import Nav from "@/components/nav.vue";
+// @ts-ignore
+import Slider from "@/components/slider.vue";
+// @ts-ignore
+import Footer from "@/components/footer.vue";
+// @ts-ignore
+import ArrowUp from "@/components/arrowUp.vue";
 import { isMobileOrPc } from "@/utils/utils";
 
 // 移动端 rem 单位适配
