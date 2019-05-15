@@ -35,7 +35,7 @@
     @Component({})
     export default class Home extends Vue {
         mounted() {
-            let sakura_point_vsh: string = `
+    let sakura_point_vsh: string = `
     uniform mat4 uProjection;
     uniform mat4 uModelview;
     uniform vec3 uResolution;

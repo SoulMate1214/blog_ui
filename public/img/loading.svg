@@ -1,20 +1,247 @@
-<svg width="135" height="135" viewBox="0 0 135 135" xmlns="http://www.w3.org/2000/svg" fill="#1890ff">
-    <path d="M67.447 58c5.523 0 10-4.477 10-10s-4.477-10-10-10-10 4.477-10 10 4.477 10 10 10zm9.448 9.447c0 5.523 4.477 10 10 10 5.522 0 10-4.477 10-10s-4.478-10-10-10c-5.523 0-10 4.477-10 10zm-9.448 9.448c-5.523 0-10 4.477-10 10 0 5.522 4.477 10 10 10s10-4.478 10-10c0-5.523-4.477-10-10-10zM58 67.447c0-5.523-4.477-10-10-10s-10 4.477-10 10 4.477 10 10 10 10-4.477 10-10z">
-        <animateTransform
-            attributeName="transform"
-            type="rotate"
-            from="0 67 67"
-            to="-360 67 67"
-            dur="2.5s"
-            repeatCount="indefinite"/>
-    </path>
-    <path d="M28.19 40.31c6.627 0 12-5.374 12-12 0-6.628-5.373-12-12-12-6.628 0-12 5.372-12 12 0 6.626 5.372 12 12 12zm30.72-19.825c4.686 4.687 12.284 4.687 16.97 0 4.686-4.686 4.686-12.284 0-16.97-4.686-4.687-12.284-4.687-16.97 0-4.687 4.686-4.687 12.284 0 16.97zm35.74 7.705c0 6.627 5.37 12 12 12 6.626 0 12-5.373 12-12 0-6.628-5.374-12-12-12-6.63 0-12 5.372-12 12zm19.822 30.72c-4.686 4.686-4.686 12.284 0 16.97 4.687 4.686 12.285 4.686 16.97 0 4.687-4.686 4.687-12.284 0-16.97-4.685-4.687-12.283-4.687-16.97 0zm-7.704 35.74c-6.627 0-12 5.37-12 12 0 6.626 5.373 12 12 12s12-5.374 12-12c0-6.63-5.373-12-12-12zm-30.72 19.822c-4.686-4.686-12.284-4.686-16.97 0-4.686 4.687-4.686 12.285 0 16.97 4.686 4.687 12.284 4.687 16.97 0 4.687-4.685 4.687-12.283 0-16.97zm-35.74-7.704c0-6.627-5.372-12-12-12-6.626 0-12 5.373-12 12s5.374 12 12 12c6.628 0 12-5.373 12-12zm-19.823-30.72c4.687-4.686 4.687-12.284 0-16.97-4.686-4.686-12.284-4.686-16.97 0-4.687 4.686-4.687 12.284 0 16.97 4.686 4.687 12.284 4.687 16.97 0z">
-        <animateTransform
-            attributeName="transform"
-            type="rotate"
-            from="0 67 67"
-            to="360 67 67"
-            dur="8s"
-            repeatCount="indefinite"/>
-    </path>
+<!--第一个svg-->
+<!--<svg width="60" height="60" viewBox="0 0 135 135" xmlns="http://www.w3.org/2000/svg" fill="#1890ff">-->
+<!--    <path d="M67.447 58c5.523 0 10-4.477 10-10s-4.477-10-10-10-10 4.477-10 10 4.477 10 10 10zm9.448 9.447c0 5.523 4.477 10 10 10 5.522 0 10-4.477 10-10s-4.478-10-10-10c-5.523 0-10 4.477-10 10zm-9.448 9.448c-5.523 0-10 4.477-10 10 0 5.522 4.477 10 10 10s10-4.478 10-10c0-5.523-4.477-10-10-10zM58 67.447c0-5.523-4.477-10-10-10s-10 4.477-10 10 4.477 10 10 10 10-4.477 10-10z">-->
+<!--        <animateTransform-->
+<!--            attributeName="transform"-->
+<!--            type="rotate"-->
+<!--            from="0 67 67"-->
+<!--            to="-360 67 67"-->
+<!--            dur="2.5s"-->
+<!--            repeatCount="indefinite"/>-->
+<!--    </path>-->
+<!--    <path d="M28.19 40.31c6.627 0 12-5.374 12-12 0-6.628-5.373-12-12-12-6.628 0-12 5.372-12 12 0 6.626 5.372 12 12 12zm30.72-19.825c4.686 4.687 12.284 4.687 16.97 0 4.686-4.686 4.686-12.284 0-16.97-4.686-4.687-12.284-4.687-16.97 0-4.687 4.686-4.687 12.284 0 16.97zm35.74 7.705c0 6.627 5.37 12 12 12 6.626 0 12-5.373 12-12 0-6.628-5.374-12-12-12-6.63 0-12 5.372-12 12zm19.822 30.72c-4.686 4.686-4.686 12.284 0 16.97 4.687 4.686 12.285 4.686 16.97 0 4.687-4.686 4.687-12.284 0-16.97-4.685-4.687-12.283-4.687-16.97 0zm-7.704 35.74c-6.627 0-12 5.37-12 12 0 6.626 5.373 12 12 12s12-5.374 12-12c0-6.63-5.373-12-12-12zm-30.72 19.822c-4.686-4.686-12.284-4.686-16.97 0-4.686 4.687-4.686 12.285 0 16.97 4.686 4.687 12.284 4.687 16.97 0 4.687-4.685 4.687-12.283 0-16.97zm-35.74-7.704c0-6.627-5.372-12-12-12-6.626 0-12 5.373-12 12s5.374 12 12 12c6.628 0 12-5.373 12-12zm-19.823-30.72c4.687-4.686 4.687-12.284 0-16.97-4.686-4.686-12.284-4.686-16.97 0-4.687 4.686-4.687 12.284 0 16.97 4.686 4.687 12.284 4.687 16.97 0z">-->
+<!--        <animateTransform-->
+<!--            attributeName="transform"-->
+<!--            type="rotate"-->
+<!--            from="0 67 67"-->
+<!--            to="360 67 67"-->
+<!--            dur="8s"-->
+<!--            repeatCount="indefinite"/>-->
+<!--    </path>-->
+<!--</svg>-->
+
+<!--第二个svg-->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+<rect x="0" y="0" width="4" height="10" fill="#58b2dc" transform="translate(0 15.1665)">
+<animateTransform attributeType="xml" attributeName="transform" type="translate" values="0 0; 0 20; 0 0" begin="0" dur="0.6s" repeatCount="indefinite"></animateTransform>
+</rect>
+    <rect x="10" y="0" width="4" height="10" fill="#ecb88a" transform="translate(0 11.5002)">
+<animateTransform attributeType="xml" attributeName="transform" type="translate" values="0 0; 0 20; 0 0" begin="0.2s" dur="0.6s" repeatCount="indefinite"></animateTransform>
+</rect>
+    <rect x="20" y="0" width="4" height="10" fill="#e87a90" transform="translate(0 1.83315)">
+<animateTransform attributeType="xml" attributeName="transform" type="translate" values="0 0; 0 20; 0 0" begin="0.4s" dur="0.6s" repeatCount="indefinite"></animateTransform>
+</rect>
 </svg>
+
+<!--第三个svg-->
+<!--<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200px"-->
+<!--     height="200px" viewBox="0 0 200 200"-->
+<!--     xml:space="preserve">-->
+<!--&lt;!&ndash;#4886CD为深色值   #9DBFE4为中间值 可以随意修改&ndash;&gt;-->
+<!--    <style type="text/css">-->
+<!--.left{fill:url(#left);}-->
+<!--.right{fill:url(#right);}-->
+<!--.top{fill:#4886CD;}-->
+<!--@keyframes load{-->
+<!--0%{transform:rotate(0)}-->
+<!--100%{transform:rotate(-360deg)}-->
+<!--}-->
+<!--#load{animation:load 1s  linear infinite; transform-origin:center center; }-->
+<!--</style>-->
+<!--    <g id="load">-->
+<!--<linearGradient id="right" gradientUnits="userSpaceOnUse" x1="150" y1="20" x2="150" y2="180">-->
+<!--<stop offset="0" style="stop-color:#4886CD"/>-->
+<!--    <stop offset="1" style="stop-color:#9DBFE4"/>&lt;!&ndash;蓝到浅蓝渐变&ndash;&gt;-->
+<!--</linearGradient>-->
+<!--        <path class="right"-->
+<!--              d="M100,0v20c44.1,0,80,35.9,80,80c0,44.1-35.9,80-80,80v20c55.2,0,100-44.8,100-100S155.2,0,100,0z"/>&lt;!&ndash;右半圆环&ndash;&gt;-->
+<!--        <linearGradient id="left" gradientUnits="userSpaceOnUse" x1="50" y1="0" x2="50" y2="180">-->
+<!--<stop offset="0" style="stop-color:#FFFFFF"/>-->
+<!--            <stop offset="1" style="stop-color:#9DBFE4"/>&lt;!&ndash;浅蓝到白色渐变&ndash;&gt;-->
+<!--</linearGradient>-->
+<!--        <path class="left"-->
+<!--              d="M20,100c0-44.1,35.9-80,80-80V0C44.8,0,0,44.8,0,100s44.8,100,100,100v-20C55.9,180,20,144.1,20,100z"/>&lt;!&ndash;左半圆环&ndash;&gt;-->
+<!--        <circle class="top" cx="100" cy="10" r="10"/>-->
+<!--</g>-->
+<!--</svg>-->
+
+<!--第四个svg-->
+<!--<svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"-->
+<!--     width="40px" height="40px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">-->
+<!--  <path opacity="0.2" fill="#000" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946-->
+<!--    s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634-->
+<!--    c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"/>-->
+<!--    <path fill="#000" d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0-->
+<!--    C22.32,8.481,24.301,9.057,26.013,10.047z">-->
+<!--    <animateTransform attributeType="xml"-->
+<!--                      attributeName="transform"-->
+<!--                      type="rotate"-->
+<!--                      from="0 20 20"-->
+<!--                      to="360 20 20"-->
+<!--                      dur="0.5s"-->
+<!--                      repeatCount="indefinite"/>-->
+<!--    </path>-->
+<!--  </svg>-->
+
+<!--第五个svg-->
+<!--<svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"-->
+<!--     width="40px" height="40px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">-->
+<!--  <path fill="#000" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z">-->
+<!--    <animateTransform attributeType="xml"-->
+<!--                      attributeName="transform"-->
+<!--                      type="rotate"-->
+<!--                      from="0 25 25"-->
+<!--                      to="360 25 25"-->
+<!--                      dur="0.6s"-->
+<!--                      repeatCount="indefinite"/>-->
+<!--    </path>-->
+<!--  </svg>-->
+
+<!--第六个svg-->
+<!--<svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"-->
+<!--     width="40px" height="40px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">-->
+<!--  <path fill="#000" d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">-->
+<!--    <animateTransform attributeType="xml"-->
+<!--                      attributeName="transform"-->
+<!--                      type="rotate"-->
+<!--                      from="0 25 25"-->
+<!--                      to="360 25 25"-->
+<!--                      dur="0.6s"-->
+<!--                      repeatCount="indefinite"/>-->
+<!--    </path>-->
+<!--  </svg>-->
+
+<!--第七个svg-->
+<!--<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"-->
+<!--     width="24px" height="24px" viewBox="0 0 24 24" style="enable-background:new 0 0 50 50;" xml:space="preserve">-->
+<!--    <rect x="0" y="0" width="4" height="7" fill="#333">-->
+<!--      <animateTransform  attributeType="xml"-->
+<!--                         attributeName="transform" type="scale"-->
+<!--                         values="1,1; 1,3; 1,1"-->
+<!--                         begin="0s" dur="0.6s" repeatCount="indefinite" />       -->
+<!--    </rect>-->
+
+<!--    <rect x="10" y="0" width="4" height="7" fill="#333">-->
+<!--      <animateTransform  attributeType="xml"-->
+<!--                         attributeName="transform" type="scale"-->
+<!--                         values="1,1; 1,3; 1,1"-->
+<!--                         begin="0.2s" dur="0.6s" repeatCount="indefinite" />       -->
+<!--    </rect>-->
+<!--    <rect x="20" y="0" width="4" height="7" fill="#333">-->
+<!--      <animateTransform  attributeType="xml"-->
+<!--                         attributeName="transform" type="scale"-->
+<!--                         values="1,1; 1,3; 1,1"-->
+<!--                         begin="0.4s" dur="0.6s" repeatCount="indefinite" />       -->
+<!--    </rect>-->
+<!--  </svg>-->
+
+<!--第八个svg-->
+<!--<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"-->
+<!--     width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">-->
+<!--    <rect x="0" y="13" width="4" height="5" fill="#333">-->
+<!--      <animate attributeName="height" attributeType="XML"-->
+<!--               values="5;21;5"-->
+<!--               begin="0s" dur="0.6s" repeatCount="indefinite" />-->
+<!--        <animate attributeName="y" attributeType="XML"-->
+<!--                 values="13; 5; 13"-->
+<!--                 begin="0s" dur="0.6s" repeatCount="indefinite" />-->
+<!--    </rect>-->
+<!--    <rect x="10" y="13" width="4" height="5" fill="#333">-->
+<!--      <animate attributeName="height" attributeType="XML"-->
+<!--               values="5;21;5"-->
+<!--               begin="0.15s" dur="0.6s" repeatCount="indefinite" />-->
+<!--        <animate attributeName="y" attributeType="XML"-->
+<!--                 values="13; 5; 13"-->
+<!--                 begin="0.15s" dur="0.6s" repeatCount="indefinite" />-->
+<!--    </rect>-->
+<!--    <rect x="20" y="13" width="4" height="5" fill="#333">-->
+<!--      <animate attributeName="height" attributeType="XML"-->
+<!--               values="5;21;5"-->
+<!--               begin="0.3s" dur="0.6s" repeatCount="indefinite" />-->
+<!--        <animate attributeName="y" attributeType="XML"-->
+<!--                 values="13; 5; 13"-->
+<!--                 begin="0.3s" dur="0.6s" repeatCount="indefinite" />-->
+<!--    </rect>-->
+<!--  </svg>-->
+
+<!--第九个svg-->
+<!--<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"-->
+<!--     width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">-->
+<!--    <rect x="0" y="0" width="4" height="20" fill="#333">-->
+<!--      <animate attributeName="opacity" attributeType="XML"-->
+<!--               values="1; .2; 1"-->
+<!--               begin="0s" dur="0.6s" repeatCount="indefinite" />-->
+<!--    </rect>-->
+<!--    <rect x="7" y="0" width="4" height="20" fill="#333">-->
+<!--      <animate attributeName="opacity" attributeType="XML"-->
+<!--               values="1; .2; 1"-->
+<!--               begin="0.2s" dur="0.6s" repeatCount="indefinite" />-->
+<!--    </rect>-->
+<!--    <rect x="14" y="0" width="4" height="20" fill="#333">-->
+<!--      <animate attributeName="opacity" attributeType="XML"-->
+<!--               values="1; .2; 1"-->
+<!--               begin="0.4s" dur="0.6s" repeatCount="indefinite" />-->
+<!--    </rect>-->
+<!--  </svg>-->
+
+<!--第十个svg-->
+<!--<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"-->
+<!--     width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">-->
+<!--    <rect x="0" y="10" width="4" height="10" fill="#333" opacity="0.2">-->
+<!--      <animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0s" dur="0.6s" repeatCount="indefinite" />-->
+<!--        <animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0s" dur="0.6s" repeatCount="indefinite" />-->
+<!--        <animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0s" dur="0.6s" repeatCount="indefinite" />-->
+<!--    </rect>-->
+<!--    <rect x="8" y="10" width="4" height="10" fill="#333"  opacity="0.2">-->
+<!--      <animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0.15s" dur="0.6s" repeatCount="indefinite" />-->
+<!--        <animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0.15s" dur="0.6s" repeatCount="indefinite" />-->
+<!--        <animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0.15s" dur="0.6s" repeatCount="indefinite" />-->
+<!--    </rect>-->
+<!--    <rect x="16" y="10" width="4" height="10" fill="#333"  opacity="0.2">-->
+<!--      <animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0.3s" dur="0.6s" repeatCount="indefinite" />-->
+<!--        <animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0.3s" dur="0.6s" repeatCount="indefinite" />-->
+<!--        <animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0.3s" dur="0.6s" repeatCount="indefinite" />-->
+<!--    </rect>-->
+<!--  </svg>-->
+
+<!--<svg width="45" height="45" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="#e87a90">-->
+<!--    <g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="2">-->
+<!--        <circle cx="22" cy="22" r="6" stroke-opacity="0">-->
+<!--            <animate attributeName="r"-->
+<!--                     begin="1.5s" dur="3s"-->
+<!--                     values="6;22"-->
+<!--                     calcMode="linear"-->
+<!--                     repeatCount="indefinite" />-->
+<!--            <animate attributeName="stroke-opacity"-->
+<!--                     begin="1.5s" dur="3s"-->
+<!--                     values="1;0" calcMode="linear"-->
+<!--                     repeatCount="indefinite" />-->
+<!--            <animate attributeName="stroke-width"-->
+<!--                     begin="1.5s" dur="3s"-->
+<!--                     values="2;0" calcMode="linear"-->
+<!--                     repeatCount="indefinite" />-->
+<!--        </circle>-->
+<!--        <circle cx="22" cy="22" r="6" stroke-opacity="0">-->
+<!--            <animate attributeName="r"-->
+<!--                     begin="3s" dur="3s"-->
+<!--                     values="6;22"-->
+<!--                     calcMode="linear"-->
+<!--                     repeatCount="indefinite" />-->
+<!--            <animate attributeName="stroke-opacity"-->
+<!--                     begin="3s" dur="3s"-->
+<!--                     values="1;0" calcMode="linear"-->
+<!--                     repeatCount="indefinite" />-->
+<!--            <animate attributeName="stroke-width"-->
+<!--                     begin="3s" dur="3s"-->
+<!--                     values="2;0" calcMode="linear"-->
+<!--                     repeatCount="indefinite" />-->
+<!--        </circle>-->
+<!--        <circle cx="22" cy="22" r="8">-->
+<!--            <animate attributeName="r"-->
+<!--                     begin="0s" dur="1.5s"-->
+<!--                     values="6;1;2;3;4;5;6"-->
+<!--                     calcMode="linear"-->
+<!--                     repeatCount="indefinite" />-->
+<!--        </circle>-->
+<!--    </g>-->
+<!--</svg>-->

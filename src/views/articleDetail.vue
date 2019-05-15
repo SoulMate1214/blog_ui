@@ -53,7 +53,8 @@
 
                 <!--点赞-->
                 <div class="heart">
-                    <el-button type="danger" size="large" icon="heart" :loading="isLoading" @click="">点赞</el-button>
+                    <el-button type="danger" size="large" icon="heart" :loading="isLoading" @click="likeArticle">点赞
+                    </el-button>
                 </div>
 
                 <!--评论提交-->
@@ -61,12 +62,12 @@
                     <!--评论框-->
                     <el-input placeholder="文明社会，理性评论" type="textarea" v-model="content"></el-input>
                     <!--评论按钮-->
-                    <el-button style="margin-top: 15px" type="primary" :loading="btnLoading" @click="">发 送</el-button>
+                    <el-button style="margin-top: 15px" type="primary" :loading="btnLoading" @click="handleAddComment">发 送</el-button>
                 </div>
 
-<!--                &lt;!&ndash;显示评论信息&ndash;&gt;-->
-<!--                <CommentList v-if="!isLoading" @refreshArticle="refreshArticle" :numbers="articleDetail.meta.comments"-->
-<!--                             :list="articleDetail.comments" :article_id="articleDetail._id"/>-->
+                <!--显示评论信息-->
+                <CommentList v-if="!isLoading" @refreshArticle="refreshArticle" :list="discussList"
+                             :article_id="articleDetail.id"/>
             </div>
 
             <!--左侧-->
@@ -81,10 +82,10 @@
 </template>
 
 <script lang="ts">
+    //导入
     import {Component, Prop, Vue} from "vue-property-decorator";
     import {
         timestampToTime,
-        getQueryStringByName,
         isMobileOrPc
     } from "@/utils/utils";
     // @ts-ignore
@@ -96,219 +97,191 @@
 
     declare var document: any;
 
+    /**
+     * 加载组件
+     */
     @Component({
         components: {
             LoadingCustom,
+            Slider,
             CommentList,
-            Slider
         }
     })
 
+    /**
+     * vue
+     */
     export default class ArticleDetail extends Vue {
         reverse: boolean = true;
         btnLoading: boolean = false;
         isLoadEnd: boolean = false;
         isLoading: boolean = false;
-        isMobileOrPc: boolean = isMobileOrPc();
-        articlesList: Array<object> = [];
-        listList: Array<object> = [];
-        total: number = 0;
-        params: any = {
-            id: "",
-            classify_id: 1 //文章类型
-        };
         content: string = "";
-        articleDetail: any = {
-            toc: "",
-            _id: "",
-            author: "冫Soul丶",
-            category: [],
-            comments: [],
-            create_time: "",
-            desc: "",
-            id: 16,
-            img_url: "",
-            numbers: 0,
-            keyword: [],
-            like_users: [],
-            meta: {views: 0, likes: 0, comments: 0},
-            origin: 0,
-            state: 1,
-            tags: [],
-            title: "",
-            update_time: ""
-        };
+        articleDetail: any = {};
+        isMobileOrPc: boolean = isMobileOrPc();
         labelList: Array<object> = [];
+        discussList: Array<object> = [];
+        params: any = {
+            articleId: "",
+            message: "",
+            user: "测试用户"
+        };
 
+        /**
+         * 初始执行
+         */
         mounted() {
-            this.params.id = this.$route.query.sysArticles;
-            if (this.$route.path === "/about") {
-                this.params.type = 3;
-            }
+            this.params.articleId = this.$route.query.sysArticles;
             this.handleSearch();
             this.labelSearch();
+            this.discussSearch();
         }
 
+        /**
+         * 刷新
+         */
         refreshArticle() {
             this.handleSearch();
             this.labelSearch();
+            this.discussSearch();
         }
 
-        // 评论
-        // async handleAddComment() {
-        //   if (!this.articleDetail._id) {
-        //     this.$message({
-        //       message: "该文章不存在！",
-        //       type: "error"
-        //     });
-        //     return;
-        //   }
-        //   if (!this.content) {
-        //     this.$message({
-        //       message: "请输入内容!",
-        //       type: "warning"
-        //     });
-        //     return;
-        //   }
-        //   let user_id = "";
-        //   if (window.sessionStorage.userInfo) {
-        //     let userInfo = JSON.parse(window.sessionStorage.userInfo);
-        //     user_id = userInfo._id;
-        //   } else {
-        //     this.$message({
-        //       message: "登录才能评论，请先登录！",
-        //       type: "warning"
-        //     });
-        //     return;
-        //   }
-        //
-        //   // 评论请求
-        //   this.btnLoading = true;
-        //   const res: any = await this.$https.post(this.$urls.addComment, {
-        //     id: this.articleDetail._id,
-        //     user_id,
-        //     content: this.content
-        //   });
-        //   this.btnLoading = false;
-        //   if (res.status === 200) {
-        //     if (res.data.code === 0) {
-        //       this.content = "";
-        //       this.$message({
-        //         message: res.data.message,
-        //         type: "success"
-        //       });
-        //       this.handleSearch();
-        //     } else {
-        //       this.$message({
-        //         message: res.data.message,
-        //         type: "error"
-        //       });
-        //     }
-        //   } else {
-        //     this.$message({
-        //       message: "网络错误!",
-        //       type: "error"
-        //     });
-        //   }
-        // }
-
-        //显示的信息
-        beforeDestroy() {
-            document.title = "冫Soul丶 的博客网站";
-            document
-                .getElementById("keywords")
-                .setAttribute("content", "冫Soul丶 的博客网站");
-            document
-                .getElementById("description")
-                .setAttribute(
-                    "content",
-                    "——分享冫Soul丶的成长历程与相关的技术文章"
-                );
-        }
-
-        // 获取时间
+        /**
+         * 获取时间
+         * @param value
+         */
         formatTime(value: any) {
             return timestampToTime(value, true);
         }
 
-        //请求文章内容
+        /**
+         * 请求文章内容
+         */
         async handleSearch() {
             this.isLoading = true;
-            const res: any = await this.$https.get('http://127.0.0.1:1111/article/findSysArticleById?articleId=' + this.params.id
-            );
+            const res: any = await this.$https.get('http://127.0.0.1:1111/article/findSysArticleById?articleId=' + this.params.articleId);
             this.isLoading = false;
             if (res.status === 200) {
                 this.articleDetail = res.data;
             } else {
                 this.$message({
-                    message: "网络错误!",
+                    message: "文章加载失败哦!",
                     type: "error"
                 });
             }
         }
 
-        //请求文章所属标签内容
+        /**
+         * 请求评论内容
+         */
+        async discussSearch() {
+            this.isLoading = true;
+            const res: any = await this.$https.get('http://127.0.0.1:1111/sysDiscusses');
+            this.isLoading = false;
+            if (res.status === 200) {
+                const data: any = res.data._embedded;
+                this.discussList = []
+                this.discussList = [...this.discussList, ...data.sysDiscusses];
+            } else {
+                this.$message({
+                    message: "评论加载失败哦!",
+                    type: "error"
+                });
+            }
+        }
+
+        /**
+         * 请求文章所属标签内容
+         */
         async labelSearch() {
             this.isLoading = true;
-            const res: any = await this.$https.get('http://127.0.0.1:1111/articleLabel/findLabelByArticleId?articleId=' + this.params.id
-            );
+            const res: any = await this.$https.get('http://127.0.0.1:1111/articleLabel/findLabelByArticleId?articleId=' + this.params.articleId);
             this.isLoading = false;
             if (res.status === 200) {
                 this.labelList = res.data;
             } else {
                 this.$message({
-                    message: "网络错误!",
+                    message: "所属标签加载失败哦!",
                     type: "error"
                 });
             }
         }
 
-        // 点赞请求
-        // async likeArticle() {
-        //   if (!this.articleDetail._id) {
-        //     this.$message({
-        //       message: "该文章不存在！",
-        //       type: "warning"
-        //     });
-        //     return;
-        //   }
-        //   let user_id: any = "";
-        //   if (window.sessionStorage.userInfo) {
-        //     let userInfo = JSON.parse(window.sessionStorage.userInfo);
-        //     user_id = userInfo._id;
-        //   } else {
-        //     this.$message({
-        //       message: "登录才能点赞，请先登录！",
-        //       type: "warning"
-        //     });
-        //     return;
-        //   }
-        //   let params: any = {
-        //     id: this.articleDetail._id,
-        //     user_id
-        //   };
-        //   const res: any = await this.$https.post(this.$urls.likeArticle, params);
-        //   this.isLoading = false;
-        //   if (res.status === 200) {
-        //     if (res.data.code === 0) {
-        //       ++this.articleDetail.meta.likes;
-        //       this.$message({
-        //         message: res.data.message,
-        //         type: "success"
-        //       });
-        //     } else {
-        //       this.$message({
-        //         message: res.data.message,
-        //         type: "error"
-        //       });
-        //     }
-        //   } else {
-        //     this.$message({
-        //       message: "网络错误!",
-        //       type: "error"
-        //     });
-        //   }
-        // }
+        /**
+         * 点赞请求
+         */
+        async likeArticle() {
+            if (!this.params.articleId) {
+                this.$message({
+                    message: "该文章不存在！",
+                    type: "warning"
+                });
+                return;
+            }
+            this.btnLoading = true;
+            const res: any = await this.$https.post('http://127.0.0.1:1111/article/saveLikeCount', this.params);
+            this.isLoading = false;
+            if (res.status === 200) {
+                this.$message({
+                    message: "非常感谢您的点赞!",
+                    type: "success"
+                });
+            } else {
+                this.$message({
+                    message: "出了点小错误,没赞成功哦!",
+                    type: "error"
+                });
+            }
+        }
+
+        /**
+         * 评论请求
+         */
+        async handleAddComment() {
+            if (!this.params.articleId) {
+                this.$message({
+                    message: "该文章不存在！",
+                    type: "error"
+                });
+                return;
+            }
+            if (!this.content) {
+                this.$message({
+                    message: "请输入内容!",
+                    type: "warning"
+                });
+                return;
+            }
+            // let user_id = "";
+            // if (window.sessionStorage.userInfo) {
+            //     let userInfo = JSON.parse(window.sessionStorage.userInfo);
+            //     user_id = userInfo._id;
+            // } else {
+            //     this.$message({
+            //         message: "登录才能评论，请先登录！",
+            //         type: "warning"
+            //     });
+            //     return;
+            // }
+            this.btnLoading = true;
+            this.params.message = this.content;
+            const res: any = await this.$https.post("http://127.0.0.1:1111/discuss/saveDiscuss", this.params);
+            this.btnLoading = false;
+            if (res.status === 200) {
+                this.content = "";
+                this.$message({
+                    message: "感谢评论!",
+                    type: "success"
+                });
+                this.discussSearch();
+            } else {
+                this.$message({
+                    message: "评论失败了哦,要不重新试试?",
+                    type: "error"
+                });
+            }
+        }
+
     }
 </script>
 <style lang="less" scoped>
@@ -324,9 +297,9 @@
             top: 0;
             max-width: 250px;
             border: none;
-            -moz-box-shadow: 0 0px 0px #fff;
-            -webkit-box-shadow: 0 0px 0px #fff;
-            box-shadow: 0 0px 0px #fff;
+            -moz-box-shadow: 0 0 0 #fff;
+            -webkit-box-shadow: 0 0 0 #fff;
+            box-shadow: 0 0 0 #fff;
 
             li.active {
                 color: #009a61;

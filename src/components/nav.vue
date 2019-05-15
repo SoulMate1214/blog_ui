@@ -35,7 +35,7 @@
                 </span>
                 <img v-if="!userInfo.avatar"
                      class="user-img"
-                     src="../assets/user.png"
+                     src="../assets/user1.png"
                      alt="冫Soul丶">
                 <img v-if="userInfo.avatar"
                      class="user-img"
