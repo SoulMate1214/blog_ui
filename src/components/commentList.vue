@@ -5,7 +5,6 @@
             <span>共 {{list.length}} 条评论</span>
         </div>
         <div v-for="(item, i) in list" :key="i" class="item">
-            <!--一级评论-->
             <!--加载用户头像-->
             <div class="item-header">
                 <div class="author">

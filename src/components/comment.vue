@@ -17,7 +17,6 @@
 <script lang="ts">
     import {Component, Emit, Prop, Vue} from "vue-property-decorator";
     import {Dialog, Form, FormItem, Input, Button, Message} from "element-ui";
-    import config from "@/utils/config";
 
     @Component({
         components: {
@@ -47,8 +46,6 @@
         mounted() {
             this.params.articleId = this.article_id;
             this.params.parentId = this.parent_id;
-            console.log(this.article_id);
-            console.log(this.parent_id);
         }
 
         /**
