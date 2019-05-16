@@ -123,11 +123,11 @@
         }
 
         /**
-         * axios请求后台
+         * axios请求后台获取文章列表
          */
         async handleSearch() {
             this.isLoading = true;
-            const res: any = await this.$https.get('http://127.0.0.1:1111/article/findSysArticles', {});
+            const res: any = await this.$https.get('http://127.0.0.1:1111/article/findSysArticles');
             this.isLoading = false;
             if (res.status === 200) {
                 const data: any = res.data;

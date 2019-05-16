@@ -53,25 +53,24 @@
 
                 <!--点赞-->
                 <div class="heart">
-                    <el-button type="danger" size="large" icon="heart" :loading="isLoading" @click="likeArticle">点赞
+                    <el-button type="danger" :loading="isLoading" @click="likeArticle" >点赞
                     </el-button>
                 </div>
 
                 <!--评论提交-->
-                <div class="comment">
+                <div class="heart">
                     <!--评论框-->
-                    <el-input placeholder="文明社会，理性评论" type="textarea" v-model="content"></el-input>
+                    <textarea autocomplete="off" placeholder="文明社会，理性评论" class="el-textarea__inner" style="min-height: 150px;" v-model="content"></textarea>
                     <!--评论按钮-->
-                    <el-button style="margin-top: 15px" type="primary" :loading="btnLoading" @click="handleAddComment">发 送</el-button>
+                    <el-button type="primary" :loading="btnLoading" style="margin-top: 15px"   @click="handleAddComment">发 送</el-button>
                 </div>
 
                 <!--显示评论信息-->
-                <CommentList v-if="!isLoading" @refreshArticle="refreshArticle" :list="discussList"
-                             :article_id="articleDetail.id"/>
+                <CommentList style="margin-top: 20%" v-if="!isLoading" @refreshArticle="refreshArticle" :list="discussList" :article_id="articleDetail.id"/>
             </div>
 
             <!--左侧-->
-            <div v-if="!isMobileOrPc" style="width: 23%" class="article-right fr">
+            <div v-if="!isMobileOrPc" style="width: 25%" class="article-right fr">
                 <Slider></Slider>
             </div>
 
@@ -117,14 +116,14 @@
         isLoadEnd: boolean = false;
         isLoading: boolean = false;
         content: string = "";
-        articleDetail: any = {};
         isMobileOrPc: boolean = isMobileOrPc();
+        articleDetail: any = {};
         labelList: Array<object> = [];
         discussList: Array<object> = [];
         params: any = {
             articleId: "",
             message: "",
-            user: "测试用户"
+            user: "游客"
         };
 
         /**
@@ -172,19 +171,19 @@
         }
 
         /**
-         * 请求评论内容
+         * 请求文章所属评论内容
          */
         async discussSearch() {
             this.isLoading = true;
-            const res: any = await this.$https.get('http://127.0.0.1:1111/sysDiscusses');
+            const res: any = await this.$https.get('http://127.0.0.1:1111/discuss/findDiscussByArticleId?articleId='+ this.params.articleId);
             this.isLoading = false;
             if (res.status === 200) {
-                const data: any = res.data._embedded;
-                this.discussList = []
-                this.discussList = [...this.discussList, ...data.sysDiscusses];
+                const data: any = res.data;
+                this.discussList = [];
+                this.discussList = [...this.discussList, ...data];
             } else {
                 this.$message({
-                    message: "评论加载失败哦!",
+                    message: "所属评论加载失败哦!",
                     type: "error"
                 });
             }
@@ -198,7 +197,9 @@
             const res: any = await this.$https.get('http://127.0.0.1:1111/articleLabel/findLabelByArticleId?articleId=' + this.params.articleId);
             this.isLoading = false;
             if (res.status === 200) {
-                this.labelList = res.data;
+                const data: any = res.data;
+                this.labelList = [];
+                this.labelList = [...this.labelList, ...data];
             } else {
                 this.$message({
                     message: "所属标签加载失败哦!",
@@ -220,7 +221,7 @@
             }
             this.btnLoading = true;
             const res: any = await this.$https.post('http://127.0.0.1:1111/article/saveLikeCount', this.params);
-            this.isLoading = false;
+            this.btnLoading = false;
             if (res.status === 200) {
                 this.$message({
                     message: "非常感谢您的点赞!",
@@ -252,17 +253,6 @@
                 });
                 return;
             }
-            // let user_id = "";
-            // if (window.sessionStorage.userInfo) {
-            //     let userInfo = JSON.parse(window.sessionStorage.userInfo);
-            //     user_id = userInfo._id;
-            // } else {
-            //     this.$message({
-            //         message: "登录才能评论，请先登录！",
-            //         type: "warning"
-            //     });
-            //     return;
-            // }
             this.btnLoading = true;
             this.params.message = this.content;
             const res: any = await this.$https.post("http://127.0.0.1:1111/discuss/saveDiscuss", this.params);
@@ -384,7 +374,7 @@
         }
 
         .content {
-            min-height: 300px;
+            min-height: 100px;
         }
     }
 

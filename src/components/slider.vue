@@ -6,13 +6,13 @@
     <div class="title">冫Soul丶</div>
     <div class="right-content">
       <div class="item">
-        <div class="num">3</div>文章数
+        <div class="num">{{articlesList.length}}</div>文章数
       </div>
       <div class="item">
-        <div class="num">1</div>分类数
+        <div class="num">{{articleClassList.length}}</div>分类数
       </div>
       <div class="item">
-        <div class="num">4234</div>点赞数
+        <div class="num">{{labelList.length}}</div>标签数
       </div>
     </div>
     <div class="tags">
@@ -20,7 +20,7 @@
       <div class="tags">
         <div class="title">标签云</div>
         <br><br>
-        <el-tag size="medium" v-for="(tag,index) in list" :key="index" class="tag" type="success">{{tag.name}}</el-tag>
+        <el-tag size="medium" v-for="(tag,index) in labelList" :key="index" class="tag" type="primary">{{tag.name}}</el-tag>
       </div>
     </div>
   </div>
@@ -33,22 +33,45 @@ import { Component, Vue } from "vue-property-decorator";
 export default class Slider extends Vue {
   isLoadEnd: boolean = false;
   isLoading: boolean = false;
-  list: Array<object> = [];
+  labelList: Array<object> = [];
+  articlesList: Array<object> = [];
+  articleClassList: Array<object> = [];
 
 
   mounted() {
-    this.handleSearch();
+    this.handleLabelSearch();
+    this.handleArticleSearch();
+    this.handleArticleClassSearch();
   }
 
-  //请求获取标签
-  async handleSearch() {
+  /**
+   * 获取文章列表
+   */
+  async handleArticleSearch() {
     this.isLoading = true;
-    const res: any = await this.$https.get("http://127.0.0.1:1111/sysLabels", {
-    });
+    const res: any = await this.$https.get('http://127.0.0.1:1111/article/findSysArticles');
+    this.isLoading = false;
+    if (res.status === 200) {
+      const data: any = res.data;
+      this.articlesList = [...this.articlesList, ...data];
+    } else {
+      this.$message({
+        message: "网络错误!",
+        type: "error"
+      });
+    }
+  }
+
+  /**
+   * 获取标签
+   */
+  async handleLabelSearch() {
+    this.isLoading = true;
+    const res: any = await this.$https.get("http://127.0.0.1:1111/sysLabels");
     this.isLoading = false;
     if (res.status === 200) {
       const data: any = res.data._embedded;
-      this.list = [...this.list, ...data.sysLabels];
+      this.labelList = [...this.labelList, ...data.sysLabels];
       this.isLoadEnd = true;
     } else {
       this.$message({
@@ -57,6 +80,25 @@ export default class Slider extends Vue {
       });
     }
   }
+
+  /**
+   * 获取分类列表
+   */
+  async handleArticleClassSearch() {
+    this.isLoading = true;
+    const res: any = await this.$https.get('http://127.0.0.1:1111/sysClassifies');
+    this.isLoading = false;
+    if (res.status === 200) {
+      const data: any = res.data._embedded;
+      this.articleClassList = [...this.articleClassList, ...data.sysClassifies];
+    } else {
+      this.$message({
+        message: "网络错误!",
+        type: "error"
+      });
+    }
+  }
+
 }
 </script>
 
@@ -119,6 +161,10 @@ export default class Slider extends Vue {
     padding: 5px 0 20px 0;
     margin-bottom: 10px;
     border-bottom: 1px solid #eee;
+    .tag {
+      margin-left: 5px;
+      border-right: 2px solid #eee;
+    }
     .title {
       font-size: 14px;
       color: #969696;

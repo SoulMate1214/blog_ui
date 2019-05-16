@@ -5,6 +5,7 @@
             <span>共 {{list.length}} 条评论</span>
         </div>
         <div v-for="(item, i) in list" :key="i" class="item">
+            <!--一级评论-->
             <!--加载用户头像-->
             <div class="item-header">
                 <div class="author">
@@ -15,72 +16,74 @@
 
                 <!--加载用户名及时间-->
                 <div class="info">
+                    <!--用户名-->
                     <div class="name" v-if="item.createUser!=null">
-                        {{item.createUser}}
+                        {{item.createUser}}{{item.id}}
                     </div>
                     <div class="name" v-else="item.createUser==null">
-                        无名氏
+                        游客 {{item.id}}
                     </div>
+                    <!--评论时间-->
                     <div class="time">
                         {{formatTime(item.createTime)}}
                     </div>
                 </div>
-
             </div>
+
             <!--具体内容-->
-            <div class="comment-detail">{{item.message}}</div>
+            <div class="comment-detail">
+                {{item.message}}
+            </div>
 
             <!--回复按钮-->
             <div class="item-comment">
-                <div @click="showCommentModal(item, false)" class="message heart">
+                <div @click="showCommentModal(item)" class="message heart">
                     <el-button size="small">回复</el-button>
                 </div>
             </div>
 
-            <!--            &lt;!&ndash;二级评论&ndash;&gt;-->
-            <!--            <div v-for="e in item.other_comments"-->
-            <!--                 :key="e._id"-->
-            <!--                 class="item-other">-->
-            <!--                <div class="item-header">-->
-            <!--                    &lt;!&ndash;加载用户头像&ndash;&gt;-->
-            <!--                    <div class="author">-->
-            <!--                        <div class="avator">-->
-            <!--                            <img v-if="e.user.avatar.length < 10" src="../assets/user1.png" alt="默认图片">-->
-            <!--                            <img v-else :src="e.user.avatar" alt="">-->
-            <!--                        </div>-->
-            <!--                    </div>-->
+            <!--回复内容-->
+            <div v-for="(childItem, j) in list" :key="j" class="item-other" v-if="childItem.parentId===item.id">
+                <div class="item-header">
+                    <!--加载用户头像-->
+                    <div class="author">
+                        <div class="avator">
+                            <img :src='handleImage()'>
+                        </div>
+                    </div>
 
-            <!--                    &lt;!&ndash;加载用户名及时间&ndash;&gt;-->
-            <!--                    <div class="info">-->
-            <!--                        <div class="name">-->
-            <!--                            {{e.user.name}}-->
-            <!--                            {{e.user.type === 0 ? "(作者)" : ""}}-->
-            <!--                        </div>-->
-            <!--                        <div class="time">-->
-            <!--                            {{formatTime(e.create_time)}}-->
-            <!--                        </div>-->
-            <!--                    </div>-->
-            <!--                </div>-->
+                    <!--加载用户名及时间-->
+                    <div class="info">
+                        <!--用户名-->
+                        <div class="name" v-if="childItem.createUser!=null">
+                            {{childItem.createUser}}{{childItem.id}}
+                        </div>
+                        <div class="name" v-else="childItem.createUser==null">
+                            游客 {{childItem.id}}
+                        </div>
+                        <!--评论时间-->
+                        <div class="time">
+                            {{formatTime(childItem.createTime)}}
+                        </div>
+                    </div>
+                </div>
 
-            <!--                &lt;!&ndash;加载用户名及时间&ndash;&gt;-->
-            <!--                <div class="comment-detail">-->
-            <!--                    {{"@" + e.to_user.name}}-->
-            <!--                    {{e.to_user.type === 0 ? "(作者)" : ""}}：{{e.content}}-->
-            <!--                </div>-->
+                <!--具体内容-->
+                <div class="comment-detail">
+                    {{childItem.message}}
+                </div>
 
-            <!--                &lt;!&ndash;三级回复按钮&ndash;&gt;-->
-            <!--                <div class="item-comment">-->
-            <!--                    <div class="message">-->
-            <!--                        <el-button @click="showCommentModal(item, e)"-->
-            <!--                                   size="small">回复-->
-            <!--                        </el-button>-->
-            <!--                    </div>-->
-            <!--                </div>-->
-            <!--            </div>-->
+                <!--回复按钮-->
+                <div class="item-comment">
+                    <div @click="showCommentModal(childItem)" class="message heart">
+                        <el-button size="small">回复</el-button>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <Comment :visible="visible" :to_user="to_user" :comment_id="comment_id" :article_id="article_id"
-                 @handleOk="handleOk" @cancel="handleCancel"/>
+        <!--回复组件-->
+        <Comment :visible="visible" :parent_id="parent_id" :article_id="article_id" @handleOk="handleOk"
+                 @cancel="handleCancel"/>
     </div>
 </template>
 <script lang="ts">
@@ -99,53 +102,46 @@
         @Prop({default: []}) list!: Array<object>;
         @Prop({default: 0}) numbers!: number;
         @Prop({default: ""}) article_id!: string;
+        parent_id: any = "";
         visible: boolean = false;
         content: any = "";
-        comment_id: any = "";
-        to_user: any = {};
 
+        /**
+         * 时间
+         */
         formatTime(value: any) {
             return timestampToTime(value, true);
         }
 
-        handleCancel() {
-            this.visible = false;
-        }
-
+        /**
+         * 随机加载头像
+         */
         handleImage() {
             return require("../assets/user" + Math.floor(Math.random() * 8) + ".png");
         }
 
-        // @Emit("refreshArticle")
+        /**
+         * 点击回复按钮显示回复组件
+         * @param item
+         */
+        showCommentModal(item: any) {
+            this.visible = true;
+            this.parent_id = item.id;
+        }
+
+        /**
+         * 确认回复
+         */
         handleOk() {
             this.visible = false;
             this.$emit("refreshArticle");
         }
 
         /**
-         * 添加评论
-         * @param item
-         * @param secondItem
+         * 取消回复
          */
-        showCommentModal(item: any, secondItem: any) {
-            if (!window.sessionStorage.userInfo) {
-                this.$message({
-                    message: "登录才能点赞，请先登录！",
-                    type: "warning"
-                });
-                return false;
-            }
-            // 添加三级评论
-            if (secondItem) {
-                this.visible = true;
-                this.comment_id = item._id;
-                this.to_user = secondItem.user;
-            } else {
-                // 添加二级评论
-                this.visible = true;
-                this.comment_id = item._id;
-                this.to_user = item.user;
-            }
+        handleCancel() {
+            this.visible = false;
         }
     }
 </script>
@@ -156,11 +152,7 @@
 
     .comment-list {
         text-align: left;
-        margin-top: 30px;
-        padding-top: 30px;
         position: relative;
-        // padding-left: 58px;
-        border-top: 1px solid #eee;
 
         .avatar {
             position: absolute;
@@ -180,15 +172,14 @@
         margin-top: 30px;
 
         .top-title {
-            padding-bottom: 20px;
-            font-size: 17px;
+            font-size: 20px;
             font-weight: 700;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid #9a9dc2;
         }
 
         .item {
             padding: 20px 0 30px;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid #cdd2e3;
 
             .item-header {
                 position: relative;
@@ -245,8 +236,8 @@
 
     .item-other {
         margin: 20px;
-        padding: 10px;
-        border-left: 2px solid #f0f0f0;
+        padding: 20px;
+        border-left: 1px solid #cdd2e3;
 
         .item-header {
             position: relative;

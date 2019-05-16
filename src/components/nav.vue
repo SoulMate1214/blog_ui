@@ -50,10 +50,10 @@
           <el-col v-else
                   :span="4">
             <div class="nav-right">
-              <el-button size="small"
+              <el-button size="medium"
                          type="primary"
                          @click="handleClick('login')">登录</el-button>
-              <el-button size="small"
+              <el-button size="medium"
                          type="danger"
                          @click="handleClick('register')">注册</el-button>
             </div>
