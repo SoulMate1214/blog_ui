@@ -1,3 +1,4 @@
+<!--页面-->
 <template>
     <div style="width: 100%">
         <div class="article clearfix">
@@ -76,13 +77,15 @@
 
             <!--拼命加载中-->
             <LoadingCustom v-if="isLoading"></LoadingCustom>
+            <LoadEnd v-if="isLoadEnd"></LoadEnd>
         </div>
     </div>
 </template>
 
+<!--逻辑-->
 <script lang="ts">
     //导入
-    import {Component, Prop, Vue} from "vue-property-decorator";
+    import {Component, Vue} from "vue-property-decorator";
     import {
         timestampToTime,
         isMobileOrPc

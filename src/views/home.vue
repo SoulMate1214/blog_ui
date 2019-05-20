@@ -1,3 +1,4 @@
+<!--页面-->
 <template>
     <div class="home">
         <canvas id="sakura"/>
@@ -13,11 +14,7 @@
             <div class="home-body">
                 <div class="list">
                     <router-link class="link" to="/articles">文章</router-link>
-                    <router-link class="link" to="/archive">归档</router-link>
-                    <router-link class="link" to="/project">项目</router-link>
                     <router-link class="link" to="/timeline">历程</router-link>
-                    <router-link class="link" to="/message">留言</router-link>
-                    <router-link class="link" to="/about">关于</router-link>
                     <a target="_blank" rel="noopener noreferrer" class="link" href="https://github.com/SoulMate1214">github</a>
                 </div>
                 <div class="introduce">自在飞花轻似梦</div>
@@ -27,6 +24,7 @@
     </div>
 </template>
 
+<!--逻辑-->
 <script lang="ts">
     // 满屏落花效果
     import {Component, Vue} from "vue-property-decorator";
@@ -1312,6 +1310,8 @@
         }
     }
 </script>
+
+<!--样式-->
 <style lang="less" scoped>
     .home {
         position: fixed;

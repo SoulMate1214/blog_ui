@@ -1,3 +1,4 @@
+<!--页面-->
 <template>
     <div class="comment-list">
         <!--共有几条评论-->
@@ -85,8 +86,12 @@
                  @cancel="handleCancel"/>
     </div>
 </template>
+
+<!--逻辑-->
 <script lang="ts">
-    import {Vue, Component, Prop, Emit} from "vue-property-decorator";
+    // @ts-ignore
+    import {Vue, Component, Prop} from "vue-property-decorator";
+    // @ts-ignore
     import {timestampToTime} from "@/utils/utils";
     // @ts-ignore
     import Comment from "@/components/comment.vue";
@@ -144,6 +149,8 @@
         }
     }
 </script>
+
+<!--样式-->
 <style lang="less" scoped>
     .comment-list {
         text-align: center;

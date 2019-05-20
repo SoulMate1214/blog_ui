@@ -4,7 +4,7 @@ export function throttle(fn: Function, delay: number) {
   let last = 0
   let timer: any = null
   // 将throttle处理结果当作函数返回
-  return function() {
+  return function () {
     // 保留调用时的this上下文
     let context = this
     // 保留调用时传入的参数
@@ -16,7 +16,7 @@ export function throttle(fn: Function, delay: number) {
     if (now - last < delay) {
       // 如果时间间隔小于我们设定的时间间隔阈值，则为本次触发操作设立一个新的定时器
       clearTimeout(timer)
-      timer = setTimeout(function() {
+      timer = setTimeout(function () {
         last = now
         fn.apply(context, args)
       }, delay)
@@ -33,29 +33,32 @@ export function setCookie(cName: string, value: any, expiredays: any) {
     let exdate = new Date()
     exdate.setDate(exdate.getDate() + expiredays)
     document.cookie =
-      cName +
-      "=" +
-      escape(value) +
-      // (expiredays == null ? '' : ';expires=' + exdate.toGMTString());
-      (expiredays == null ? "" : ";expires=" + exdate.toUTCString())
+            cName +
+            "=" +
+            escape(value) +
+            // (expiredays == null ? '' : ';expires=' + exdate.toGMTString());
+            (expiredays == null ? "" : ";expires=" + exdate.toUTCString())
   }
   if (expiredays === "100") {
     let exdate = new Date("2118-01-01 00:00:00")
     document.cookie =
-      cName +
-      "=" +
-      escape(value) +
-      // (expiredays == null ? '' : ';expires=' + exdate.toGMTString());
-      (expiredays == null ? "" : ";expires=" + exdate.toUTCString())
+            cName +
+            "=" +
+            escape(value) +
+            // (expiredays == null ? '' : ';expires=' + exdate.toGMTString());
+            (expiredays == null ? "" : ";expires=" + exdate.toUTCString())
   }
 }
+
 export function getCookie(cName: string) {
   if (document.cookie.length > 0) {
     let cStart = document.cookie.indexOf(cName + "=")
     if (cStart !== -1) {
       cStart = cStart + cName.length + 1
       let cEnd = document.cookie.indexOf(";", cStart)
-      if (cEnd === -1) {cEnd = document.cookie.length}
+      if (cEnd === -1) {
+        cEnd = document.cookie.length
+      }
       return unescape(document.cookie.substring(cStart, cEnd))
     }
   }
@@ -68,7 +71,9 @@ export function delCookie(name: string) {
   let cval = getCookie(name)
   if (cval != null)
   // document.cookie = name + '=' + cval + ';expires=' + exp.toGMTString();
-  {document.cookie = name + "=" + cval + ";expires=" + exp.toUTCString()}
+  {
+    document.cookie = name + "=" + cval + ";expires=" + exp.toUTCString()
+  }
 }
 
 // 清除cookie
@@ -89,6 +94,7 @@ export function getQueryString() {
   }
   return result
 }
+
 // 根据 QueryString 参数名称获取值
 export function getQueryStringByName(name: string) {
   let result = window.location.search.match(
@@ -99,6 +105,7 @@ export function getQueryStringByName(name: string) {
   }
   return result[1]
 }
+
 // 获取页面顶部被卷起来的高度
 export function getScrollTop() {
   return Math.max(
@@ -108,6 +115,7 @@ export function getScrollTop() {
     document.documentElement.scrollTop
   )
 }
+
 // 获取页面文档的总高度
 export function getDocumentHeight() {
   // 现代浏览器（IE9+和其他浏览器）和IE8的document.body.scrollHeight和document.documentElement.scrollHeight都可以
@@ -116,30 +124,32 @@ export function getDocumentHeight() {
     document.documentElement.scrollHeight
   )
 }
+
 // 页面浏览器视口的高度
 export function getWindowHeight() {
   return document.compatMode === "CSS1Compat"
     ? document.documentElement.clientHeight
     : document.body.clientHeight
 }
+
 // // 时间 格式化成 2018-12-12 12:12:00
 export function timestampToTime(timestamp: any, dayMinSecFlag: boolean) {
   const date = new Date(timestamp)
   const Y = date.getFullYear() + "-"
   const M =
-    (date.getMonth() + 1 < 10
-      ? "0" + (date.getMonth() + 1)
-      : date.getMonth() + 1) + "-"
+        (date.getMonth() + 1 < 10
+          ? "0" + (date.getMonth() + 1)
+          : date.getMonth() + 1) + "-"
   const D =
-    date.getDate() < 10 ? "0" + date.getDate() + " " : date.getDate() + " "
+        date.getDate() < 10 ? "0" + date.getDate() + " " : date.getDate() + " "
   const h =
-    date.getHours() < 10 ? "0" + date.getHours() + ":" : date.getHours() + ":"
+        date.getHours() < 10 ? "0" + date.getHours() + ":" : date.getHours() + ":"
   const m =
-    date.getMinutes() < 10
-      ? "0" + date.getMinutes() + ":"
-      : date.getMinutes() + ":"
+        date.getMinutes() < 10
+          ? "0" + date.getMinutes() + ":"
+          : date.getMinutes() + ":"
   const s =
-    date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds()
+        date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds()
   if (!dayMinSecFlag) {
     return Y + M + D
   }

@@ -1,12 +1,14 @@
+<!--页面-->
 <template>
     <Dialog title="回复" width="60%" :visible="dialogVisible" @close="cancel">
-
+        <!--回复表格-->
         <Form>
             <FormItem>
                 <Input type="textarea" v-model="content" placeholder="文明社会，理性评论" autocomplete="off"></Input>
             </FormItem>
         </Form>
 
+        <!--确认取消-->
         <div slot="footer" class="dialog-footer">
             <Button type="default" @click="cancel">取消</Button>
             <Button type="primary" @click="handleOk">确 定</Button>
@@ -14,6 +16,7 @@
     </Dialog>
 </template>
 
+<!--逻辑-->
 <script lang="ts">
     import {Component, Emit, Prop, Vue} from "vue-property-decorator";
     import {Dialog, Form, FormItem, Input, Button, Message} from "element-ui";
@@ -27,6 +30,7 @@
             Button
         }
     })
+
     export default class Comment extends Vue {
         @Prop({default: false}) visible!: boolean;
         @Prop({default: ""}) parent_id!: string;
@@ -35,7 +39,7 @@
         content: any = "";
         params: any = {
             articleId: "",
-            parentId:"",
+            parentId: "",
             message: "",
             user: "游客"
         };

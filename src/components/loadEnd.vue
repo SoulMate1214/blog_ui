@@ -1,16 +1,22 @@
+<!--页面-->
 <template>
-  <div class="load-end"> --------- 我也是有底线的啦 --------- </div>
+    <div class="load-end"> --------- 加载置底啦，不要再滑啦～～～---------</div>
 </template>
-<script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
 
-@Component
-export default class LoadEnd extends Vue {}
+<!--逻辑-->
+<script lang="ts">
+    import {Vue, Component} from "vue-property-decorator";
+
+    @Component
+    export default class LoadEnd extends Vue {
+    }
 </script>
+
+<!--样式-->
 <style scoped>
-.load-end {
-  text-align: center;
-  padding: 30px;
-}
+    .load-end {
+        text-align: center;
+        padding: 30px;
+    }
 </style>
 
