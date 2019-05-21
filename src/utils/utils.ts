@@ -69,9 +69,7 @@ export function delCookie(name: string) {
   let exp = new Date()
   exp.setTime(exp.getTime() - 1)
   let cval = getCookie(name)
-  if (cval != null)
-  // document.cookie = name + '=' + cval + ';expires=' + exp.toGMTString();
-  {
+  if (cval != null) {
     document.cookie = name + "=" + cval + ";expires=" + exp.toUTCString()
   }
 }

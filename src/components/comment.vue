@@ -19,7 +19,7 @@
 <!--逻辑-->
 <script lang="ts">
     import {Component, Emit, Prop, Vue} from "vue-property-decorator";
-    import {Dialog, Form, FormItem, Input, Button, Message} from "element-ui";
+    import {Dialog, Form, FormItem, Input, Button} from "element-ui";
 
     @Component({
         components: {

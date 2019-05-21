@@ -78,7 +78,7 @@
     // @ts-ignore
     import login from "@/components/login.vue";
     // @ts-ignore
-    import {isMobileOrPc, getQueryStringByName} from "@/utils/utils";
+    import {isMobileOrPc} from "@/utils/utils";
     // @ts-ignore
     import {Route} from "vue-router";
 

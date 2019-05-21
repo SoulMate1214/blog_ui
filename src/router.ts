@@ -12,7 +12,6 @@ export default new Router({
       // @ts-ignore
       component: () => import(/* webpackChunkName: "home" */ "./views/home.vue")
     },
-
     {
       path: "/articles",
       name: "articles",
@@ -33,6 +32,13 @@ export default new Router({
       component: () =>
           // @ts-ignore
           import(/* webpackChunkName: "articleDetail" */ "./views/articleDetail.vue")
+    },
+    {
+      path: "/adminHome",
+      name: "adminHome",
+      component: () =>
+          // @ts-ignore
+          import(/* webpackChunkName: "adminHome" */ "./views/adminHome.vue")
     }
   ]
 })

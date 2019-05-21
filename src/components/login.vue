@@ -84,7 +84,8 @@
                 Message.warning("密码不能为空");
                 return;
             }
-            this.submit();
+            this.$router.push({ path:'/adminHome'})
+            this.cancel();
         }
 
         /**

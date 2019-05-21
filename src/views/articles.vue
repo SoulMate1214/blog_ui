@@ -108,7 +108,7 @@
         articleDetail(id: string) {
             let url: string = "";
             if (process.env.NODE_ENV === "development") {
-                url = "http://localhost:3333/articleDetail?";
+                url = "http://localhost:2222/articleDetail?";
             } else {
                 url = "https://Soul.cn/articleDetail?";
             }

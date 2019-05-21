@@ -28,6 +28,6 @@ export const urls: object = {
 
   getProjectList: "getProjectList",
   getProjectDetail: "getProjectDetail"
-};
+}
 
-export default urls;
+export default urls
