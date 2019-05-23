@@ -3,41 +3,15 @@
     <div class="table">
         <h1 id="tableTitle">博客管理表</h1>
         <hr width="95%" color=#5193d5 SIZE=2>
-        <el-button id="tableInsert" type="primary" round>添加</el-button>
-        <el-table :data="data.tableData.slice((data.currentPage-1)*data.pageSize,data.currentPage*data.pageSize)" height="650" border>
-            <!--隐藏内容-->
-            <el-table-column type="expand">
-                <template slot-scope="scope">
-                    <el-form class="demo-table-expand" inline label-position="left">
-                        <el-form-item label="商品名称">
-                            <span>{{ scope.row.name }}</span>
-                        </el-form-item>
-                        <el-form-item label="所属店铺">
-                            <span>{{ scope.row.shop }}</span>
-                        </el-form-item>
-                        <el-form-item label="商品 ID">
-                            <span>{{ scope.row.id }}</span>
-                        </el-form-item>
-                        <el-form-item label="店铺 ID">
-                            <span>{{ scope.row.shopId }}</span>
-                        </el-form-item>
-                        <el-form-item label="商品分类">
-                            <span>{{ scope.row.category }}</span>
-                        </el-form-item>
-                        <el-form-item label="店铺地址">
-                            <span>{{ scope.row.address }}</span>
-                        </el-form-item>
-                        <el-form-item label="商品描述">
-                            <span>{{ scope.row.desc }}</span>
-                        </el-form-item>
-                    </el-form>
-                </template>
-            </el-table-column>
-
+        <el-button id="insertRow" type="primary" round>添加</el-button>
+        <el-button id="deleteRows" type="danger" round>批量删除</el-button>
+        <el-table :data="data.tableData.slice((data.currentPage-1)*data.pageSize,data.currentPage*data.pageSize)"
+                  :default-sort = "{prop: 'id', order: 'descending'}"
+                  height="650" border>
             <!--左固定列-->
-            <el-table-column fixed="left" label="编号" width="100" align="center">
+            <el-table-column fixed="left" label="编号" width="100" align="center" prop="id" sortable>
                 <template slot-scope="scope">
-                    <p>{{ scope.row.id }}</p>
+                    <p>{{ scope.row[6]}}</p>
                 </template>
             </el-table-column>
 
@@ -45,121 +19,42 @@
             <el-table-column fixed="left" type="selection" width="55" align="center">
             </el-table-column>
 
-            <!--其它列-->
-            <el-table-column fixed="left" label="日期" width="180" align="center">
+            <!--隐藏内容-->
+            <el-table-column type="expand" fixed="left">
                 <template slot-scope="scope">
-                    <i class="el-icon-time"></i>
-                    <span style="margin-left: 10px">{{ scope.row.date }}</span>
+                    <el-form class="demo-table-expand" inline label-position="left">
+                        <el-form-item label="编号">
+                            <span>{{scope.row[6]}}</span>
+                        </el-form-item>
+                        <el-form-item label="名称">
+                            <span>{{scope.row[0]}}</span>
+                        </el-form-item>
+                        <el-form-item label="类型">
+                            <span>{{scope.row[1]}}</span>
+                        </el-form-item>
+                        <el-form-item label="特点">
+                            <span>{{scope.row[2]}}</span>
+                        </el-form-item>
+                        <el-form-item label="地点">
+                            <span>{{scope.row[3]}}</span>
+                        </el-form-item>
+                        <el-form-item label="店名">
+                            <span>{{scope.row[4]}}</span>
+                        </el-form-item>
+                        <el-form-item label="店编号">
+                            <span>{{scope.row[5]}}</span>
+                        </el-form-item>
+                    </el-form>
                 </template>
             </el-table-column>
 
-            <el-table-column label="姓名" width="180" align="center">
+            <!--动态渲染其它列-->
+            <el-table-column :label="date" v-for="(date, index) in data.header" width="400">
                 <template slot-scope="scope">
-                    <el-popover placement="top" trigger="hover">
-                        <p>姓名: {{ scope.row.name }}</p>
-                        <p>住址: {{ scope.row.address }}</p>
-                        <div class="name-wrapper" slot="reference">
-                            <el-tag size="medium">{{ scope.row.name }}</el-tag>
-                        </div>
-                    </el-popover>
+                    {{ scope.row[index]}}
                 </template>
             </el-table-column>
 
-            <el-table-column label="姓名" width="180" align="center">
-                <template slot-scope="scope">
-                    <el-popover placement="top" trigger="hover">
-                        <p>姓名: {{ scope.row.name }}</p>
-                        <p>住址: {{ scope.row.address }}</p>
-                        <div class="name-wrapper" slot="reference">
-                            <el-tag size="medium">{{ scope.row.name }}</el-tag>
-                        </div>
-                    </el-popover>
-                </template>
-            </el-table-column>
-
-            <el-table-column label="姓名" width="180" align="center">
-                <template slot-scope="scope">
-                    <el-popover placement="top" trigger="hover">
-                        <p>姓名: {{ scope.row.name }}</p>
-                        <p>住址: {{ scope.row.address }}</p>
-                        <div class="name-wrapper" slot="reference">
-                            <el-tag size="medium">{{ scope.row.name }}</el-tag>
-                        </div>
-                    </el-popover>
-                </template>
-            </el-table-column>
-
-            <el-table-column label="姓名" width="180" align="center">
-                <template slot-scope="scope">
-                    <el-popover placement="top" trigger="hover">
-                        <p>姓名: {{ scope.row.name }}</p>
-                        <p>住址: {{ scope.row.address }}</p>
-                        <div class="name-wrapper" slot="reference">
-                            <el-tag size="medium">{{ scope.row.name }}</el-tag>
-                        </div>
-                    </el-popover>
-                </template>
-            </el-table-column>
-
-            <el-table-column label="姓名" width="180" align="center">
-                <template slot-scope="scope">
-                    <el-popover placement="top" trigger="hover">
-                        <p>姓名: {{ scope.row.name }}</p>
-                        <p>住址: {{ scope.row.address }}</p>
-                        <div class="name-wrapper" slot="reference">
-                            <el-tag size="medium">{{ scope.row.name }}</el-tag>
-                        </div>
-                    </el-popover>
-                </template>
-            </el-table-column>
-
-            <el-table-column label="姓名" width="180" align="center">
-                <template slot-scope="scope">
-                    <el-popover placement="top" trigger="hover">
-                        <p>姓名: {{ scope.row.name }}</p>
-                        <p>住址: {{ scope.row.address }}</p>
-                        <div class="name-wrapper" slot="reference">
-                            <el-tag size="medium">{{ scope.row.name }}</el-tag>
-                        </div>
-                    </el-popover>
-                </template>
-            </el-table-column>
-
-            <el-table-column label="姓名" width="180" align="center">
-                <template slot-scope="scope">
-                    <el-popover placement="top" trigger="hover">
-                        <p>姓名: {{ scope.row.name }}</p>
-                        <p>住址: {{ scope.row.address }}</p>
-                        <div class="name-wrapper" slot="reference">
-                            <el-tag size="medium">{{ scope.row.name }}</el-tag>
-                        </div>
-                    </el-popover>
-                </template>
-            </el-table-column>
-
-            <el-table-column label="姓名" width="180" align="center">
-                <template slot-scope="scope">
-                    <el-popover placement="top" trigger="hover">
-                        <p>姓名: {{ scope.row.name }}</p>
-                        <p>住址: {{ scope.row.address }}</p>
-                        <div class="name-wrapper" slot="reference">
-                            <el-tag size="medium">{{ scope.row.name }}</el-tag>
-                        </div>
-                    </el-popover>
-                </template>
-            </el-table-column>
-
-            <el-table-column label="姓名" width="180" align="center">
-                <template slot-scope="scope">
-                    <el-popover placement="top" trigger="hover">
-                        <p>姓名: {{ scope.row.name }}</p>
-                        <p>住址: {{ scope.row.address }}</p>
-                        <div class="name-wrapper" slot="reference">
-                            <el-tag size="medium">{{ scope.row.name }}</el-tag>
-                        </div>
-                    </el-popover>
-                </template>
-            </el-table-column>
 
             <!--右固定列-->
             <el-table-column fixed="right" width="150" align="center">
@@ -167,8 +62,10 @@
                     <el-input v-model="data.search" size="mini" placeholder="输入关键字搜索"/>
                 </template>
                 <template slot-scope="scope">
-                    <el-button @click="handleEdit(scope.$index, scope.row)" type="primary" icon="el-icon-edit" circle></el-button>
-                    <el-button @click="handleDelete(scope.$index, scope.row)" type="danger" icon="el-icon-delete" circle></el-button>
+                    <el-button @click="handleEdit(scope.$index, scope.row)" type="primary" icon="el-icon-edit"
+                               circle></el-button>
+                    <el-button @click="handleDelete(scope.$index, scope.row)" type="danger" icon="el-icon-delete"
+                               circle></el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -198,178 +95,44 @@
             pageSize: 10,
             articlesList: [],
             search: '',
-            tableData: [{
-                id: '1',
-                name: '好滋好味鸡蛋仔',
-                category: '江浙小吃、小吃零食',
-                desc: '荷兰优质淡奶，奶香浓而不腻',
-                address: '上海市普陀区真北路',
-                shop: '王小虎夫妻店',
-                shopId: '10333',
-                date: '2016-05-02',
-            }, {
-                id: '1',
-                name: '好滋好味鸡蛋仔',
-                category: '江浙小吃、小吃零食',
-                desc: '荷兰优质淡奶，奶香浓而不腻',
-                address: '上海市普陀区真北路',
-                shop: '王小虎夫妻店',
-                shopId: '10333',
-                date: '2016-05-02',
-            }, {
-                id: '1',
-                name: '好滋好味鸡蛋仔',
-                category: '江浙小吃、小吃零食',
-                desc: '荷兰优质淡奶，奶香浓而不腻',
-                address: '上海市普陀区真北路',
-                shop: '王小虎夫妻店',
-                shopId: '10333',
-                date: '2016-05-02',
-            }, {
-                id: '1',
-                name: '好滋好味鸡蛋仔',
-                category: '江浙小吃、小吃零食',
-                desc: '荷兰优质淡奶，奶香浓而不腻',
-                address: '上海市普陀区真北路',
-                shop: '王小虎夫妻店',
-                shopId: '10333',
-                date: '2016-05-02',
-            }, {
-                id: '1',
-                name: '好滋好味鸡蛋仔',
-                category: '江浙小吃、小吃零食',
-                desc: '荷兰优质淡奶，奶香浓而不腻',
-                address: '上海市普陀区真北路',
-                shop: '王小虎夫妻店',
-                shopId: '10333',
-                date: '2016-05-02',
-            }, {
-                id: '1',
-                name: '好滋好味鸡蛋仔',
-                category: '江浙小吃、小吃零食',
-                desc: '荷兰优质淡奶，奶香浓而不腻',
-                address: '上海市普陀区真北路',
-                shop: '王小虎夫妻店',
-                shopId: '10333',
-                date: '2016-05-02',
-            }, {
-                id: '1',
-                name: '好滋好味鸡蛋仔',
-                category: '江浙小吃、小吃零食',
-                desc: '荷兰优质淡奶，奶香浓而不腻',
-                address: '上海市普陀区真北路',
-                shop: '王小虎夫妻店',
-                shopId: '10333',
-                date: '2016-05-02',
-            }, {
-                id: '1',
-                name: '好滋好味鸡蛋仔',
-                category: '江浙小吃、小吃零食',
-                desc: '荷兰优质淡奶，奶香浓而不腻',
-                address: '上海市普陀区真北路',
-                shop: '王小虎夫妻店',
-                shopId: '10333',
-                date: '2016-05-02',
-            }, {
-                id: '1',
-                name: '好滋好味鸡蛋仔',
-                category: '江浙小吃、小吃零食',
-                desc: '荷兰优质淡奶，奶香浓而不腻',
-                address: '上海市普陀区真北路',
-                shop: '王小虎夫妻店',
-                shopId: '10333',
-                date: '2016-05-02',
-            }, {
-                id: '1',
-                name: '好滋好味鸡蛋仔',
-                category: '江浙小吃、小吃零食',
-                desc: '荷兰优质淡奶，奶香浓而不腻',
-                address: '上海市普陀区真北路',
-                shop: '王小虎夫妻店',
-                shopId: '10333',
-                date: '2016-05-02',
-            }, {
-                id: '1',
-                name: '好滋好味鸡蛋仔',
-                category: '江浙小吃、小吃零食',
-                desc: '荷兰优质淡奶，奶香浓而不腻',
-                address: '上海市普陀区真北路',
-                shop: '王小虎夫妻店',
-                shopId: '10333',
-                date: '2016-05-02',
-            }, {
-                id: '1',
-                name: '好滋好味鸡蛋仔',
-                category: '江浙小吃、小吃零食',
-                desc: '荷兰优质淡奶，奶香浓而不腻',
-                address: '上海市普陀区真北路',
-                shop: '王小虎夫妻店',
-                shopId: '10333',
-                date: '2016-05-02',
-            }, {
-                id: '1',
-                name: '好滋好味鸡蛋仔',
-                category: '江浙小吃、小吃零食',
-                desc: '荷兰优质淡奶，奶香浓而不腻',
-                address: '上海市普陀区真北路',
-                shop: '王小虎夫妻店',
-                shopId: '10333',
-                date: '2016-05-02',
-            }, {
-                id: '1',
-                name: '好滋好味鸡蛋仔',
-                category: '江浙小吃、小吃零食',
-                desc: '荷兰优质淡奶，奶香浓而不腻',
-                address: '上海市普陀区真北路',
-                shop: '王小虎夫妻店',
-                shopId: '10333',
-                date: '2016-05-02',
-            }, {
-                id: '1',
-                name: '好滋好味鸡蛋仔',
-                category: '江浙小吃、小吃零食',
-                desc: '荷兰优质淡奶，奶香浓而不腻',
-                address: '上海市普陀区真北路',
-                shop: '王小虎夫妻店',
-                shopId: '10333',
-                date: '2016-05-02',
-            }, {
-                id: '1',
-                name: '好滋好味鸡蛋仔',
-                category: '江浙小吃、小吃零食',
-                desc: '荷兰优质淡奶，奶香浓而不腻',
-                address: '上海市普陀区真北路',
-                shop: '王小虎夫妻店',
-                shopId: '10333',
-                date: '2016-05-02',
-            }, {
-                id: '1',
-                name: '好滋好味鸡蛋仔',
-                category: '江浙小吃、小吃零食',
-                desc: '荷兰优质淡奶，奶香浓而不腻',
-                address: '上海市普陀区真北路',
-                shop: '王小虎夫妻店',
-                shopId: '10333',
-                date: '2016-05-02',
-            }, {
-                id: '1',
-                name: '好滋好味鸡蛋仔',
-                category: '江浙小吃、小吃零食',
-                desc: '荷兰优质淡奶，奶香浓而不腻',
-                address: '上海市普陀区真北路',
-                shop: '王小虎夫妻店',
-                shopId: '10333',
-                date: '2016-05-02',
-            }, {
-                id: '1  ',
-                name: '好滋好味鸡蛋仔',
-                category: '江浙小吃、小吃零食',
-                desc: '荷兰优质淡奶，奶香浓而不腻',
-                address: '上海市普陀区真北路',
-                shop: '王小虎夫妻店',
-                shopId: '10333',
-                date: '2016-05-02',
-            }]
+            header: ["名称", "类型", "特点", "地点", "店名", "店编号"],
+            tableData: [
+                ["好滋好味鸡蛋仔1", "江浙小吃、小吃零食1", "荷兰优质淡奶，奶香浓而不腻1", "上海市普陀区真北路1", "王小虎夫妻店1", "11111","1"],
+                ["好滋好味鸡蛋仔2", "江浙小吃、小吃零食2", "荷兰优质淡奶，奶香浓而不腻2", "上海市普陀区真北路2", "王小虎夫妻店2", "11112","2"],
+                ["好滋好味鸡蛋仔3", "江浙小吃、小吃零食3", "荷兰优质淡奶，奶香浓而不腻3", "上海市普陀区真北路3", "王小虎夫妻店3", "11113","3"],
+                ["好滋好味鸡蛋仔4", "江浙小吃、小吃零食4", "荷兰优质淡奶，奶香浓而不腻4", "上海市普陀区真北路4", "王小虎夫妻店4", "11114","4"],
+                ["好滋好味鸡蛋仔5", "江浙小吃、小吃零食5", "荷兰优质淡奶，奶香浓而不腻5", "上海市普陀区真北路5", "王小虎夫妻店5", "11115","5"],
+                ["好滋好味鸡蛋仔6", "江浙小吃、小吃零食6", "荷兰优质淡奶，奶香浓而不腻6", "上海市普陀区真北路6", "王小虎夫妻店6", "11116","6"],
+                ["好滋好味鸡蛋仔7", "江浙小吃、小吃零食7", "荷兰优质淡奶，奶香浓而不腻7", "上海市普陀区真北路7", "王小虎夫妻店7", "11117","7"],
+                ["好滋好味鸡蛋仔8", "江浙小吃、小吃零食8", "荷兰优质淡奶，奶香浓而不腻8", "上海市普陀区真北路8", "王小虎夫妻店8", "11118","8"],
+                ["好滋好味鸡蛋仔9", "江浙小吃、小吃零食9", "荷兰优质淡奶，奶香浓而不腻9", "上海市普陀区真北路9", "王小虎夫妻店9", "11119","9"],
+                ["好滋好味鸡蛋仔10", "江浙小吃、小吃零食10", "荷兰优质淡奶，奶香浓而不腻10", "上海市普陀区真北路10", "王小虎夫妻店10", "111110","10"],
+                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","11"],
+                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","12"],
+                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","13"],
+                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","14"],
+                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","15"],
+                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","16"],
+                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","17"],
+                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","18"],
+                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","19"],
+                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","20"],
+                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","21"],
+                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","22"],
+                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","23"],
+                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","24"],
+                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","25"],
+                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","26"],
+                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","27"],
+                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","28"],
+                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","29"],
+                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","30"],
+                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","31"],
+                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","32"],
+                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","33"],
+                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","34"],
+                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","35"],
+            ]
         };
 
         mounted() {
@@ -428,10 +191,12 @@
     .demo-table-expand {
         font-size: 0;
     }
+
     .demo-table-expand label {
         width: 90px;
         color: #99a9bf;
     }
+
     .demo-table-expand .el-form-item {
         margin-right: 0;
         margin-bottom: 0;
@@ -444,13 +209,13 @@
         margin-left: 15%;
     }
 
-    #tableTitle{
+    #tableTitle {
         margin-left: 2%;
         font-size: 30px;
     }
 
-    #tableInsert{
-        margin-left: 5%;
+    #insertRow {
+        margin-left: 2%;
         margin-bottom: 5px;
     }
 
