@@ -1,72 +1,47 @@
+<!--页面-->
 <template>
-    <div>
-        <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
-            <el-radio-button :label="false">展开</el-radio-button>
-            <el-radio-button :label="true">收起</el-radio-button>
-        </el-radio-group>
-        <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
-                 :collapse="isCollapse">
-            <el-submenu index="1">
-                <template slot="title">
-                    <i class="el-icon-location"></i>
-                    <span slot="title">导航一</span>
-                </template>
-                <el-menu-item-group>
-                    <span slot="title">分组一</span>
-                    <el-menu-item index="1-1">选项1</el-menu-item>
-                    <el-menu-item index="1-2">选项2</el-menu-item>
-                </el-menu-item-group>
-                <el-menu-item-group title="分组2">
-                    <el-menu-item index="1-3">选项3</el-menu-item>
-                </el-menu-item-group>
-                <el-submenu index="1-4">
-                    <span slot="title">选项4</span>
-                    <el-menu-item index="1-4-1">选项1</el-menu-item>
-                </el-submenu>
-            </el-submenu>
-            <el-menu-item index="2">
-                <i class="el-icon-menu"></i>
-                <span slot="title">导航二</span>
-            </el-menu-item>
-            <el-menu-item index="3" disabled>
-                <i class="el-icon-document"></i>
-                <span slot="title">导航三</span>
-            </el-menu-item>
-            <el-menu-item index="4">
-                <i class="el-icon-setting"></i>
-                <span slot="title">导航四</span>
-            </el-menu-item>
-        </el-menu>
+    <div class="home">
+        <adminLeft></adminLeft>
+        <adminNav></adminNav>
+        <adminTable></adminTable>
+        <adminFooter></adminFooter>
     </div>
 </template>
 
-<script>
-import Vue from "vue"
-import ElementUI from "element-ui"
-import "element-ui/lib/theme-chalk/index.css"
-Vue.use(ElementUI)
+<!--逻辑-->
+<script lang="ts">
+    import {Component, Vue} from "vue-property-decorator";
+    // @ts-ignore
+    import adminNav from "@/components/adminNav.vue";
+    // @ts-ignore
+    import adminLeft from "@/components/adminLeft.vue";
+    // @ts-ignore
+    import adminTable from "@/components/adminTable.vue";
+    // @ts-ignore
+    import adminFooter from "@/components/adminFooter.vue";
 
-
-export default {
-  data() {
-    return {
-      isCollapse: true
-    }
-  },
-  methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath)
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath)
-    }
-  }
-}
+    /**
+     * 加载组件
+     */
+    @Component({
+        components: {
+            adminNav,
+            adminLeft,
+            adminTable,
+            adminFooter
+        }
+    })
+    export default class Slider extends Vue {}
 </script>
 
+<!--样式-->
 <style>
-    .el-menu-vertical-demo:not(.el-menu--collapse) {
-        width: 200px;
-        min-height: 400px;
+    .home {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%
     }
 </style>
+
