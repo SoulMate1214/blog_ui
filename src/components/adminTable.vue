@@ -6,57 +6,41 @@
         <el-button id="insertRow" type="primary" round>添加</el-button>
         <el-button id="deleteRows" type="danger" round>批量删除</el-button>
         <el-table :data="data.tableData.slice((data.currentPage-1)*data.pageSize,data.currentPage*data.pageSize)"
-                  :default-sort = "{prop: 'id', order: 'descending'}"
+                  :default-sort="{prop: 'id'}"
                   height="650" border>
-            <!--左固定列-->
-            <el-table-column fixed="left" label="编号" width="100" align="center" prop="id" sortable>
+            <!--编号列左固定-->
+            <el-table-column fixed="left" label="序号" width="100" align="center" prop="id" sortable>
                 <template slot-scope="scope">
-                    <p>{{ scope.row[6]}}</p>
+                    <p>{{scope.row[data.header.length+1]}}</p>
                 </template>
             </el-table-column>
 
-            <!--多选框列-->
+            <!--多选框列左固定-->
             <el-table-column fixed="left" type="selection" width="55" align="center">
             </el-table-column>
 
-            <!--隐藏内容-->
+            <!--隐藏内容列左固定-->
             <el-table-column type="expand" fixed="left">
                 <template slot-scope="scope">
                     <el-form class="demo-table-expand" inline label-position="left">
-                        <el-form-item label="编号">
-                            <span>{{scope.row[6]}}</span>
-                        </el-form-item>
-                        <el-form-item label="名称">
-                            <span>{{scope.row[0]}}</span>
-                        </el-form-item>
-                        <el-form-item label="类型">
-                            <span>{{scope.row[1]}}</span>
-                        </el-form-item>
-                        <el-form-item label="特点">
-                            <span>{{scope.row[2]}}</span>
-                        </el-form-item>
-                        <el-form-item label="地点">
-                            <span>{{scope.row[3]}}</span>
-                        </el-form-item>
-                        <el-form-item label="店名">
-                            <span>{{scope.row[4]}}</span>
-                        </el-form-item>
-                        <el-form-item label="店编号">
-                            <span>{{scope.row[5]}}</span>
+                        <el-form-item :label="date" v-for="(date, index) in data.header">
+                        <span>
+                            {{ scope.row[index]}}
+                        </span>
                         </el-form-item>
                     </el-form>
                 </template>
             </el-table-column>
 
             <!--动态渲染其它列-->
-            <el-table-column :label="date" v-for="(date, index) in data.header" width="400">
+            <el-table-column :label="date" v-for="(date, index) in data.header" width="180">
                 <template slot-scope="scope">
                     {{ scope.row[index]}}
                 </template>
             </el-table-column>
 
 
-            <!--右固定列-->
+            <!--操作列右固定-->
             <el-table-column fixed="right" width="150" align="center">
                 <template slot="header" slot-scope="scope">
                     <el-input v-model="data.search" size="mini" placeholder="输入关键字搜索"/>
@@ -93,50 +77,13 @@
         data: any = {
             currentPage: 1,
             pageSize: 10,
-            articlesList: [],
             search: '',
-            header: ["名称", "类型", "特点", "地点", "店名", "店编号"],
-            tableData: [
-                ["好滋好味鸡蛋仔1", "江浙小吃、小吃零食1", "荷兰优质淡奶，奶香浓而不腻1", "上海市普陀区真北路1", "王小虎夫妻店1", "11111","1"],
-                ["好滋好味鸡蛋仔2", "江浙小吃、小吃零食2", "荷兰优质淡奶，奶香浓而不腻2", "上海市普陀区真北路2", "王小虎夫妻店2", "11112","2"],
-                ["好滋好味鸡蛋仔3", "江浙小吃、小吃零食3", "荷兰优质淡奶，奶香浓而不腻3", "上海市普陀区真北路3", "王小虎夫妻店3", "11113","3"],
-                ["好滋好味鸡蛋仔4", "江浙小吃、小吃零食4", "荷兰优质淡奶，奶香浓而不腻4", "上海市普陀区真北路4", "王小虎夫妻店4", "11114","4"],
-                ["好滋好味鸡蛋仔5", "江浙小吃、小吃零食5", "荷兰优质淡奶，奶香浓而不腻5", "上海市普陀区真北路5", "王小虎夫妻店5", "11115","5"],
-                ["好滋好味鸡蛋仔6", "江浙小吃、小吃零食6", "荷兰优质淡奶，奶香浓而不腻6", "上海市普陀区真北路6", "王小虎夫妻店6", "11116","6"],
-                ["好滋好味鸡蛋仔7", "江浙小吃、小吃零食7", "荷兰优质淡奶，奶香浓而不腻7", "上海市普陀区真北路7", "王小虎夫妻店7", "11117","7"],
-                ["好滋好味鸡蛋仔8", "江浙小吃、小吃零食8", "荷兰优质淡奶，奶香浓而不腻8", "上海市普陀区真北路8", "王小虎夫妻店8", "11118","8"],
-                ["好滋好味鸡蛋仔9", "江浙小吃、小吃零食9", "荷兰优质淡奶，奶香浓而不腻9", "上海市普陀区真北路9", "王小虎夫妻店9", "11119","9"],
-                ["好滋好味鸡蛋仔10", "江浙小吃、小吃零食10", "荷兰优质淡奶，奶香浓而不腻10", "上海市普陀区真北路10", "王小虎夫妻店10", "111110","10"],
-                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","11"],
-                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","12"],
-                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","13"],
-                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","14"],
-                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","15"],
-                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","16"],
-                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","17"],
-                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","18"],
-                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","19"],
-                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","20"],
-                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","21"],
-                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","22"],
-                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","23"],
-                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","24"],
-                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","25"],
-                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","26"],
-                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","27"],
-                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","28"],
-                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","29"],
-                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","30"],
-                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","31"],
-                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","32"],
-                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","33"],
-                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","34"],
-                ["好滋好味鸡蛋仔", "江浙小吃、小吃零食", "荷兰优质淡奶，奶香浓而不腻", "上海市普陀区真北路", "王小虎夫妻店", "10333","35"],
-            ]
+            header: [],
+            tableData: []
         };
 
         mounted() {
-            // this.handleUserList()
+            this.handleUserList()
         }
 
         /**
@@ -170,11 +117,26 @@
          */
         async handleUserList() {
             this.isLoading = true;
-            const res: any = await this.$https.get('http://127.0.0.1:1111/article/findSysArticles');
+            const res: any = await this.$https.get('http://127.0.0.1:1111/sysLogs');
             this.isLoading = false;
             if (res.status === 200) {
-                const data: any = res.data;
-                this.data.articlesList = [...this.data.articlesList, ...data];
+                const data: any = res.data._embedded.sysLogs;
+                for (let key in data[0]) {
+                    if (key != "_links") {
+                        this.data.header.push(key); //列标题
+                    }
+                }
+                for (let count in data) {
+                    let temp = 0;
+                    let dataList = [];
+                    for (let key in data[count]) {
+                        dataList[temp] = data[count][key];  //列数据
+                        temp++;
+                    }
+                    dataList[temp] = Number(count)+1;  //序号
+                    this.data.tableData.push(dataList);
+                }
+                console.log(this.data.tableData);
             } else {
                 this.$message({
                     message: "网络错误!",
