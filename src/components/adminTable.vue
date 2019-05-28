@@ -1,17 +1,17 @@
 <!--页面-->
 <template>
     <div class="table">
-        <h1 id="tableTitle">博客管理表</h1>
+        <h1 id="tableTitle">{{tableTitle}}</h1>
         <hr width="95%" color=#5193d5 SIZE=2>
         <el-button id="insertRow" type="primary" round>添加</el-button>
         <el-button id="deleteRows" type="danger" round>批量删除</el-button>
         <el-table :data="data.tableData.slice((data.currentPage-1)*data.pageSize,data.currentPage*data.pageSize)"
                   :default-sort="{prop: 'id'}"
-                  height="650" border>
+                  :height="tableHeight" border>
             <!--编号列左固定-->
             <el-table-column fixed="left" label="序号" width="100" align="center" prop="id" sortable>
                 <template slot-scope="scope">
-                    <p>{{scope.row[data.header.length+1]}}</p>
+                    <p>{{scope.row[data.tableHeader.length+1]}}</p>
                 </template>
             </el-table-column>
 
@@ -23,7 +23,7 @@
             <el-table-column type="expand" fixed="left">
                 <template slot-scope="scope">
                     <el-form class="demo-table-expand" inline label-position="left">
-                        <el-form-item :label="date" v-for="(date, index) in data.header">
+                        <el-form-item :label="date" v-for="(date, index) in data.tableHeader">
                         <span>
                             {{ scope.row[index]}}
                         </span>
@@ -33,7 +33,7 @@
             </el-table-column>
 
             <!--动态渲染其它列-->
-            <el-table-column :label="date" v-for="(date, index) in data.header" width="180">
+            <el-table-column :label="date" v-for="(date, index) in data.tableHeader" width="180">
                 <template slot-scope="scope">
                     {{ scope.row[index]}}
                 </template>
@@ -68,21 +68,27 @@
 
 <!--逻辑-->
 <script lang="ts">
-    import {Component, Vue} from "vue-property-decorator";
+    import {Component, Prop, Vue} from "vue-property-decorator";
 
     @Component
     export default class Slider extends Vue {
+        @Prop({default: ""}) tableName!: string;
+        @Prop({default: ""}) tableUrl!: string;
+        @Prop({default: ""}) tableTitle!: string;
+        @Prop({default: []}) tableHeader!: [];
         isLoadEnd: boolean = false;
         isLoading: boolean = false;
+        tableHeight:Number = window.innerHeight - 250;
         data: any = {
             currentPage: 1,
             pageSize: 10,
             search: '',
-            header: [],
+            tableHeader: [],
             tableData: []
         };
 
         mounted() {
+            this.data.tableHeader = this.tableHeader;
             this.handleUserList()
         }
 
@@ -90,6 +96,22 @@
          * 编辑
          */
         handleEdit() {
+                this.$prompt('请输入邮箱', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
+                    inputErrorMessage: '邮箱格式不正确'
+                }).then(({}) => {
+                    this.$message({
+                        type: 'success',
+                        message: '你的邮箱是: '
+                    });
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '取消输入'
+                    });
+                });
         }
 
         /**
@@ -111,19 +133,21 @@
         handleCurrentChange(currentPage: any) {
             this.data.currentPage = currentPage
         }
-
+        // 好好写我也要用呵呵哈哈哈~~~
         /**
          * 请求数据
          */
         async handleUserList() {
             this.isLoading = true;
-            const res: any = await this.$https.get('http://127.0.0.1:1111/sysLogs');
+            const res: any = await this.$https.get(this.tableUrl);
             this.isLoading = false;
             if (res.status === 200) {
-                const data: any = res.data._embedded.sysLogs;
-                for (let key in data[0]) {
-                    if (key != "_links") {
-                        this.data.header.push(key); //列标题
+                const data: any = res.data._embedded[this.tableName];
+                if (this.data.tableHeader === null) {
+                    for (let key in data[0]) {
+                        if (key != "_links") {
+                            this.data.tableHeader.push(key); //列标题
+                        }
                     }
                 }
                 for (let count in data) {
@@ -133,10 +157,9 @@
                         dataList[temp] = data[count][key];  //列数据
                         temp++;
                     }
-                    dataList[temp] = Number(count)+1;  //序号
+                    dataList[temp] = Number(count) + 1;  //序号
                     this.data.tableData.push(dataList);
                 }
-                console.log(this.data.tableData);
             } else {
                 this.$message({
                     message: "网络错误!",

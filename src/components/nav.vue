@@ -19,6 +19,10 @@
                             <el-menuItem :route="l.path" :index="l.index" v-for="l in list" :key="l.index">
                                 {{l.name}}
                             </el-menuItem>
+
+                            <el-menu-item index="4"><a href="http://106.12.27.242" target="_blank">友链</a></el-menu-item>
+
+                            <el-menu-item index="5"><a href="https://github.com/SoulMate1214" target="_blank">GitHub</a></el-menu-item>
                         </el-menu>
                     </el-col>
 
@@ -56,6 +60,12 @@
                     </div>
                     <div @click="handleClickMenu('/timeline')" class="item">
                         <router-link to="/timeline">历 程</router-link>
+                    </div>
+                    <div class="item">
+                        <a target="_blank" href="http://106.12.27.242">友链</a>
+                    </div>
+                    <div class="item">
+                        <a href="https://github.com/SoulMate1214" target="_blank">GitHub</a>
                     </div>
                     <div @click="handleClickMenu('/login')" class="item">
                         <span v-if="userInfo._id">{{ userInfo.name }}</span>
@@ -349,5 +359,9 @@
         to {
             opacity: 0;
         }
+    }
+
+    a{
+        display : block;
     }
 </style>

@@ -5,7 +5,7 @@
         <div class="content">
             <div class="home-header">
                 <router-link class="link"
-                             to="/home">
+                             to="/articles">
                     <img class="home-logo"
                          src="../assets/userLogo.jpeg"
                          alt="冫Soul丶 logo"/>
@@ -15,7 +15,8 @@
                 <div class="list">
                     <router-link class="link" to="/articles">文章</router-link>
                     <router-link class="link" to="/timeline">历程</router-link>
-                    <a target="_blank" rel="noopener noreferrer" class="link" href="https://github.com/SoulMate1214">github</a>
+                    <a target="_blank" rel="noopener noreferrer" class="link" href="http://106.12.27.242">友链</a>
+                    <a target="_blank" rel="noopener noreferrer" class="link" href="https://github.com/SoulMate1214">GitHub</a>
                 </div>
                 <div class="introduce">自在飞花轻似梦</div>
                 <div class="introduce">无边丝雨细如愁</div>
@@ -28,7 +29,7 @@
 <script lang="ts">
     // 满屏落花效果
     import {Component, Vue} from "vue-property-decorator";
-
+    // 哪天送你一个固态
     declare var document: any;
     @Component({})
     export default class Home extends Vue {

@@ -12,8 +12,7 @@
     import {Vue, Component} from "vue-property-decorator";
 
     @Component
-    export default class Footer extends Vue {
-    }
+    export default class Footer extends Vue {}
 </script>
 
 <!--样式-->
@@ -21,9 +20,9 @@
     .adminFooter {
         text-align: center;
         font-weight: bold;
-        position:absolute;
-        bottom:0;
-        width:100%;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
     }
 </style>
 

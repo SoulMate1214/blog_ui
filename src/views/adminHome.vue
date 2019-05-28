@@ -3,8 +3,8 @@
     <div class="home">
         <adminLeft></adminLeft>
         <adminNav></adminNav>
-        <adminTable></adminTable>
-        <adminFooter></adminFooter>
+        <router-view></router-view>
+<!--        <adminFooter></adminFooter>-->
     </div>
 </template>
 
@@ -16,8 +16,6 @@
     // @ts-ignore
     import adminLeft from "@/components/adminLeft.vue";
     // @ts-ignore
-    import adminTable from "@/components/adminTable.vue";
-    // @ts-ignore
     import adminFooter from "@/components/adminFooter.vue";
 
     /**
@@ -27,11 +25,11 @@
         components: {
             adminNav,
             adminLeft,
-            adminTable,
             adminFooter
         }
     })
-    export default class Slider extends Vue {}
+    export default class adminHome extends Vue {
+    }
 </script>
 
 <!--样式-->

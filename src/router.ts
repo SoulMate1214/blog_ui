@@ -10,35 +10,45 @@ export default new Router({
       path: "/",
       name: "home",
       // @ts-ignore
-      component: () => import(/* webpackChunkName: "home" */ "./views/home.vue")
+      component: () => import("./views/home.vue")
     },
     {
       path: "/articles",
       name: "articles",
       component: () =>
-          // @ts-ignore
-          import(/* webpackChunkName: "articles" */ "./views/articles.vue")
+                // @ts-ignore
+                import("./views/articles.vue")
     },
     {
       path: "/timeline",
       name: "timeline",
       component: () =>
-          // @ts-ignore
-          import(/* webpackChunkName: "timeline" */ "./views/timeline.vue")
+                // @ts-ignore
+                import("./views/timeline.vue")
     },
     {
       path: "/articleDetail",
       name: "articleDetail",
       component: () =>
-          // @ts-ignore
-          import(/* webpackChunkName: "articleDetail" */ "./views/articleDetail.vue")
+                // @ts-ignore
+                import("./views/articleDetail.vue")
     },
     {
       path: "/adminHome",
       name: "adminHome",
-      component: () =>
-          // @ts-ignore
-          import(/* webpackChunkName: "adminHome" */ "./views/adminHome.vue")
+      component: (resolve) => require(["./views/adminHome.vue"], resolve),
+      children: [
+        {
+          path: "",
+          name: "adminArticle",
+          component: (resolve) => require(["./views/adminArticle.vue"], resolve)
+        },
+        {
+          path: "adminLog",
+          name: "adminLog",
+          component: (resolve) => require(["./views/adminLog.vue"], resolve)
+        }
+      ]
     }
   ]
 })
