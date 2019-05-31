@@ -20,7 +20,7 @@
                                 {{l.name}}
                             </el-menuItem>
 
-                            <el-menu-item index="4"><a href="http://106.12.27.242" target="_blank">友链</a></el-menu-item>
+                            <el-menu-item index="4"><a href="http://www.xymate.cn" target="_blank">友链</a></el-menu-item>
 
                             <el-menu-item index="5"><a href="https://github.com/SoulMate1214" target="_blank">GitHub</a></el-menu-item>
                         </el-menu>
@@ -62,7 +62,7 @@
                         <router-link to="/timeline">历 程</router-link>
                     </div>
                     <div class="item">
-                        <a target="_blank" href="http://106.12.27.242">友链</a>
+                        <a target="_blank" href="http://www.xymate.cn">友链</a>
                     </div>
                     <div class="item">
                         <a href="https://github.com/SoulMate1214" target="_blank">GitHub</a>

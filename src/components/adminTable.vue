@@ -160,6 +160,7 @@
                     dataList[temp] = Number(count) + 1;  //序号
                     this.data.tableData.push(dataList);
                 }
+                console.log(this.data.tableData)
             } else {
                 this.$message({
                     message: "网络错误!",

@@ -34,20 +34,20 @@ export default new Router({
                 import("./views/articleDetail.vue")
     },
     {
-      path: "/adminHome",
-      name: "adminHome",
-      component: (resolve) => require(["./views/adminHome.vue"], resolve),
+      path: "/admin",
+      name: "admin",
+      component: (resolve) => require(["./views/admin/admin.vue"], resolve),
       children: [
         {
           path: "",
           name: "adminArticle",
-          component: (resolve) => require(["./views/adminArticle.vue"], resolve)
+          component: (resolve) => require(["./views/admin/adminArticle.vue"], resolve)
         },
         {
           path: "adminLog",
           name: "adminLog",
-          component: (resolve) => require(["./views/adminLog.vue"], resolve)
-        }
+          component: (resolve) => require(["./views/admin/adminLog.vue"], resolve)
+        },
       ]
     }
   ]

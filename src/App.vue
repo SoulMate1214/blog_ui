@@ -57,7 +57,7 @@
 
         @Watch("$route")
         routeChange(val: Route) {
-            if (val.path === "/"||val.path === "/adminHome") {
+            if (val.path === "/"||val.path === "/admin") {
                 this.isShowNav = false;
             } else {
                 this.isShowNav = true;
