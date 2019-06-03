@@ -41,7 +41,7 @@
 </script>
 
 <!-- 样式-->
-<style scoped>
+<style lang="less" scoped>
     .el-icon-arrow-up {
         position: fixed;
         bottom: 50px;

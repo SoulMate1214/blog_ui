@@ -16,7 +16,7 @@
 </script>
 
 <!--样式-->
-<style scoped>
+<style lang="less" scoped>
     .adminFooter {
         text-align: center;
         font-weight: bold;

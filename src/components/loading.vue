@@ -16,7 +16,7 @@
 </script>
 
 <!--样式-->
-<style scoped>
+<style lang="less" scoped>
     .loading {
         text-align: center;
         padding: 30px;

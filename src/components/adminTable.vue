@@ -96,22 +96,22 @@
          * 编辑
          */
         handleEdit() {
-                this.$prompt('请输入邮箱', '提示', {
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
-                    inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
-                    inputErrorMessage: '邮箱格式不正确'
-                }).then(({}) => {
-                    this.$message({
-                        type: 'success',
-                        message: '你的邮箱是: '
-                    });
-                }).catch(() => {
-                    this.$message({
-                        type: 'info',
-                        message: '取消输入'
-                    });
-                });
+            // this.$prompt('请输入邮箱', '提示', {
+            //     confirmButtonText: '确定',
+            //     cancelButtonText: '取消',
+            //     inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
+            //     inputErrorMessage: '邮箱格式不正确'
+            // }).then(({}) => {
+            //     this.$message({
+            //         type: 'success',
+            //         message: '你的邮箱是: '
+            //     });
+            // }).catch(() => {
+            //     this.$message({
+            //         type: 'info',
+            //         message: '取消输入'
+            //     });
+            // });
         }
 
         /**
@@ -133,7 +133,7 @@
         handleCurrentChange(currentPage: any) {
             this.data.currentPage = currentPage
         }
-        // 好好写我也要用呵呵哈哈哈~~~
+
         /**
          * 请求数据
          */
@@ -173,7 +173,7 @@
 </script>
 
 <!--样式-->
-<style>
+<style lang="less" scoped>
     .demo-table-expand {
         font-size: 0;
     }

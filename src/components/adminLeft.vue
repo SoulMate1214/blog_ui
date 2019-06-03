@@ -1,6 +1,6 @@
 <!--页面-->
 <template>
-    <div class="home">
+    <div class="home" id="admin-left">
         <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
                  :collapse="data.isCollapse"
                  background-color="#545c64"
@@ -195,7 +195,7 @@
 </script>
 
 <!--样式-->
-<style>
+<style lang="less" scoped>
     .el-menu-vertical-demo:not(.el-menu--collapse) {
         width: 15%;
     }
@@ -208,6 +208,10 @@
 
     .radio-button {
         color: #88f074;
+    }
+
+    #admin-left{
+        position: fixed;
     }
 </style>
 

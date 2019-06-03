@@ -17,7 +17,7 @@
 </script>
 
 <!--样式-->
-<style scoped>
+<style lang="less" scoped>
     .footer {
         text-align: center;
         padding: 20px;

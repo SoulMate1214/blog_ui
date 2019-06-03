@@ -40,14 +40,19 @@ export default new Router({
       children: [
         {
           path: "",
+          name: "adminDashboard",
+          component: (resolve) => require(["./views/admin/adminDashboard.vue"], resolve)
+        },
+        {
+          path: "",
           name: "adminArticle",
           component: (resolve) => require(["./views/admin/adminArticle.vue"], resolve)
         },
-        {
-          path: "adminLog",
-          name: "adminLog",
-          component: (resolve) => require(["./views/admin/adminLog.vue"], resolve)
-        },
+        // {
+        //   path: "adminLog",
+        //   name: "adminLog",
+        //   component: (resolve) => require(["./views/admin/adminLog.vue"], resolve)
+        // },
       ]
     }
   ]

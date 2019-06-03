@@ -13,7 +13,7 @@
 </script>
 
 <!--样式-->
-<style scoped>
+<style lang="less" scoped>
     .load-end {
         text-align: center;
         padding: 30px;

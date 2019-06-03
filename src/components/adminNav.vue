@@ -1,6 +1,6 @@
 <!--页面-->
 <template>
-    <div>
+    <div id="admin-nav">
         <el-menu :default-active="data.activeIndex2"
                  class="el-menu-demo"
                  mode="horizontal"
@@ -49,7 +49,14 @@
 </script>
 
 <!--样式-->
-<style>
+<style lang="less" scoped>
+
+    #admin-nav {
+        position: fixed;
+        width: 100%;
+        z-index: 100;
+    }
+
     #navTitle {
         font-size: 35px;
         width: 15%;
