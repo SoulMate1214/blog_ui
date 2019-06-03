@@ -1,7 +1,7 @@
 <!--页面-->
 <template>
     <!--脚部显示-->
-    <div class="adminFooter">
+    <div id="admin-footer">
         <div>分享技术，分享生活</div>
         <div>灵魂伴侣 ©2019 Create by 冫Soul丶</div>
     </div>
@@ -17,12 +17,12 @@
 
 <!--样式-->
 <style lang="less" scoped>
-    .adminFooter {
+    #admin-footer {
         text-align: center;
         font-weight: bold;
-        position: absolute;
         bottom: 0;
         width: 100%;
+        position: fixed;
     }
 </style>
 

@@ -19,7 +19,7 @@
 
             <el-menu-item index="3">消息中心</el-menu-item>
 
-            <el-menu-item index="4"><a href="http://106.12.27.242" target="_blank">友链</a></el-menu-item>
+            <el-menu-item index="4"><a href="http://www.xymate.cn" target="_blank">友链</a></el-menu-item>
 
             <el-menu-item index="5"><a href="https://github.com/SoulMate1214" target="_blank">GitHub</a></el-menu-item>
             <router-link to="/">
@@ -50,6 +50,17 @@
 
 <!--样式-->
 <style lang="less" scoped>
+    a{
+        display : block;
+    }
+
+    .logo {
+        float: right;
+        height: 50px;
+        border-radius: 50%;
+        margin-top: 5px;
+        margin-right: 5%;
+    }
 
     #admin-nav {
         position: fixed;
@@ -62,17 +73,5 @@
         width: 15%;
         text-align:center;
         font-weight:bolder;
-    }
-
-    .logo {
-        float: right;
-        height: 50px;
-        border-radius: 50%;
-        margin-top: 5px;
-        margin-right: 5%;
-    }
-
-    a{
-        display : block;
     }
 </style>

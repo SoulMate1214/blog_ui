@@ -1,6 +1,6 @@
 <!--页面-->
 <template>
-    <div class="table">
+    <div id="admin-table">
         <h1 id="tableTitle">{{tableTitle}}</h1>
         <hr width="95%" color=#5193d5 SIZE=2>
         <el-button id="insertRow" type="primary" round>添加</el-button>
@@ -78,7 +78,7 @@
         @Prop({default: []}) tableHeader!: [];
         isLoadEnd: boolean = false;
         isLoading: boolean = false;
-        tableHeight:Number = window.innerHeight - 250;
+        tableHeight:Number = window.innerHeight - 300;
         data: any = {
             currentPage: 1,
             pageSize: 10,
@@ -96,22 +96,6 @@
          * 编辑
          */
         handleEdit() {
-            // this.$prompt('请输入邮箱', '提示', {
-            //     confirmButtonText: '确定',
-            //     cancelButtonText: '取消',
-            //     inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
-            //     inputErrorMessage: '邮箱格式不正确'
-            // }).then(({}) => {
-            //     this.$message({
-            //         type: 'success',
-            //         message: '你的邮箱是: '
-            //     });
-            // }).catch(() => {
-            //     this.$message({
-            //         type: 'info',
-            //         message: '取消输入'
-            //     });
-            // });
         }
 
         /**
@@ -189,13 +173,14 @@
         width: 50%;
     }
 
-    .table {
+    #admin-table {
         position: absolute;
         width: 85%;
         margin-left: 15%;
     }
 
     #tableTitle {
+        margin-top: 4%;
         margin-left: 2%;
         font-size: 30px;
     }

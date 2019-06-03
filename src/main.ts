@@ -7,6 +7,8 @@ import store from "./store/index"
 import service from "./utils/https"
 import urls from "./utils/urls"
 import {
+  Image,
+  Calendar,
   Pagination,
   Dialog,
   Autocomplete,
@@ -81,6 +83,8 @@ import "element-ui/lib/theme-chalk/index.css"
 import CollapseTransition from "element-ui/lib/transitions/collapse-transition"
 
 // 按需引用 element 组件
+Vue.component(Image.name, Image)
+Vue.component(Calendar.name, Calendar)
 Vue.component(Dialog.name, Dialog)
 Vue.component(Form.name, Form)
 Vue.component(FormItem.name, FormItem)

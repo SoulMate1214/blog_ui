@@ -4,7 +4,7 @@
         <adminLeft></adminLeft>
         <adminNav></adminNav>
         <router-view></router-view>
-<!--        <adminFooter></adminFooter>-->
+        <adminFooter></adminFooter>
     </div>
 </template>
 
