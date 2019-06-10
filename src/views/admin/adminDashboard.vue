@@ -4,7 +4,7 @@
         <div id="block">
             <div class="block">
                 <span class="demonstration">评论条数控制</span>
-                <el-slider v-model="data.value1"></el-slider>
+                <el-slider v-model="data.value1" ></el-slider>
             </div>
 
             <div class="block">
@@ -16,7 +16,11 @@
                 <span class="demonstration">30s内点赞次数(固定)</span>
                 <el-slider disabled v-model="data.value3"></el-slider>
             </div>
-            <img id="image" src="../../assets/bg4.jpg">
+            <el-carousel  height="450px" :interval="3000" type="card">
+                <el-carousel-item v-for="item in 8" :key="item">
+                    <img :src='handleImage(item)'>
+                </el-carousel-item>
+            </el-carousel>
         </div>
         <el-calendar id="calendar" v-model="data.value"></el-calendar>
         <div class="charts long-charts" id="lineContainer"></div>
@@ -26,8 +30,8 @@
         <div class="charts" id="barContainer"></div>
 
         <hr color=#86A697>
-        <div class="charts" id="radarContainer"></div>
         <div class="charts" id="gaugeContainer"></div>
+        <div class="charts" id="radarContainer"></div>
 
         <hr color=#CB4042>
         <div class="charts long-charts" id="scatterContainer"></div>
@@ -71,6 +75,13 @@
         formatTooltip(val: any) {
             return val / 100;
         }
+
+        /**
+         * 加载图片
+         */
+        handleImage(item:any) {
+            return require("../../assets/bg" + item + ".jpg");
+        }
     }
 </script>
 
@@ -96,23 +107,34 @@
 
     #block {
         margin-left: 2%;
-        width: 45%;
+        width: 50%;
         float: left;
     }
 
     #calendar {
         float: left;
-        width: 50%;
-    }
-
-    #image {
-        width: 100%;
-        height: 450px;
+        width: 45%;
     }
 
     hr {
         margin-top: 4%;
         width: 95%;
         clear: left;
+    }
+
+    .el-carousel__item h3 {
+        color: #475669;
+        font-size: 14px;
+        opacity: 0.75;
+        line-height: 200px;
+        margin: 0;
+    }
+
+    .el-carousel__item:nth-child(2n) {
+        background-color: #99a9bf;
+    }
+
+    .el-carousel__item:nth-child(2n+1) {
+        background-color: #d3dce6;
     }
 </style>
