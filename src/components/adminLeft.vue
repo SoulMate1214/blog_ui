@@ -1,10 +1,10 @@
 <!--页面-->
 <template>
     <div class="home" id="admin-left">
-        <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
+        <el-menu class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
                  :collapse="data.isCollapse"
                  background-color="#545c64"
-                 text-color="#fff" route
+                 text-color="#fff" router
                  :default-active="$route.path"
                  active-text-color="#ffd04b">
             <el-radio-group v-model="data.isCollapse" style="margin-bottom: 20px;">
@@ -13,7 +13,7 @@
             </el-radio-group>
 
             <!--第一个-->
-            <el-menu-item index="1">
+            <el-menu-item index="/admin">
                 <i class="el-icon-s-help"></i>
                 <span slot="title">仪表盘</span>
             </el-menu-item>
@@ -31,28 +31,28 @@
                         <span slot="title">文章相关</span>
                     </template>
 
-                    <el-menu-item index="/adminLog">
+                    <el-menu-item index="/admin-article">
                         <template slot="title">
                             <i class="el-icon-document-copy"></i>
                             <span slot="title">文章</span>
                         </template>
                     </el-menu-item>
 
-                    <el-menu-item index="2-1-2">
+                    <el-menu-item index="/admin-classify">
                         <template slot="title">
                             <i class="el-icon-folder-opened"></i>
                             <span slot="title">文章分类</span>
                         </template>
                     </el-menu-item>
 
-                    <el-menu-item index="2-1-3">
+                    <el-menu-item index="/admin-label">
                         <template slot="title">
                             <i class="el-icon-collection-tag"></i>
                             <span slot="title">文章标签</span>
                         </template>
                     </el-menu-item>
 
-                    <el-menu-item index="2-1-4">
+                    <el-menu-item index="/admin-articleLabel">
                         <template slot="title">
                             <i class="el-icon-connection"></i>
                             <span slot="title">文章标签关联</span>
@@ -66,28 +66,28 @@
                         <span slot="title">其他相关</span>
                     </template>
 
-                    <el-menu-item index="2-2-1">
+                    <el-menu-item index="/admin-discuss">
                         <template slot="title">
                             <i class="el-icon-chat-line-round"></i>
                             <span slot="title">评论</span>
                         </template>
                     </el-menu-item>
 
-                    <el-menu-item index="2-2-2">
+                    <el-menu-item index="/admin-file">
                         <template slot="title">
                             <i class="el-icon-picture-outline"></i>
                             <span slot="title">文件</span>
                         </template>
                     </el-menu-item>
 
-                    <el-menu-item index="2-2-3">
+                    <el-menu-item index="/admin-page">
                         <template slot="title">
                             <i class="el-icon-document"></i>
                             <span slot="title">页面</span>
                         </template>
                     </el-menu-item>
 
-                    <el-menu-item index="2-2-4">
+                    <el-menu-item index="/admin-timeLine">
                         <template slot="title">
                             <i class="el-icon-time"></i>
                             <span slot="title">时间线</span>
@@ -109,14 +109,14 @@
                         <span slot="title">系统</span>
                     </template>
 
-                    <el-menu-item index="3-1-1">
+                    <el-menu-item index="/admin-log">
                         <template slot="title">
                             <i class="el-icon-notebook-1"></i>
                             <span slot="title">日志</span>
                         </template>
                     </el-menu-item>
 
-                    <el-menu-item index="3-1-2">
+                    <el-menu-item index="/admin-setting">
                         <template slot="title">
                             <i class="el-icon-position"></i>
                             <span slot="title">站点基本设置</span>
@@ -130,35 +130,35 @@
                         <span slot="title">权限</span>
                     </template>
 
-                    <el-menu-item index="3-2-1">
+                    <el-menu-item index="/admin-user">
                         <template slot="title">
                             <i class="el-icon-user"></i>
                             <span slot="title">用户</span>
                         </template>
                     </el-menu-item>
 
-                    <el-menu-item index="3-2-2">
+                    <el-menu-item index="/admin-role">
                         <template slot="title">
                             <i class="el-icon-bicycle"></i>
                             <span slot="title">角色</span>
                         </template>
                     </el-menu-item>
 
-                    <el-menu-item index="3-2-3">
+                    <el-menu-item index="/admin-res">
                         <template slot="title">
                             <i class="el-icon-coin"></i>
                             <span slot="title">资源</span>
                         </template>
                     </el-menu-item>
 
-                    <el-menu-item index="3-2-4">
+                    <el-menu-item index="/admin-userRole">
                         <template slot="title">
                             <i class="el-icon-connection"></i>
                             <span slot="title">用户角色关联</span>
                         </template>
                     </el-menu-item>
 
-                    <el-menu-item index="3-2-5">
+                    <el-menu-item index="/admin-roleRes">
                         <template slot="title">
                             <i class="el-icon-connection"></i>
                             <span slot="title">角色资源关联</span>
@@ -210,7 +210,7 @@
         color: #88f074;
     }
 
-    #admin-left{
+    #admin-left {
         position: fixed;
     }
 </style>

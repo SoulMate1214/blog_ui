@@ -24,7 +24,7 @@
         parameter: any = {
             tableTitle: "日志表",
             tableName: "sysLogs",
-            tableUrl: "http://localhost:1111/sysLogs",
+            tableUrl: "http://localhost:1111/log/searchAll",
             tableHeader: ['编号','名称','排序','状态','备注','是否启用','创建时间','修改时间','创建者','修改者','浏览器','操作方式','实际url','ip地址','相对url']
         };
     }

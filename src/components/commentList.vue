@@ -5,7 +5,7 @@
         <div class="top-title">
             <span>共 {{list.length}} 条评论</span>
         </div>
-        <div v-for="(item, i) in list" :key="i" class="item">
+        <div v-for="(item, i) in list" v-if="item.parentId===1" :key="i" class="item">
             <!--加载用户头像-->
             <div class="item-header">
                 <div class="author">
@@ -72,17 +72,10 @@
                 <div class="comment-detail">
                     {{childItem.message}}
                 </div>
-
-                <!--回复按钮-->
-                <div class="item-comment">
-                    <div @click="showCommentModal(childItem)" class="message heart">
-                        <el-button size="small">回复</el-button>
-                    </div>
-                </div>
             </div>
         </div>
         <!--回复组件-->
-        <Comment :visible="visible" :parent_id="parent_id" :article_id="article_id" @handleOk="handleOk"
+        <Comment v-if="parent_id!==''" :visible="visible" :parent_id="parent_id" :article_id="article_id" @handleOk="handleOk"
                  @cancel="handleCancel"/>
     </div>
 </template>

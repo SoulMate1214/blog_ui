@@ -24,7 +24,7 @@
         parameter: any = {
             tableTitle: "文章表",
             tableName: "sysArticles",
-            tableUrl: "http://localhost:1111/sysArticles",
+            tableUrl: "http://localhost:1111/article/searchAll",
             tableHeader: ['编号','文章名','排序','状态','备注','是否启用','创建时间','修改时间','创建者','修改者','文章内容','浏览量','点赞数','关联类型','关联类型详情']
         };
     }

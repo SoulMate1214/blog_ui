@@ -24,7 +24,7 @@
         parameter: any = {
             tableTitle: "时间线表",
             tableName: "sysTimelines",
-            tableUrl: "http://localhost:1111/sysTimelines",
+            tableUrl: "http://localhost:1111/timeline/searchAll",
             tableHeader: ['编号','名称','排序','状态','备注','是否启用','创建时间','修改时间','创建者','修改者','时间线信息']
         };
     }

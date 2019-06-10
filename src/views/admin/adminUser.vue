@@ -24,7 +24,7 @@
         parameter: any = {
             tableTitle: "用户表",
             tableName: "sysUsers",
-            tableUrl: "http://localhost:1111/sysUsers",
+            tableUrl: "http://localhost:1111/user/searchAll",
             tableHeader: ['编号','用户名','排序','状态','备注','是否启用','创建时间','修改时间','创建者','修改者','密码','邮箱','qq号','github地址']
         };
     }

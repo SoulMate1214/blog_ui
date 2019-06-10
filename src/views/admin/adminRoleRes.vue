@@ -24,7 +24,7 @@
         parameter: any = {
             tableTitle: "角色资源表",
             tableName: "sysRoleReses",
-            tableUrl: "http://localhost:1111/sysRoleReses",
+            tableUrl: "http://localhost:1111/roleRes/searchAll",
             tableHeader: ['编号','名称','排序','状态','备注','是否启用','创建时间','修改时间','创建者','修改者','角色编号','资源编号','角色信息','资源编号']
         };
     }

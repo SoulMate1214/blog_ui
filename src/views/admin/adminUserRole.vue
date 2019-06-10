@@ -24,7 +24,7 @@
         parameter: any = {
             tableTitle: "用户角色表",
             tableName: "sysUserRoles",
-            tableUrl: "http://localhost:1111/sysUserRoles",
+            tableUrl: "http://localhost:1111/userRole/searchAll",
             tableHeader: ['编号','名称','排序','状态','备注','是否启用','创建时间','修改时间','创建者','修改者','角色编号','用户编号','角色信息','用户信息']
         };
     }

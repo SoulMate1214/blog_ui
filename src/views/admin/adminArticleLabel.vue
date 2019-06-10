@@ -24,7 +24,7 @@
         parameter: any = {
             tableTitle: "文章标签关联表",
             tableName: "sysArticleLabels",
-            tableUrl: "http://localhost:1111/sysArticleLabels",
+            tableUrl: "http://localhost:1111/articleLabel/searchAll",
             tableHeader: ['编号','名称','排序','状态','备注','是否启用','创建时间','修改时间','创建者','修改者','文章编号','标签编号','文章具体信息','标签具体信息']
         };
     }

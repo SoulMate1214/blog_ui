@@ -24,7 +24,7 @@
         parameter: any = {
             tableTitle: "页面表",
             tableName: "sysPages",
-            tableUrl: "http://localhost:1111/sysPages",
+            tableUrl: "http://localhost:1111/page/searchAll",
             tableHeader: ['编号','名称','排序','状态','备注','是否启用','创建时间','修改时间','创建者','修改者','页面路劲']
         };
     }

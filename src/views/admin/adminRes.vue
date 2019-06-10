@@ -24,7 +24,7 @@
         parameter: any = {
             tableTitle: "资源表",
             tableName: "sysReses",
-            tableUrl: "http://localhost:1111/sysReses",
+            tableUrl: "http://localhost:1111/res/searchAll",
             tableHeader: ['编号','资源名','排序','状态','备注','是否启用','创建时间','修改时间','创建者','修改者','父级编号','描述','资源路径','资源等级','图标','资源类型','父级信息']
         };
     }

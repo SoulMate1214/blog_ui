@@ -24,7 +24,7 @@
         parameter: any = {
             tableTitle: "分类表",
             tableName: "sysClassifies",
-            tableUrl: "http://localhost:1111/sysClassifies",
+            tableUrl: "http://localhost:1111/classify/searchAll",
             tableHeader: ['编号','分类名','排序','状态','备注','是否启用','创建时间','修改时间','创建者','修改者']
         };
     }

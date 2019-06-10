@@ -183,6 +183,7 @@
         margin-top: 4%;
         margin-left: 2%;
         font-size: 30px;
+        font-family: YouYuan;
     }
 
     #insertRow {

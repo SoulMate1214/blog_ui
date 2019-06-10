@@ -1,6 +1,5 @@
 <template>
     <div id="admin-Dashboard">
-        <h1>仪表盘及系统控制</h1>
         <hr color=#5193d5>
         <div id="block">
             <div class="block">
@@ -22,15 +21,15 @@
         <el-calendar id="calendar" v-model="data.value"></el-calendar>
         <div class="charts long-charts" id="lineContainer"></div>
 
-        <hr color=#5193d5>
-        <div class="charts" id="gaugeContainer"></div>
+        <hr color=#EBB471>
+        <div class="charts" id="pieContainer"></div>
         <div class="charts" id="barContainer"></div>
 
-        <hr color=#5193d5>
-        <div class="charts" id="pieContainer"></div>
+        <hr color=#86A697>
         <div class="charts" id="radarContainer"></div>
+        <div class="charts" id="gaugeContainer"></div>
 
-        <hr color=#5193d5>
+        <hr color=#CB4042>
         <div class="charts long-charts" id="scatterContainer"></div>
     </div>
 </template>
@@ -92,18 +91,18 @@
     .long-charts {
         margin-left: 2%;
         width: 95%;
-        height: 300px;
+        height: 400px;
     }
 
     #block {
         margin-left: 2%;
-        width: 55%;
+        width: 45%;
         float: left;
     }
 
     #calendar {
         float: left;
-        width: 40%;
+        width: 50%;
     }
 
     #image {
@@ -111,13 +110,8 @@
         height: 450px;
     }
 
-    h1 {
-        margin-top: 4%;
-        margin-left: 2%;
-        font-size: 30px;
-    }
-
     hr {
+        margin-top: 4%;
         width: 95%;
         clear: left;
     }

@@ -1,4 +1,21 @@
 export const pieOption = {
+    title: {
+        text: '系统流量饼图'
+    },
+    toolbox: {
+        show: true,
+        feature: {
+            mark: {
+                show: true
+            },
+            restore: {
+                show: true
+            },
+            saveAsImage: {
+                show: true
+            }
+        }
+    },
     itemStyle: {
         normal: {
             shadowBlur: 200, // 阴影的大小
@@ -7,7 +24,7 @@ export const pieOption = {
             shadowColor: 'rgba(0, 0, 0, 0.5)'// 阴影颜色
         }
     },
-    backgroundColor: '#2c343c', //设置图标的背景色,
+    // backgroundColor: '#2c343c', //设置图标的背景色,
     label: {
         normal: {
             fontStyle: 'italic' //文字字体的风格
@@ -27,11 +44,11 @@ export const pieOption = {
             radius: '150', //饼图的半径
             roseType: 'angle',  //通过roseType绘制南丁格尔图
             data: [ //数据
-                {value: 235, name: '视频广告'},
-                {value: 274, name: '联盟广告'},
-                {value: 310, name: '邮件营销'},
-                {value: 335, name: '直接访问'},
-                {value: 400, name: '搜索引擎'}
+                {value: 235, name: '点赞数'},
+                {value: 274, name: '评论数'},
+                {value: 310, name: '访问量'},
+                {value: 335, name: '回复量'},
+                {value: 400, name: '搜索量'}
             ],
             itemStyle: {  //设置每个item的颜色
                 normal: {

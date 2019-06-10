@@ -14,6 +14,24 @@ export const scatterOption = {
             }
         }
     },
+    toolbox: {
+        show: true,
+        feature: {
+            mark: {
+                show: true
+            },
+            dataView: {
+                show: true,
+                readOnly: false
+            },
+            restore: {
+                show: true
+            },
+            saveAsImage: {
+                show: true
+            }
+        }
+    },
     legend: {
         data: ["女性", "男性"]
     },

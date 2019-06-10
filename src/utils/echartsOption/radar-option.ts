@@ -1,7 +1,7 @@
 export const radarOption = {
     title: {
-        text: "预算 vs 开销",
-        subtext: "纯属虚构"
+        text: "文章数 vs 文件数",
+        subtext: "图与文"
     },
     tooltip: {
         trigger: "axis"
@@ -10,7 +10,7 @@ export const radarOption = {
         orient: "vertical",
         x: "right",
         y: "bottom",
-        data: ["预算分配", "实际开销"]
+        data: ["文章数", "文件数"]
     },
     toolbox: {
         show: true,
@@ -30,37 +30,37 @@ export const radarOption = {
             }
         }
     },
-    polar: [  //雷达图必须设置polar
+    polar: [
         {
             indicator: [
                 {
-                    text: "销售",
-                    max: 6000,
+                    text: "一二月",
+                    max: 100,
                     min: 0,
                 },
                 {
-                    text: "管理",
-                    max: 16000,
+                    text: "三四月",
+                    max: 100,
                     min: 0
                 },
                 {
-                    text: "信息技术",
-                    max: 30000,
+                    text: "五六月",
+                    max: 100,
                     min: 0
                 },
                 {
-                    text: "客服",
-                    max: 38000,
+                    text: "七八月",
+                    max: 100,
                     min: 0
                 },
                 {
-                    text: "研发",
-                    max: 52000,
+                    text: "九十月",
+                    max: 100,
                     min: 0
                 },
                 {
-                    text: "市场",
-                    max: 25000,
+                    text: "十一二月",
+                    max: 100,
                     min: 0
                 }
             ]
@@ -73,8 +73,8 @@ export const radarOption = {
             type: "radar",
             data: [
                 {
-                    value: [4300, 10000, 28000, 35000, 50000, 19000],
-                    name: "预算分配"
+                    value: [43, 10, 28, 35, 50, 19],
+                    name: "文章数"
                 }
             ]
         },
@@ -83,8 +83,8 @@ export const radarOption = {
             type: "radar",
             data: [
                 {
-                    value: [5000, 14000, 28000, 31000, 42000, 21000],
-                    name: "实际开销"
+                    value: [50, 65, 74, 82, 55, 80],
+                    name: "文件数"
                 }
             ]
         }

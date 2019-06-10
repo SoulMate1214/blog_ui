@@ -1,13 +1,31 @@
 export const barOption = {
-    title: {text: 'ECharts 入门示例'},
+    title: {text: '文章发布率'},
     tooltip: {},
+    toolbox: {
+        show: true,
+        feature: {
+            mark: {
+                show: true
+            },
+            dataView: {
+                show: true,
+                readOnly: false
+            },
+            restore: {
+                show: true
+            },
+            saveAsImage: {
+                show: true
+            }
+        }
+    },
     xAxis: {
-        data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+        data: ["一月", "二月", "三月", "四月", "五月", "六月","七月","八月","九月","十月","十一月","十二月"]
     },
     yAxis: {},
     series: [{
-        name: '销量',
+        name: '文章数',
         type: 'bar',
-        data: [5, 20, 36, 10, 10, 20]
+        data: [1, 3, 2, 5, 8, 9, 3, 2, 5, 6, 7, 3]
     }]
 }

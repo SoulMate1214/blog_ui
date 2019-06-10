@@ -24,7 +24,7 @@
         parameter: any = {
             tableTitle: "标签表",
             tableName: "sysLabels",
-            tableUrl: "http://localhost:1111/sysLabels",
+            tableUrl: "http://localhost:1111/label/searchAll",
             tableHeader: ['编号','标签名','排序','状态','备注','是否启用','创建时间','修改时间','创建者','修改者']
         };
     }

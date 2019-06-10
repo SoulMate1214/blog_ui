@@ -24,7 +24,7 @@
         parameter: any = {
             tableTitle: "评论表",
             tableName: "sysDiscusses",
-            tableUrl: "http://localhost:1111/sysDiscusses",
+            tableUrl: "http://localhost:1111/discuss/searchAll",
             tableHeader: ['编号','名称','排序','状态','备注','是否启用','创建时间','修改时间','创建者','修改者','父级编号','文章编号','评论内容','文章详情','父级详情']
         };
     }

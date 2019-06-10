@@ -57,16 +57,8 @@
 
         @Watch("$route")
         routeChange(val: Route) {
-            if (val.path === "/"||val.path === "/admin") {
-                this.isShowNav = false;
-            } else {
-                this.isShowNav = true;
-            }
-            if (val.path === "/articles" || val.path === "/timeline") {
-                this.isShowSlider = true;
-            } else {
-                this.isShowSlider = false;
-            }
+            this.isShowNav = val.path === "/articles" || val.path === "/timeline" || val.path === "/articleDetail";
+            this.isShowSlider = val.path === "/articles" || val.path === "/timeline";
             if (isMobileOrPc()) {
                 this.isShowSlider = false;
             }
