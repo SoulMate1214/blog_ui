@@ -126,7 +126,7 @@
         isMobile: boolean = isMobileOrPc();
 
         mounted() {
-            this.routeChange(this.$route, this.$route);
+            this.routeChange(this.$route);
         }
 
 
@@ -134,7 +134,7 @@
          * 跳转页面
          */
         @Watch("$route")
-        routeChange(val: Route, oldVal: Route) {
+        routeChange(val: Route) {
             for (let i = 0; i < this.list.length; i++) {
                 const l: any = this.list[i];
                 if (l.path === val.path) {
@@ -244,13 +244,11 @@
     }
 
     .nav {
-        position: fixed;
+        position: absolute;
         top: 0;
         left: 0;
         z-index: 1000;
         width: 100%;
-        border-bottom: 1px solid #eee;
-        background-color: #fff;
 
         .nav-content {
             width: 1200px;
@@ -259,16 +257,17 @@
 
         .logo {
             height: 50px;
-            margin: 0;
             border-radius: 50%;
-            margin-top: 5px;
+            margin-top: 15px;
         }
 
         .el-menu.el-menu--horizontal {
             border-bottom: none;
+            background-color: rgba(0, 0, 0, 0);
         }
 
         .el-menu--horizontal > .el-menu-item {
+            font-size: 18px;
             cursor: pointer;
             color: #333;
         }

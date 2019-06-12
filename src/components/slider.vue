@@ -112,7 +112,7 @@
 <!--样式-->
 <style scoped lang="less">
     .slider {
-        padding-top: 50px;
+        margin-top: 30%;
     }
 
     .right {
@@ -135,7 +135,7 @@
 
         .right-content {
             padding: 10px 0 20px 0;
-            margin-bottom: 10px;
+            margin-top: 50px;
             border-bottom: 1px solid #eee;
 
             .item {
@@ -178,7 +178,7 @@
         .tags {
             min-height: 200px;
             padding: 5px 0 20px 0;
-            margin-bottom: 10px;
+            margin-top: 50px;
             border-bottom: 1px solid #eee;
 
             .tag {

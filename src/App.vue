@@ -1,6 +1,12 @@
 <!--页面-->
 <template>
     <div id="app" class="container">
+        <div id="nav-background" v-if="isShowNav">
+            <img :src='handleImage()'>
+            <span style="position:absolute; left:40%; top:10%">冫Soul丶</span>
+            <span id="child-text" style="position:absolute; left:60%; top:30%">——冫Mate丶</span>
+        </div>
+
         <!--头部-->
         <Nav v-if="isShowNav"/>
 
@@ -63,11 +69,18 @@
                 this.isShowSlider = false;
             }
         }
+
+        /**
+         * 随机加载背景
+         */
+        handleImage() {
+            return require("assets/navBg" + Math.floor(Math.random() * 12) + ".jpg");
+        }
     }
 </script>
 
 <!--样式-->
-<style lang="less">
+<style lang="less" >
     @import url("./less/index.less");
     @import url("./less/mobile.less");
 
@@ -82,7 +95,25 @@
         padding-top: 61px;
     }
 
-    img {
-        vertical-align: bottom;
+    #child-text{
+        font-size: 30px;
+        font-weight: lighter;
+        color: #eeeeee;
     }
+
+    #nav-background{
+        font-size: 80px;
+        font-weight:bold;
+        color: #eeeeee;
+        line-height: 400px;
+        height: 45%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+    a{
+        text-decoration:none
+    }
+
 </style>

@@ -149,6 +149,7 @@
 <!--样式-->
 <style lang="less" scoped>
     .left {
+        margin-top: 40%;
         .articles-list {
             margin: 0;
             padding: 0;
