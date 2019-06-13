@@ -57,14 +57,6 @@
          */
         mounted() {
             this.handleSearch();
-            window.onscroll = () => {
-                if (getScrollTop() + getWindowHeight() > getDocumentHeight() - 100) {
-                    // 如果不是已经没有数据了，都可以继续滚动加载
-                    if (this.isLoadEnd === false && this.isLoading === false) {
-                        this.handleSearch();
-                    }
-                }
-            };
         }
 
         /**
@@ -99,6 +91,7 @@
 <style lang="less" scoped>
     .timeline {
         padding: 40px 0;
+        margin-top: 35%;
 
         .year {
             font-size: 34px;

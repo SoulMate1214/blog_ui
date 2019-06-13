@@ -15,6 +15,7 @@
                                   class="time">文章创建时间:{{formatTime(article.createTime)}}</span>
                         </div>
                     </div>
+                    <hr color=#959595>
                 </li>
             </transition-group>
         </ul>
@@ -78,18 +79,10 @@
         articlesList: Array<object> = [];
 
         /**
-         * 如果已经没有数据了，都可以继续滚动加载
+         * 加载数据
          */
         mounted() {
             this.handleSearch();
-            window.onscroll = () => {
-                if (getScrollTop() + getWindowHeight() > getDocumentHeight() - 100) {
-                    if (this.isLoadEnd === false && this.isLoading === false) {
-                        this.handleSearch();
-                    }
-                }
-            };
-            document.addEventListener("scroll", lazyload);
         }
 
         /**
@@ -149,7 +142,7 @@
 <!--样式-->
 <style lang="less" scoped>
     .left {
-        margin-top: 40%;
+        margin-top: 35%;
         .articles-list {
             margin: 0;
             padding: 0;

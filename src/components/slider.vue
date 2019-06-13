@@ -29,6 +29,17 @@
                 </el-tag>
             </div>
         </div>
+
+        <div class="tags">
+            <!--分类-->
+            <div class="tags">
+                <div class="title">分类云</div>
+                <br><br>
+                <el-tag size="medium" v-for="(tag,index) in articleClassList" :key="index" class="tag" type="success">
+                    {{tag.name}}
+                </el-tag>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -112,7 +123,7 @@
 <!--样式-->
 <style scoped lang="less">
     .slider {
-        margin-top: 40%;
+        margin-top: 45%;
     }
 
     .right {

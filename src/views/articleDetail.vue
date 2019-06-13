@@ -70,10 +70,7 @@
                 <CommentList style="margin-top: 20%" v-if="!isLoading" @refreshArticle="refreshArticle" :list="discussList" :article_id="articleDetail.id"/>
             </div>
 
-            <!--左侧-->
-            <div v-if="!isMobileOrPc" style="width: 25%" class="article-right fr">
-                <Slider></Slider>
-            </div>
+
 
             <!--拼命加载中-->
             <LoadingCustom v-if="isLoading"></LoadingCustom>
@@ -94,8 +91,6 @@
     import LoadingCustom from "@/components/loading.vue";
     // @ts-ignore
     import CommentList from "@/components/commentList.vue";
-    // @ts-ignore
-    import Slider from "@/components/slider.vue";
 
     declare var document: any;
 
@@ -105,7 +100,6 @@
     @Component({
         components: {
             LoadingCustom,
-            Slider,
             CommentList,
         }
     })
@@ -306,6 +300,7 @@
 
     .article {
         width: 100%;
+        margin-top: 50%;
 
         .header {
             .title {
