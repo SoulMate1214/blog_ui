@@ -112,7 +112,7 @@
 <!--样式-->
 <style scoped lang="less">
     .slider {
-        margin-top: 30%;
+        margin-top: 40%;
     }
 
     .right {

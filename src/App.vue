@@ -1,11 +1,18 @@
 <!--页面-->
 <template>
     <div id="app" class="container">
-        <div id="nav-background" v-if="isShowNav">
-            <img :src='handleImage()'>
-            <span style="position:absolute; left:40%; top:10%">冫Soul丶</span>
-            <span id="child-text" style="position:absolute; left:60%; top:30%">——冫Mate丶</span>
-        </div>
+        <el-carousel v-if="isShowNav"
+                     id="nav-background"
+                     :interval="3000"
+                     arrow="always"
+                     height="500px"
+                     indicator-position="none">
+            <el-carousel-item v-for="item in 34" :key="item">
+                <img :src='handleImage(item)' class="banner">
+                <span style="position:absolute; left:40%; top:10%">冫Soul丶</span>
+                <span id="child-text" style="position:absolute; left:60%; top:30%">——冫Mate丶</span>
+            </el-carousel-item>
+        </el-carousel>
 
         <!--头部-->
         <Nav v-if="isShowNav"/>
@@ -73,8 +80,8 @@
         /**
          * 随机加载背景
          */
-        handleImage() {
-            return require("assets/navBg" + Math.floor(Math.random() * 12) + ".jpg");
+        handleImage(item:any) {
+            return require("assets/navBg" + item + ".jpg");
         }
     }
 </script>
@@ -102,16 +109,16 @@
     }
 
     #nav-background{
-        font-size: 80px;
+        font-size: 100px;
         font-weight:bold;
         color: #eeeeee;
         line-height: 400px;
-        height: 45%;
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
     }
+
     a{
         text-decoration:none
     }

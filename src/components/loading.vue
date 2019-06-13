@@ -2,7 +2,7 @@
 <template>
     <!--加载的动画效果-->
     <div class="loading">
-        <img src="../assets/loading.svg" alt="大王叫我来巡山啊...">
+        <img src="../assets/loading.svg" alt="加载啊啊啊...">
     </div>
 </template>
 
