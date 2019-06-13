@@ -117,7 +117,7 @@
     }
 
     hr {
-        margin-top: 4%;
+        margin-top: 3.5%;
         width: 95%;
         clear: left;
     }

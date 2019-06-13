@@ -3,7 +3,7 @@
     <div id="app" class="container">
         <el-carousel v-if="isShowNav"
                      id="nav-background"
-                     :interval="3000"
+                     :interval="5000"
                      arrow="always"
                      height="500px"
                      indicator-position="none">
