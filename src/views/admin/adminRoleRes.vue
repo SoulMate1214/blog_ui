@@ -1,7 +1,7 @@
 <!--页面-->
 <template>
     <div>
-        <adminTable :tableName=parameter.tableName :tableUrl=parameter.tableUrl :tableTitle=parameter.tableTitle :tableHeader=parameter.tableHeader></adminTable>
+        <adminTable :tableDeleteUrl=parameter.tableDeleteUrl :tableName=parameter.tableName :tableUrl=parameter.tableUrl :tableTitle=parameter.tableTitle :tableHeader=parameter.tableHeader></adminTable>
     </div>
 </template>
 
@@ -25,7 +25,8 @@
             tableTitle: "角色资源表",
             tableName: "sysRoleReses",
             tableUrl: "http://localhost:1111/roleRes/searchAll",
-            tableHeader: ['编号','名称','排序','状态','备注','是否启用','创建时间','修改时间','创建者','修改者','角色编号','资源编号','角色信息','资源编号']
+            tableDeleteUrl:"http://localhost:1111/roleRes/batchDelete",
+            tableHeader: ['编号','名称','排序','状态','备注','是否启用','创建时间','修改时间','创建者','修改者','角色编号','资源编号','角色详情','资源详情']
         };
     }
 </script>

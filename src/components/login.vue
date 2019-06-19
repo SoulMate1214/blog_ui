@@ -42,7 +42,6 @@
 
     export default class Login extends Vue {
         @Prop({default: false}) visible!: boolean;
-
         btnLoading: boolean = false;
         formLabelWidth: string = "100px";
         params: any = {
@@ -67,7 +66,8 @@
         /**
          * 确认登录的验证
          */
-        handleOk() {
+        @Emit("ok")
+        async handleOk() {
             const reg = new RegExp(
                 "^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"
             );
@@ -84,8 +84,25 @@
                 Message.warning("密码不能为空");
                 return;
             }
-            this.$router.push({ path:'admin'})
-            this.cancel();
+            const res: any = await this.$https.post("http://127.0.0.1:1111/user/login", this.params);
+            if (res.data === 1) {
+                this.$message({
+                    message: "信息正确,登录成功!",
+                    type: "success"
+                });
+                this.$router.push({path: 'admin'})
+                this.cancel();
+            } else if(res.data === 0){
+                this.$message({
+                    message: "信息有误,登录失败",
+                    type: "error"
+                });
+            } else{
+                this.$message({
+                    message: "信息正确,网络错误,无法登录",
+                    type: "error"
+                });
+            }
         }
 
         /**
@@ -94,32 +111,6 @@
         @Emit()
         cancel() {
             return false;
-        }
-
-        /**
-         * 提交表单
-         */
-        @Emit("ok")
-        async submit() {
-            const res: any = await this.$https.post(this.$urls.login, this.params);
-            console.log("res :", res);
-            if (res.status === 200) {
-                if (res.data.code === 0) {
-                    const data: any = res.data.data;
-                    const userInfo: object = {
-                        _id: data._id,
-                        name: data.name,
-                        avatar: data.avatar
-                    };
-                    window.sessionStorage.userInfo = JSON.stringify(userInfo);
-                    Message.success(res.data.message);
-                    return false;
-                } else {
-                    Message.error(res.data.message);
-                }
-            } else {
-                Message.error("网络错误");
-            }
         }
     }
 </script>

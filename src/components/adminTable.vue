@@ -3,28 +3,42 @@
     <div id="admin-table">
         <h1 id="tableTitle">{{tableTitle}}</h1>
         <hr width="95%" color=#5193d5 SIZE=2>
-        <el-button id="insertRow" type="primary" round>添加</el-button>
-        <el-button id="deleteRows" type="danger" round>批量删除</el-button>
+        <!--添加模态框-->
+        <el-button @click="showCommentModal('insert','','')"
+                   id="insertRow"
+                   type="primary"
+                   round>添加
+        </el-button>
+        <el-button
+                id="deleteRows"
+                type="danger"
+                round @click="handleBatchDelete()">批量删除
+        </el-button>
         <el-table :data="data.tableData.slice((data.currentPage-1)*data.pageSize,data.currentPage*data.pageSize)"
                   :default-sort="{prop: 'id'}"
-                  :height="tableHeight" border>
+                  :height="tableHeight" border
+                  ref="multipleTable">
             <!--编号列左固定-->
             <el-table-column fixed="left" label="序号" width="100" align="center" prop="id" sortable>
                 <template slot-scope="scope">
-                    <p>{{scope.row[data.tableHeader.length+1]}}</p>
+                    <p>{{scope.row[data.tableHeader3.length]}}</p>
                 </template>
             </el-table-column>
 
             <!--多选框列左固定-->
-            <el-table-column fixed="left" type="selection" width="55" align="center">
+            <el-table-column
+                    fixed="left"
+                    type="selection"
+                    width="50"
+                    align="center">
             </el-table-column>
 
             <!--隐藏内容列左固定-->
             <el-table-column type="expand" fixed="left">
                 <template slot-scope="scope">
                     <el-form class="demo-table-expand" inline label-position="left">
-                        <el-form-item :label="date" v-for="(date, index) in data.tableHeader">
-                        <span>
+                        <el-form-item :label="date" v-for="(date, index) in data.tableHeader3">:
+                            <span>
                             {{ scope.row[index]}}
                         </span>
                         </el-form-item>
@@ -33,7 +47,7 @@
             </el-table-column>
 
             <!--动态渲染其它列-->
-            <el-table-column :label="date" v-for="(date, index) in data.tableHeader" width="180">
+            <el-table-column :label="date" v-for="(date, index) in data.tableHeader" width="150">
                 <template slot-scope="scope">
                     {{ scope.row[index]}}
                 </template>
@@ -46,7 +60,8 @@
                     <el-input v-model="data.search" size="mini" placeholder="输入关键字搜索"/>
                 </template>
                 <template slot-scope="scope">
-                    <el-button @click="handleEdit(scope.$index, scope.row)" type="primary" icon="el-icon-edit"
+                    <el-button @click="showCommentModal('update',scope.$index,scope.row)" type="primary"
+                               icon="el-icon-edit"
                                circle></el-button>
                     <el-button @click="handleDelete(scope.$index, scope.row)" type="danger" icon="el-icon-delete"
                                circle></el-button>
@@ -56,72 +71,164 @@
 
         <!--分页-->
         <el-pagination :current-page="data.currentPage" :page-size="data.pageSize"
-                       :page-sizes="[5, 10, 20, 40]"
+                       :page-sizes="[5, 10, 20, 40, 100]"
                        :total="data.tableData.length"
                        @current-change="handleCurrentChange"
                        @size-change="handleSizeChange"
                        layout="total, sizes, prev, pager, next, jumper"
                        align="center">
         </el-pagination>
+
+        <adminModal v-if="status!==''"
+                    :visible="visible"
+                    :tableHeader="this.tableHeader"
+                    :status="status"
+                    :rowData="rowData"
+                    @handleOk="handleOk"
+                    @handleCancel="handleCancel"/>
     </div>
 </template>
 
 <!--逻辑-->
 <script lang="ts">
     import {Component, Prop, Vue} from "vue-property-decorator";
+    //@ts-ignore
+    import adminModal from "@/components/adminModal.vue";
 
-    @Component
+
+    @Component({
+        components: {
+            adminModal
+        }
+    })
     export default class Slider extends Vue {
         @Prop({default: ""}) tableName!: string;
         @Prop({default: ""}) tableUrl!: string;
+        @Prop({default: ""}) tableDeleteUrl!: string;
         @Prop({default: ""}) tableTitle!: string;
         @Prop({default: []}) tableHeader!: [];
+        status: String = "";
+        visible: boolean = false;
         isLoadEnd: boolean = false;
         isLoading: boolean = false;
-        tableHeight:Number = window.innerHeight - 300;
+        tableHeight: Number = window.innerHeight - 300;
+        rowData: String[] = [];
+        parameter: any = {
+            ids: []
+        };
         data: any = {
             currentPage: 1,
             pageSize: 10,
             search: '',
-            tableHeader: [],
+            tableHeader: [],//基本信息列
+            tableHeader2: [],//关联表的详情信息列
+            tableHeader3: [],//全信息列
             tableData: []
         };
 
+        /**
+         * 初始化
+         */
         mounted() {
-            this.data.tableHeader = this.tableHeader;
-            this.handleUserList()
+            this.data.tableHeader3 = this.tableHeader;
+            this.tableHeader.forEach((value: string, i) => {
+                if (value.match("详情")) {
+                    this.data.tableHeader2[i] = value;
+                } else {
+                    this.data.tableHeader[i] = value;
+                }
+            });
+            this.handleTable()
         }
 
         /**
-         * 编辑
+         * 显示模态框
          */
-        handleEdit() {
+        showCommentModal(status: string, index: any, row: any) {
+            this.visible = true;
+            this.status = status;
+            row.forEach((value: any) => {
+                this.rowData.push(JSON.stringify(value));
+            });
+        }
+
+        /**
+         * 模态框确认
+         */
+        handleOk() {
+            this.visible = false;
+            //差个刷新
+        }
+
+        /**
+         * 模态框取消
+         */
+        handleCancel() {
+            this.visible = false;
+        }
+
+        /**
+         * 批量删除
+         */
+        async handleBatchDelete() {
+            // @ts-ignore
+            this.$refs.multipleTable.selection.forEach(async (value: any) => {
+                this.parameter.ids.push(value[0]);
+            });
+
+            if (this.parameter.ids.length === 0) {
+                this.$message({
+                    message: "没有选中任何数据,请选择之后再执行此操作",
+                    type: "warning"
+                });
+                return;
+            }
+
+            this.isLoading = true;
+            const res: any = await this.$https.post(this.tableDeleteUrl, this.parameter);
+            this.isLoading = false;
+            if (res.status === 200) {
+                this.$message({
+                    message: "批量删除成功!",
+                    type: "success"
+                });
+                // @ts-ignore
+                this.$refs.multipleTable.selection.forEach(async (value: any) => {
+                    this.data.tableData.splice(this.data.tableData.indexOf(value), 1);
+                });
+            } else {
+                this.$message({
+                    message: "网络出错,批量删除失败!",
+                    type: "error"
+                });
+            }
         }
 
         /**
          * 删除
          */
-        handleDelete() {
-        }
-
-        /**
-         * 分页尺寸
-         */
-        handleSizeChange(size: any) {
-            this.data.pageSize = size
-        }
-
-        /**
-         * 页面变化
-         */
-        handleCurrentChange(currentPage: any) {
-            this.data.currentPage = currentPage
+        async handleDelete(index: any, row: any) {
+            this.isLoading = true;
+            const res: any = await this.$https.delete("http://127.0.0.1:1111/" + this.tableName + "/" + row[0]);
+            this.isLoading = false;
+            if (res.status === 204) {
+                this.$message({
+                    message: "删除成功!",
+                    type: "success"
+                });
+                this.data.tableData.splice(this.data.tableData.indexOf(row), 1);
+            } else {
+                this.$message({
+                    message: "网络出错,删除失败!",
+                    type: "error"
+                });
+            }
         }
 
         /**
          * 请求数据
          */
-        async handleUserList() {
+        async handleTable() {
             this.isLoading = true;
             const res: any = await this.$https.get(this.tableUrl);
             this.isLoading = false;
@@ -144,7 +251,6 @@
                     dataList[temp] = Number(count) + 1;  //序号
                     this.data.tableData.push(dataList);
                 }
-                console.log(this.data.tableData)
             } else {
                 this.$message({
                     message: "网络错误!",
@@ -153,6 +259,19 @@
             }
         }
 
+        /**
+         * 分页尺寸
+         */
+        handleSizeChange(size: any) {
+            this.data.pageSize = size
+        }
+
+        /**
+         * 页面变化
+         */
+        handleCurrentChange(currentPage: any) {
+            this.data.currentPage = currentPage
+        }
     }
 </script>
 

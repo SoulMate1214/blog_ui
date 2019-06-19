@@ -1,7 +1,7 @@
 <!--页面-->
 <template>
     <div>
-        <adminTable :tableName=parameter.tableName :tableUrl=parameter.tableUrl :tableTitle=parameter.tableTitle :tableHeader=parameter.tableHeader></adminTable>
+        <adminTable :tableDeleteUrl=parameter.tableDeleteUrl :tableName=parameter.tableName :tableUrl=parameter.tableUrl :tableTitle=parameter.tableTitle :tableHeader=parameter.tableHeader></adminTable>
     </div>
 </template>
 
@@ -25,7 +25,8 @@
             tableTitle: "资源表",
             tableName: "sysReses",
             tableUrl: "http://localhost:1111/res/searchAll",
-            tableHeader: ['编号','资源名','排序','状态','备注','是否启用','创建时间','修改时间','创建者','修改者','父级编号','描述','资源路径','资源等级','图标','资源类型','父级信息']
+            tableDeleteUrl:"http://localhost:1111/res/batchDelete",
+            tableHeader: ['编号','资源名','排序','状态','备注','是否启用','创建时间','修改时间','创建者','修改者','父级编号','描述','资源路径','资源等级','图标','资源类型','父级详情']
         };
     }
 </script>
