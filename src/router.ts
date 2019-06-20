@@ -3,7 +3,7 @@ import Router from "vue-router"
 
 Vue.use(Router)
 
-export default new Router({
+const route = new Router({
     mode: "history",
     routes: [
         //  前台
@@ -215,3 +215,21 @@ export default new Router({
 
     ]
 })
+
+
+route.beforeEach((to:any,from:any,next:any)=>{
+    console.log("231242534")
+    if (to.path.startsWith('/admin')) {
+        if(localStorage.getItem('token')){
+            next()
+        }else{
+            next({
+                path:'/articles'
+            })
+        }
+    } else {
+        next()
+    }
+});
+
+export default route
