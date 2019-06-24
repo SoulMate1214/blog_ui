@@ -185,7 +185,9 @@
             }
 
             this.isLoading = true;
-            const res: any = await this.$https.post(this.tableDeleteUrl, this.parameter);
+            const res: any = await this.$https.post(this.tableDeleteUrl, this.parameter,{
+                headers: {'token':window.localStorage['token']}
+            });
             this.isLoading = false;
             if (res.status === 200) {
                 this.$message({
@@ -230,7 +232,9 @@
          */
         async handleTable() {
             this.isLoading = true;
-            const res: any = await this.$https.get(this.tableUrl);
+            const res: any = await this.$https.get(this.tableUrl,{
+                headers: {'token':window.localStorage['token']}
+            });
             this.isLoading = false;
             if (res.status === 200) {
                 const data: any = res.data._embedded[this.tableName];

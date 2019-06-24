@@ -89,7 +89,7 @@
                         message: "信息正确,登录成功!",
                         type: "success"
                     });
-                    localStorage.setItem('token',"Bearer "+reponse.data.ticket)
+                    localStorage.setItem('token',reponse.data.ticket)
                     this.$router.push({path: 'admin'})
                     this.cancel();
                 })
