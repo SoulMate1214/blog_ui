@@ -4,8 +4,11 @@
         <h1 id="tableTitle">{{tableTitle}}</h1>
         <hr width="95%" color=#5193d5 SIZE=2>
         <!--添加模态框-->
-        <el-button @click="showCommentModal('insert','','')"
-                   id="insertRow"
+        <el-button v-if="tableName==='sysArticles'" class="insertRow" type="primary" round>
+            <router-link to="/admin-articleEditor">添加</router-link>
+        </el-button>
+        <el-button v-else @click="showCommentModal('insert','','')"
+                   class="insertRow"
                    type="primary"
                    round>添加
         </el-button>
@@ -82,6 +85,7 @@
         <adminModal v-if="status!==''"
                     :visible="visible"
                     :tableHeader="this.tableHeader"
+                    :englishHeader="data.englishHeader"
                     :status="status"
                     :rowData="rowData"
                     @handleOk="handleOk"
@@ -123,6 +127,7 @@
             tableHeader: [],//基本信息列
             tableHeader2: [],//关联表的详情信息列
             tableHeader3: [],//全信息列
+            englishHeader:[],//英文的信息列
             tableData: []
         };
 
@@ -147,9 +152,11 @@
         showCommentModal(status: string, index: any, row: any) {
             this.visible = true;
             this.status = status;
-            row.forEach((value: any) => {
-                this.rowData.push(JSON.stringify(value));
-            });
+            if(row!==''){
+                row.forEach((value: any) => {
+                    this.rowData.push(JSON.stringify(value));
+                });
+            }
         }
 
         /**
@@ -238,10 +245,13 @@
             this.isLoading = false;
             if (res.status === 200) {
                 const data: any = res.data._embedded[this.tableName];
+                for (let key in data[0]) {
+                    this.data.englishHeader.push(key); //列标题添加至englishHeader以供添加修改使用
+                }
                 if (this.data.tableHeader === null) {
                     for (let key in data[0]) {
                         if (key != "_links") {
-                            this.data.tableHeader.push(key); //列标题
+                            this.data.tableHeader.push(key); //列标题添加至tableHeader以供显示使用,可无
                         }
                     }
                 }
@@ -249,10 +259,10 @@
                     let temp = 0;
                     let dataList = [];
                     for (let key in data[count]) {
-                        dataList[temp] = data[count][key];  //列数据
+                        dataList[temp] = data[count][key];  //列数据,获取暴露的全数据,包括关联信息
                         temp++;
                     }
-                    dataList[temp] = Number(count) + 1;  //序号
+                    dataList[temp] = Number(count) + 1;  //序号,为了和id区分开
                     this.data.tableData.push(dataList);
                 }
             } else {
@@ -309,7 +319,7 @@
         font-family: YouYuan;
     }
 
-    #insertRow {
+    .insertRow {
         margin-left: 2%;
         margin-bottom: 5px;
     }

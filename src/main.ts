@@ -6,6 +6,8 @@ import router from "./router"
 import store from "./store/index"
 import service from "./utils/https"
 import urls from "./utils/urls"
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
 import {
   Image,
   Calendar,
@@ -157,6 +159,7 @@ Vue.component(MessageBox.name, MessageBox)
 Vue.component(Notification.name, Notification)
 
 Vue.use(Loading.directive)
+Vue.use(mavonEditor)
 Vue.config.productionTip = false
 Vue.prototype.$urls = urls // 其他页面在使用URLS的时候直接  this.$urls就可以了
 Vue.prototype.$https = service // 其他页面在使用axios的时候直接  this.$http就可以了

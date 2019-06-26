@@ -212,13 +212,23 @@ const route = new Router({
                 }
             ]
         },
+        {
+            path: "/admin-articleEditor",
+            component: (resolve) => require(["./views/admin/admin.vue"], resolve),
+            children: [
+                {
+                    path: "",
+                    name: "admin-articleEditor",
+                    component: (resolve) => require(["./views/admin/adminArticleEditor.vue"], resolve)
+                }
+            ]
+        },
 
     ]
 })
 
 
 route.beforeEach((to:any,from:any,next:any)=>{
-    console.log("231242534")
     if (to.path.startsWith('/admin')) {
         if(localStorage.getItem('token')){
             next()

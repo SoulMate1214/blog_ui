@@ -3,9 +3,13 @@
     <!--添加-->
     <Dialog  v-if="this.status==='insert'" title="添加" width="50%" :visible="dialogVisible" @close="handleCancel">
         <Form>
-            <el-form-item :label="date" v-for="(date, index) in tableHeader">:
-                <Input autocomplete="off"></Input>
-            </el-form-item>
+            <el-row>
+                <el-col :span="12" v-for="(date, index) in tableHeader">
+                    <el-form-item :label="tableHeader[index]">:
+                        <Input autocomplete="on" :placeholder="englishHeader[index]" v-model="rowData[index]" class="adminInsert"></Input>
+                    </el-form-item>
+                </el-col>
+            </el-row>
         </Form>
 
         <!--确认和取消-->
@@ -20,12 +24,11 @@
         <Form>
             <el-row>
                 <el-col :span="12" v-for="(date, index) in tableHeader">
-                    <el-form-item :label="date">:
-                        <Input autocomplete="off" v-model="rowData[index]"></Input>
+                    <el-form-item :label="tableHeader[index]">:
+                        <Input autocomplete="on" :placeholder="englishHeader[index]" v-model="rowData[index]" class="adminUpdate"></Input>
                     </el-form-item>
                 </el-col>
             </el-row>
-
         </Form>
         <!--确认和取消-->
         <div slot="footer" class="dialog-footer">
@@ -53,6 +56,7 @@
     export default class Comment extends Vue {
         @Prop({default: false}) visible!: boolean;
         @Prop({default: []}) tableHeader!: [];
+        @Prop({default: []}) englishHeader!: [];
         @Prop({default: []}) rowData!: [];
         @Prop({default: ""}) status!: String;
 
@@ -60,6 +64,11 @@
          * 初始加载
          */
         mounted() {
+            console.log(this.visible);
+            console.log(this.tableHeader);
+            console.log(this.englishHeader);
+            console.log(this.rowData);
+            console.log(this.status);
         }
 
         /**
@@ -82,6 +91,8 @@
         @Emit("handleOk")
         async handleOk() {
         }
+
+
     }
 </script>
 <style></style>
