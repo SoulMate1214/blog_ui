@@ -49,27 +49,30 @@
 
                 <!--文章内容-->
                 <div class="content">
-                    <div id="content" class="article-detail" v-html="articleDetail.message"></div>
+                    <div id="content" class="article-detail"  v-html="articleMessage"></div>
                 </div>
 
                 <!--点赞-->
                 <div class="heart">
-                    <el-button type="danger" :loading="isLoading" @click="likeArticle" >点赞
+                    <el-button type="danger" :loading="isLoading" @click="likeArticle">点赞
                     </el-button>
                 </div>
 
                 <!--评论提交-->
                 <div class="heart">
                     <!--评论框-->
-                    <textarea autocomplete="off" placeholder="文明社会，理性评论" class="el-textarea__inner" style="min-height: 150px;" v-model="content"></textarea>
+                    <textarea autocomplete="off" placeholder="文明社会，理性评论" class="el-textarea__inner"
+                              style="min-height: 150px;" v-model="content"></textarea>
                     <!--评论按钮-->
-                    <el-button type="primary" :loading="btnLoading" style="margin-top: 15px"   @click="handleAddComment">发 送</el-button>
+                    <el-button type="primary" :loading="btnLoading" style="margin-top: 15px" @click="handleAddComment">发
+                        送
+                    </el-button>
                 </div>
 
                 <!--显示评论信息-->
-                <CommentList style="margin-top: 20%" v-if="!isLoading" @refreshArticle="refreshArticle" :list="discussList" :article_id="articleDetail.id"/>
+                <CommentList style="margin-top: 20%" v-if="!isLoading" @refreshArticle="refreshArticle"
+                             :list="discussList" :article_id="articleDetail.id"/>
             </div>
-
 
 
             <!--拼命加载中-->
@@ -83,6 +86,9 @@
 <script lang="ts">
     //导入
     import {Component, Vue} from "vue-property-decorator";
+    import marked from 'marked'
+    import hljs from "highlight.js";
+    import 'highlight.js/styles/monokai-sublime.css';
     import {
         timestampToTime,
         isMobileOrPc
@@ -117,6 +123,7 @@
         articleDetail: any = {};
         labelList: Array<object> = [];
         discussList: Array<object> = [];
+        articleMessage: string = "";
         params: any = {
             articleId: "",
             message: "",
@@ -159,6 +166,21 @@
             this.isLoading = false;
             if (res.status === 200) {
                 this.articleDetail = res.data;
+                marked.setOptions({
+                    renderer: new marked.Renderer(),
+                    highlight: function (code) {
+                        return hljs.highlightAuto(code).value;
+                    },
+                    pedantic: true,
+                    gfm: true,
+                    tables: true,
+                    breaks: true,
+                    sanitize: true,
+                    smartLists: true,
+                    smartypants: true,
+                    xhtml: true
+                });
+                this.articleMessage = marked(this.articleDetail.message);
             } else {
                 this.$message({
                     message: "文章加载失败哦!",
@@ -172,7 +194,7 @@
          */
         async discussSearch() {
             this.isLoading = true;
-            const res: any = await this.$https.get('http://127.0.0.1:1111/discuss/findDiscussByArticleId?articleId='+ this.params.articleId);
+            const res: any = await this.$https.get('http://127.0.0.1:1111/discuss/findDiscussByArticleId?articleId=' + this.params.articleId);
             this.isLoading = false;
             if (res.status === 200) {
                 const data: any = res.data;

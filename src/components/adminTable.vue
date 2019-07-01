@@ -52,7 +52,7 @@
             <!--动态渲染其它列-->
             <el-table-column :label="date" v-for="(date, index) in data.tableHeader" width="150">
                 <template slot-scope="scope">
-                    {{ scope.row[index]}}
+                    <div class="hoveTitle">{{ scope.row[index]}}</div>
                 </template>
             </el-table-column>
 
@@ -178,6 +178,13 @@
          * 批量删除
          */
         async handleBatchDelete() {
+            if(this.tableName==='sysArticles'){
+                this.$message({
+                    message: "删除前请确保'文章标签关联表','文件表','评论表'与当前文章关联的内容已删除,否则无法删除文章",
+                    type: "warning"
+                });
+            }
+
             // @ts-ignore
             this.$refs.multipleTable.selection.forEach(async (value: any) => {
                 this.parameter.ids.push(value[0]);
@@ -217,6 +224,12 @@
          * 删除
          */
         async handleDelete(index: any, row: any) {
+            if(this.tableName==='sysArticles'){
+                this.$message({
+                    message: "删除前请确保'文章标签关联表','文件表','评论表'与当前文章关联的内容已删除,否则无法删除文章",
+                    type: "warning"
+                });
+            }
             this.isLoading = true;
             const res: any = await this.$https.delete("http://127.0.0.1:1111/" + this.tableName + "/" + row[0]);
             this.isLoading = false;
@@ -323,6 +336,11 @@
         margin-left: 2%;
         margin-bottom: 5px;
     }
-
+    .hoveTitle {
+        text-align: left;
+        overflow: hidden;;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
 </style>
 

@@ -193,10 +193,13 @@
                 }
 
                 .abstract {
-                    min-height: 30px;
-                    margin: 0 0 8px;
-                    font-size: 13px;
-                    line-height: 24px;
+                    width:100px;
+                    height:50px;
+                    overflow:hidden;
+                    display:block;
+                    margin: 0 0 10px;
+                    font-size: 15px;
+                    line-height: 30px;
                     color: #555;
                 }
 
