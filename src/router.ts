@@ -28,6 +28,13 @@ const route = new Router({
                 import("./views/timeline.vue")
         },
         {
+            path: "/friend",
+            name: "friend",
+            component: () =>
+                // @ts-ignore
+                import("./views/friend.vue")
+        },
+        {
             path: "/articleDetail",
             name: "articleDetail",
             component: () =>

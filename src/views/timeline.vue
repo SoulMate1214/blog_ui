@@ -3,7 +3,7 @@
     <div class="timeline left">
         <el-timeline>
             <el-timeline-item v-for="(timeline, index) in timelineList" :key="index"
-                              :color="timeline.status === 1 ? 'green' : timeline.status === 2 ? 'red' : ''"
+                              :color="timeline.status === '1' ? 'green' : timeline.status === '2'? 'red' : ''"
                               placement="top"
                               hide-timestamp>
                 <el-card>

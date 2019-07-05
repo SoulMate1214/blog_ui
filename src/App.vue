@@ -70,7 +70,7 @@
 
         @Watch("$route")
         routeChange(val: Route) {
-            this.isShowNav = val.path === "/articles" || val.path === "/timeline" || val.path === "/articleDetail";
+            this.isShowNav = val.path === "/articles" || val.path === "/timeline" || val.path === "/articleDetail"|| val.path === "/friend";
             this.isShowSlider = val.path === "/articles" || val.path === "/timeline"|| val.path === "/articleDetail";
             if (isMobileOrPc()) {
                 this.isShowSlider = false;

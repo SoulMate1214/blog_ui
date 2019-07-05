@@ -15,7 +15,7 @@
                 <div class="list">
                     <router-link class="link" to="/articles">文章</router-link>
                     <router-link class="link" to="/timeline">历程</router-link>
-                    <a target="_blank" rel="noopener noreferrer" class="link" href="http://www.xymate.cn">友链</a>
+                    <router-link class="link" to="/friend">友链</router-link>
                     <a target="_blank" rel="noopener noreferrer" class="link" href="https://github.com/SoulMate1214">GitHub</a>
                 </div>
                 <div class="introduce">自在飞花轻似梦</div>

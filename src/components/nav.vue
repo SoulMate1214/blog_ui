@@ -19,9 +19,6 @@
                             <el-menuItem :route="l.path" :index="l.index" v-for="l in list" :key="l.index">
                                 {{l.name}}
                             </el-menuItem>
-
-                            <el-menu-item><a href="http://www.xymate.cn" target="_blank">友链</a></el-menu-item>
-
                             <el-menu-item><a href="https://github.com/SoulMate1214" target="_blank">GitHub</a></el-menu-item>
                         </el-menu>
                     </el-col>
@@ -61,8 +58,8 @@
                     <div @click="handleClickMenu('/timeline')" class="item">
                         <router-link to="/timeline">历 程</router-link>
                     </div>
-                    <div class="item">
-                        <a target="_blank" href="http://www.xymate.cn">友链</a>
+                    <div @click="handleClickMenu('/friend')" class="item">
+                        <router-link to="/friend">友链</router-link>
                     </div>
                     <div class="item">
                         <a href="https://github.com/SoulMate1214" target="_blank">GitHub</a>
@@ -117,6 +114,11 @@
                 index: "3",
                 path: "/timeline",
                 name: "历程"
+            },
+            {
+                index: "4",
+                path: "/friend",
+                name: "友链"
             }
         ];
         activeIndex: string = "1";
