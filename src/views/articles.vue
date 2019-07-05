@@ -5,17 +5,16 @@
             <transition-group name="el-fade-in" tag="p">
                 <li @click="articleDetail(article.id)" v-for="(article,index) in articlesList" v-bind:key="index"
                     class="item">
-                    <div class="content">
-                        <h4 class="title">{{article.name}}</h4>
-                        <p class="abstract">{{article.message}}</p>
-                        <div class="meta">
-                            <span>分类: {{article.remark}}</span>
-                            <span>浏览量: {{article.browseCount}}</span>
-                            <span v-if="article.createTime"
-                                  class="time">文章创建时间:{{formatTime(article.createTime)}}</span>
-                        </div>
+                    <h4 class="title">{{article.name}}</h4>
+                    <p class="abstract">{{article.message}}</p>
+                    <p id="cover" v-html="markedChange('![]('+article.status+')')"></p>
+                    <div class="meta">
+                        <span>分类: {{article.remark}}</span>
+                        <span>浏览量: {{article.browseCount}}</span>
+                        <span v-if="article.createTime"
+                              class="time">文章创建时间:{{formatTime(article.createTime)}}</span>
                     </div>
-                    <hr color=#959595>
+                    <hr color=#9CCEF0>
                 </li>
             </transition-group>
         </ul>
@@ -35,7 +34,9 @@
         getWindowHeight,
         timestampToTime
     } from "@/utils/utils";
-
+    import marked from 'marked'
+    import hljs from "highlight.js";
+    import 'highlight.js/styles/monokai-sublime.css';
     // @ts-ignore
     import LoadEnd from '@/components/loadEnd.vue';
     // @ts-ignore
@@ -136,11 +137,32 @@
             }
         }
 
+        markedChange(message:any){
+            marked.setOptions({
+                renderer: new marked.Renderer(),
+                highlight: function (code) {
+                    return hljs.highlightAuto(code).value;
+                },
+                pedantic: true,
+                gfm: true,
+                tables: true,
+                breaks: true,
+                sanitize: true,
+                smartLists: true,
+                smartypants: true,
+                xhtml: true
+            });
+           return  marked(message)
+        }
     }
 </script>
 
 <!--样式-->
 <style lang="less" scoped>
+    #cover{
+        width: 300px;
+    }
+
     .left {
         margin-top: 35%;
         .articles-list {
@@ -152,7 +174,7 @@
                 color: #333;
                 margin: 7px 0 4px;
                 display: inherit;
-                font-size: 18px;
+                font-size: 25px;
                 font-weight: 700;
                 line-height: 1.5;
             }
@@ -193,11 +215,12 @@
                 }
 
                 .abstract {
-                    width:100px;
-                    height:50px;
+                    width:500px;
+                    height:150px;
+                    float: right;
                     overflow:hidden;
                     display:block;
-                    margin: 0 0 10px;
+                    margin-top: 4%;
                     font-size: 15px;
                     line-height: 30px;
                     color: #555;

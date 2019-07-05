@@ -1,7 +1,15 @@
 <!--页面-->
 <template>
     <div>
-        <adminTable :tableDeleteUrl=parameter.tableDeleteUrl :tableName=parameter.tableName :tableUrl=parameter.tableUrl :tableTitle=parameter.tableTitle :tableHeader=parameter.tableHeader></adminTable>
+        <adminTable
+                :associatedTableName=parameter.associatedTableName
+                :tableSaveUrl=parameter.tableSaveUrl
+                :tableDeleteUrl=parameter.tableDeleteUrl
+                :tableName=parameter.tableName
+                :tableUrl=parameter.tableUrl
+                :tableTitle=parameter.tableTitle
+                :tableHeader=parameter.tableHeader>
+        </adminTable>
     </div>
 </template>
 
@@ -24,8 +32,10 @@
         parameter: any = {
             tableTitle: "时间线表",
             tableName: "sysTimelines",
+            associatedTableName :[],
             tableUrl: "http://localhost:1111/timeline/searchAll",
             tableDeleteUrl:"http://localhost:1111/timeline/batchDelete",
+            tableSaveUrl:"http://localhost:1111/timeline/save",
             tableHeader: ['编号','名称','排序','状态','备注','是否启用','创建时间','修改时间','创建者','修改者','时间线信息']
         };
     }

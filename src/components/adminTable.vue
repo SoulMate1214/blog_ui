@@ -7,7 +7,7 @@
         <el-button v-if="tableName==='sysArticles'" class="insertRow" type="primary" round>
             <router-link to="/admin-articleEditor">添加</router-link>
         </el-button>
-        <el-button v-else @click="showCommentModal('insert','','')"
+        <el-button v-else @click="showCommentModal1('insert','','')"
                    class="insertRow"
                    type="primary"
                    round>添加
@@ -63,7 +63,7 @@
                     <el-input v-model="data.search" size="mini" placeholder="输入关键字搜索"/>
                 </template>
                 <template slot-scope="scope">
-                    <el-button @click="showCommentModal('update',scope.$index,scope.row)" type="primary"
+                    <el-button @click="showCommentModal1('update',scope.$index,scope.row)" type="primary"
                                icon="el-icon-edit"
                                circle></el-button>
                     <el-button @click="handleDelete(scope.$index, scope.row)" type="danger" icon="el-icon-delete"
@@ -84,12 +84,18 @@
 
         <adminModal v-if="status!==''"
                     :visible="visible"
-                    :tableHeader="this.tableHeader"
+                    :tableHeader="this.data.tableHeader"
                     :englishHeader="data.englishHeader"
+                    :tableSaveUrl="tableSaveUrl"
+                    :tableName="tableName"
+                    :associatedTableName="associatedTableName"
                     :status="status"
-                    :rowData="rowData"
+                    :insertRowData="insertRowData"
+                    :updateRowData="updateRowData"
+                    @addSuccess="addSuccess"
                     @handleOk="handleOk"
                     @handleCancel="handleCancel"/>
+
     </div>
 </template>
 
@@ -109,14 +115,17 @@
         @Prop({default: ""}) tableName!: string;
         @Prop({default: ""}) tableUrl!: string;
         @Prop({default: ""}) tableDeleteUrl!: string;
+        @Prop({default: ""}) tableSaveUrl!: string;
         @Prop({default: ""}) tableTitle!: string;
         @Prop({default: []}) tableHeader!: [];
+        @Prop({default: []}) associatedTableName!: [];
         status: String = "";
         visible: boolean = false;
         isLoadEnd: boolean = false;
         isLoading: boolean = false;
         tableHeight: Number = window.innerHeight - 300;
-        rowData: String[] = [];
+        insertRowData: any = [];
+        updateRowData: any = [];
         parameter: any = {
             ids: []
         };
@@ -127,7 +136,7 @@
             tableHeader: [],//基本信息列
             tableHeader2: [],//关联表的详情信息列
             tableHeader3: [],//全信息列
-            englishHeader:[],//英文的信息列
+            englishHeader: [],//英文的信息列
             tableData: []
         };
 
@@ -149,13 +158,11 @@
         /**
          * 显示模态框
          */
-        showCommentModal(status: string, index: any, row: any) {
+        showCommentModal1(status: string, index: any, row: any) {
             this.visible = true;
             this.status = status;
-            if(row!==''){
-                row.forEach((value: any) => {
-                    this.rowData.push(JSON.stringify(value));
-                });
+            if (row !== '') {
+                this.updateRowData = row;
             }
         }
 
@@ -164,7 +171,6 @@
          */
         handleOk() {
             this.visible = false;
-            //差个刷新
         }
 
         /**
@@ -175,10 +181,21 @@
         }
 
         /**
+         * 添加之后的刷新
+         */
+        addSuccess(data: any) {
+            let arrData = [];
+            for (let key in data) {
+                arrData.push(data[key]);
+            }
+            this.data.tableData.push(arrData);
+        }
+
+        /**
          * 批量删除
          */
         async handleBatchDelete() {
-            if(this.tableName==='sysArticles'){
+            if (this.tableName === 'sysArticles') {
                 this.$message({
                     message: "删除前请确保'文章标签关联表','文件表','评论表'与当前文章关联的内容已删除,否则无法删除文章",
                     type: "warning"
@@ -199,8 +216,8 @@
             }
 
             this.isLoading = true;
-            const res: any = await this.$https.post(this.tableDeleteUrl, this.parameter,{
-                headers: {'token':window.localStorage['token']}
+            const res: any = await this.$https.post(this.tableDeleteUrl, this.parameter, {
+                headers: {'token': window.localStorage['token']}
             });
             this.isLoading = false;
             if (res.status === 200) {
@@ -224,7 +241,7 @@
          * 删除
          */
         async handleDelete(index: any, row: any) {
-            if(this.tableName==='sysArticles'){
+            if (this.tableName === 'sysArticles') {
                 this.$message({
                     message: "删除前请确保'文章标签关联表','文件表','评论表'与当前文章关联的内容已删除,否则无法删除文章",
                     type: "warning"
@@ -252,8 +269,8 @@
          */
         async handleTable() {
             this.isLoading = true;
-            const res: any = await this.$https.get(this.tableUrl,{
-                headers: {'token':window.localStorage['token']}
+            const res: any = await this.$https.get(this.tableUrl, {
+                headers: {'token': window.localStorage['token']}
             });
             this.isLoading = false;
             if (res.status === 200) {
@@ -336,6 +353,7 @@
         margin-left: 2%;
         margin-bottom: 5px;
     }
+
     .hoveTitle {
         text-align: left;
         overflow: hidden;;

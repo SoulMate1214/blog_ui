@@ -78,6 +78,7 @@
           classify: [],
           message: "",
           imageUrl: [],
+          status:""
         }
       }
     },
@@ -121,6 +122,8 @@
        */
       async formPost() {
         this.isLoading = true
+        this.form.status = this.form.imageUrl[this.form.imageUrl.length-1]
+        console.log(this.form.status)
         const res = await this.$https.post("http://127.0.0.1:1111/article/saveArticle",this.form)
         this.isLoading = false
         if (res.status === 200) {
@@ -183,12 +186,10 @@
         margin-left: 15%;
         margin-top: 5%;
     }
-
     #save {
         margin-left: 47.3%;
         margin-top: 5%
     }
-
     .col {
         margin-left: 2%;
     }
