@@ -31,7 +31,6 @@
        * @returns {any}
        */
       handleImage(item) {
-        console.log(item)
         return require("../assets/friendImg/" + item + ".jpg");
       },
 

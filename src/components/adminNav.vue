@@ -19,7 +19,7 @@
 
             <el-menu-item index="3">消息中心</el-menu-item>
 
-            <el-menu-item index="4"><a href="http://www.xymate.cn" target="_blank">友链</a></el-menu-item>
+            <el-menu-item index="4"><a href="http://127.0.0.1:2222/friend" target="_blank">友链</a></el-menu-item>
 
             <el-menu-item index="5"><a href="https://github.com/SoulMate1214" target="_blank">GitHub</a></el-menu-item>
             <router-link to="/">

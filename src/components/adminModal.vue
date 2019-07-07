@@ -9,11 +9,11 @@
                     <el-form-item :label="tableHeader[index]">:
                         <!--基础字段的不同形式-->
                         <label><Input
-                                v-if="tableHeader[index]==='编号'|| tableHeader[index]==='状态'|| tableHeader[index]==='排序'"
+                                v-if="tableHeader[index]==='编号'|| tableHeader[index]==='排序'"
                                 autocomplete="on" :placeholder="englishHeader[index]" v-model="insertRowData[index]"
                                 class="adminInsert" disabled></Input></label>
                         <label><Input
-                                v-if="tableHeader[index]==='名称'||tableHeader[index]==='创建者'||tableHeader[index]==='修改者'"
+                                v-if="tableHeader[index]==='名称'|| tableHeader[index]==='状态'||tableHeader[index]==='创建者'||tableHeader[index]==='修改者'"
                                 autocomplete="on" :placeholder="englishHeader[index]" v-model="insertRowData[index]"
                                 class="adminInsert"></Input></label>
                         <label><Input v-if="tableHeader[index]==='备注'" type="textarea" v-model="insertRowData[index]"
@@ -82,11 +82,11 @@
                     <el-form-item :label="tableHeader[index]">:
                         <!--基础字段的不同形式-->
                         <label><Input
-                                v-if="tableHeader[index]==='编号'|| tableHeader[index]==='状态'|| tableHeader[index]==='排序'"
+                                v-if="tableHeader[index]==='编号'|| tableHeader[index]==='排序'"
                                 autocomplete="on" :placeholder="englishHeader[index]" v-model="updateRowData[index]"
                                 class="adminInsert" disabled></Input></label>
                         <label><Input
-                                v-if="tableHeader[index]==='名称'||tableHeader[index]==='创建者'||tableHeader[index]==='修改者'"
+                                v-if="tableHeader[index]==='名称'|| tableHeader[index]==='状态'||tableHeader[index]==='创建者'||tableHeader[index]==='修改者'"
                                 autocomplete="on" :placeholder="englishHeader[index]" v-model="updateRowData[index]"
                                 class="adminInsert"></Input></label>
                         <label><Input v-if="tableHeader[index]==='备注'" type="textarea" v-model="updateRowData[index]"
