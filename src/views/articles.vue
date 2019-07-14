@@ -1,6 +1,6 @@
 <!--页面-->
 <template>
-    <div class="left clearfix">
+    <div class="left clearfix" v-bind:class="{ leftPhone: isMobile }">
         <ul class="articles-list" id="list">
             <transition-group name="el-fade-in" tag="p">
                 <li @click="articleDetail(article.id)" v-for="(article,index) in articlesList" v-bind:key="index"
@@ -41,6 +41,7 @@
     import LoadEnd from '@/components/loadEnd.vue';
     // @ts-ignore
     import LoadingCustom from "@/components/loading.vue";
+    import {isMobileOrPc} from "@/utils/utils";
     // 获取可视区域的高度
     const viewHeight = window.innerHeight || document.documentElement.clientHeight;
     // 用新的 throttle 包装 scroll 的回调
@@ -78,6 +79,7 @@
         isLoadEnd: boolean = false;
         isLoading: boolean = false;
         articlesList: Array<object> = [];
+        isMobile: boolean = isMobileOrPc();
 
         /**
          * 加载数据
@@ -102,9 +104,9 @@
         articleDetail(id: string) {
             let url: string = "";
             if (process.env.NODE_ENV === "development") {
-                url = "http://localhost:2222/articleDetail?";
+                url = "http://118.25.221.201/#/articleDetail?";
             } else {
-                url = "https://Soul.cn/articleDetail?";
+                url = "http://118.25.221.201/#/articleDetail?";
             }
             window.open(url + `sysArticles=${id}`);
         }
@@ -121,7 +123,7 @@
          */
         async handleSearch() {
             this.isLoading = true;
-            const res: any = await this.$https.get('http://127.0.0.1:1111/article/findSysArticles');
+            const res: any = await this.$https.get('http://118.25.221.201:1111/article/findSysArticles');
             this.isLoading = false;
             if (res.status === 200) {
                 const data: any = res.data;
@@ -161,6 +163,10 @@
 <style lang="less" scoped>
     #cover{
         width: 300px;
+    }
+
+    .leftPhone{
+        margin-top: 0 !important;
     }
 
     .left {

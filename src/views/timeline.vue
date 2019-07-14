@@ -1,6 +1,6 @@
 <!--页面-->
 <template>
-    <div class="timeline left">
+    <div class="timeline left"  v-bind:class="{ timelinePhone: isMobile }">
         <el-timeline>
             <el-timeline-item v-for="(timeline, index) in timelineList" :key="index"
                               :color="timeline.status === '1' ? 'green' : timeline.status === '2'? 'red' : ''"
@@ -34,6 +34,7 @@
     // @ts-ignore
     import LoadingCustom from "@/components/loading.vue";
     import {
+        isMobileOrPc,
         getScrollTop,
         getDocumentHeight,
         getWindowHeight,
@@ -51,6 +52,7 @@
         isLoadEnd: boolean = false;
         isLoading: boolean = false;
         timelineList: Array<object> = [];
+        isMobile: boolean = isMobileOrPc();
 
         /**
          * 自加载函数
@@ -72,7 +74,7 @@
          */
         async handleSearch() {
             this.isLoading = true;
-            const res: any = await this.$https.get("http://127.0.0.1:1111/sysTimelines");
+            const res: any = await this.$https.get("http://118.25.221.201:1111/sysTimelines");
             this.isLoading = false;
             if (res.status === 200) {
                 const data: any = res.data._embedded;
@@ -89,6 +91,10 @@
 
 <!--样式-->
 <style lang="less" scoped>
+    .timelinePhone{
+        margin-top: 0 !important;
+    }
+
     .timeline {
         padding: 40px 0;
         margin-top: 35%;

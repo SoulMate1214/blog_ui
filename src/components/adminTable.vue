@@ -248,7 +248,7 @@
                 });
             }
             this.isLoading = true;
-            const res: any = await this.$https.delete("http://127.0.0.1:1111/" + this.tableName + "/" + row[0]);
+            const res: any = await this.$https.delete("http://118.25.221.201:1111/" + this.tableName + "/" + row[0]);
             this.isLoading = false;
             if (res.status === 204) {
                 this.$message({

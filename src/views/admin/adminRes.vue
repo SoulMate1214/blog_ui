@@ -33,9 +33,9 @@
             tableTitle: "资源表",
             tableName: "sysReses",
             associatedTableName :["sysReses"],
-            tableUrl: "http://localhost:1111/res/searchAll",
-            tableDeleteUrl:"http://localhost:1111/res/batchDelete",
-            tableSaveUrl:"http://localhost:1111/res/save",
+            tableUrl: "http://118.25.221.201:1111/res/searchAll",
+            tableDeleteUrl:"http://118.25.221.201:1111/res/batchDelete",
+            tableSaveUrl:"http://118.25.221.201:1111/res/save",
             tableHeader: ['编号','名称','排序','状态','备注','是否启用','创建时间','修改时间','创建者','修改者','父级编号','描述','资源路径','资源等级','图标','资源类型','父级详情']
         };
     }

@@ -48,7 +48,7 @@
             </div>
             <div v-if="isShow" class="nav-mobile-content"
                  :class="{'enter-slideUp': enterSlideUp,'leave-slideDown': leaveSlideDown}">
-                <div class="list">
+                <div class="list" v-if="isShow">
                     <div @click="handleClickMenu" class="item">
                         <router-link to="/">首 页</router-link>
                     </div>
@@ -63,10 +63,6 @@
                     </div>
                     <div class="item">
                         <a href="https://github.com/SoulMate1214" target="_blank">GitHub</a>
-                    </div>
-                    <div @click="handleClickMenu('/login')" class="item">
-                        <span v-if="userInfo._id">{{ userInfo.name }}</span>
-                        <span v-else>控制台</span>
                     </div>
                 </div>
             </div>
@@ -225,7 +221,7 @@
 
     .nav-mobile-content {
         font-size: 0.3rem;
-        height: 7.3rem;
+        height: 4rem;
         width: 100%;
         background-color: #fff;
 

@@ -1,7 +1,7 @@
 <!--页面-->
 <template>
     <div style="width: 100%">
-        <div class="article clearfix">
+        <div class="article clearfix" v-bind:class="{ articlePhone: isMobile }">
             <div v-show="!isLoading" :style="{'width': isMobileOrPc ? '100%' : '75%'}" class="article-left fl">
                 <div class="header">
 
@@ -52,17 +52,14 @@
                     <div id="content" class="article-detail"  v-html="articleMessage"></div>
                 </div>
 
-                <!--点赞-->
-                <div class="heart">
-                    <el-button type="danger" :loading="isLoading" @click="likeArticle">点赞
-                    </el-button>
-                </div>
-
                 <!--评论提交-->
                 <div class="heart">
                     <!--评论框-->
                     <textarea autocomplete="off" placeholder="文明社会，理性评论" class="el-textarea__inner"
                               style="min-height: 150px;" v-model="content"></textarea>
+                    <!--点赞-->
+                        <el-button type="danger" :loading="isLoading" @click="likeArticle">点赞
+                        </el-button>
                     <!--评论按钮-->
                     <el-button type="primary" :loading="btnLoading" style="margin-top: 15px" @click="handleAddComment">发
                         送
@@ -70,7 +67,7 @@
                 </div>
 
                 <!--显示评论信息-->
-                <CommentList style="margin-top: 20%" v-if="!isLoading" @refreshArticle="refreshArticle"
+                <CommentList style="margin-top: 50%" v-if="!isLoading" @refreshArticle="refreshArticle"
                              :list="discussList" :article_id="articleDetail.id"/>
             </div>
 
@@ -124,6 +121,7 @@
         labelList: Array<object> = [];
         discussList: Array<object> = [];
         articleMessage: string = "";
+        isMobile: boolean = isMobileOrPc();
         params: any = {
             articleId: "",
             message: "",
@@ -162,7 +160,7 @@
          */
         async handleSearch() {
             this.isLoading = true;
-            const res: any = await this.$https.get('http://127.0.0.1:1111/article/findSysArticleById?articleId=' + this.params.articleId);
+            const res: any = await this.$https.get('http://118.25.221.201:1111/article/findSysArticleById?articleId=' + this.params.articleId);
             this.isLoading = false;
             if (res.status === 200) {
                 this.articleDetail = res.data;
@@ -194,7 +192,7 @@
          */
         async discussSearch() {
             this.isLoading = true;
-            const res: any = await this.$https.get('http://127.0.0.1:1111/discuss/findDiscussByArticleId?articleId=' + this.params.articleId);
+            const res: any = await this.$https.get('http://118.25.221.201:1111/discuss/findDiscussByArticleId?articleId=' + this.params.articleId);
             this.isLoading = false;
             if (res.status === 200) {
                 const data: any = res.data;
@@ -213,7 +211,7 @@
          */
         async labelSearch() {
             this.isLoading = true;
-            const res: any = await this.$https.get('http://127.0.0.1:1111/articleLabel/findLabelByArticleId?articleId=' + this.params.articleId);
+            const res: any = await this.$https.get('http://118.25.221.201:1111/articleLabel/findLabelByArticleId?articleId=' + this.params.articleId);
             this.isLoading = false;
             if (res.status === 200) {
                 const data: any = res.data;
@@ -239,7 +237,7 @@
                 return;
             }
             this.btnLoading = true;
-            const res: any = await this.$https.post('http://127.0.0.1:1111/article/saveLikeCount', this.params);
+            const res: any = await this.$https.post('http://118.25.221.201:1111/article/saveLikeCount', this.params);
             this.btnLoading = false;
             if (res.status === 200) {
                 this.$message({
@@ -274,7 +272,7 @@
             }
             this.btnLoading = true;
             this.params.message = this.content;
-            const res: any = await this.$https.post("http://127.0.0.1:1111/discuss/saveDiscuss", this.params);
+            const res: any = await this.$https.post("http://118.25.221.201:1111/discuss/saveDiscuss", this.params);
             this.btnLoading = false;
             if (res.status === 200) {
                 this.content = "";
@@ -319,7 +317,9 @@
             color: #333;
         }
     }
-
+    .articlePhone{
+        margin-top: 0 !important;
+    }
     .article {
         width: 100%;
         margin-top: 50%;
@@ -401,7 +401,6 @@
     .heart {
         height: 60px;
         text-align: center;
-        margin: 50px;
     }
 
     .loader {

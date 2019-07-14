@@ -64,7 +64,7 @@ module.exports = {
       // 设置代理
       // proxy all requests starting with /api to jsonplaceholder
       "/api": {
-        target: "http://localhost:1111/",
+        target: "http://118.25.221.201:1111/",
         changeOrigin: true,
         ws: true,
         pathRewrite: {

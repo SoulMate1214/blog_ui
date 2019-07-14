@@ -33,9 +33,9 @@
             tableTitle: "角色资源表",
             tableName: "sysRoleReses",
             associatedTableName :["sysRoles","sysReses"],
-            tableUrl: "http://localhost:1111/roleRes/searchAll",
-            tableDeleteUrl:"http://localhost:1111/roleRes/batchDelete",
-            tableSaveUrl:"http://localhost:1111/roleRes/save",
+            tableUrl: "http://118.25.221.201:1111/roleRes/searchAll",
+            tableDeleteUrl:"http://118.25.221.201:1111/roleRes/batchDelete",
+            tableSaveUrl:"http://118.25.221.201:1111/roleRes/save",
             tableHeader: ['编号','名称','排序','状态','备注','是否启用','创建时间','修改时间','创建者','修改者','角色编号','资源编号','角色详情','资源详情']
         };
     }
