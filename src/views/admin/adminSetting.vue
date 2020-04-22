@@ -33,9 +33,9 @@
             tableTitle: "站点基本设置表",
             tableName: "sysSettings",
             associatedTableName :[],
-            tableUrl: "http://118.25.221.201:1111/setting/searchAll",
-            tableDeleteUrl:"http://118.25.221.201:1111/setting/batchDelete",
-            tableSaveUrl:"http://118.25.221.201:1111/setting/save",
+            tableUrl: "http://127.0.0.1:1111/setting/searchAll",
+            tableDeleteUrl:"http://127.0.0.1:1111/setting/batchDelete",
+            tableSaveUrl:"http://127.0.0.1:1111/setting/save",
             tableHeader: ['编号','名称','排序','状态','备注','是否启用','创建时间','修改时间','创建者','修改者','站点路劲','站点标题','站点子标题','站点基本信息','站点关键字']
         };
     }

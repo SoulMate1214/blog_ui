@@ -33,9 +33,9 @@
             tableTitle: "用户表",
             tableName: "sysUsers",
             associatedTableName :[],
-            tableUrl: "http://118.25.221.201:1111/user/searchAll",
-            tableDeleteUrl:"http://118.25.221.201:1111/user/batchDelete",
-            tableSaveUrl:"http://118.25.221.201:1111/user/save",
+            tableUrl: "http://127.0.0.1:1111/user/searchAll",
+            tableDeleteUrl:"http://127.0.0.1:1111/user/batchDelete",
+            tableSaveUrl:"http://127.0.0.1:1111/user/save",
             tableHeader: ['编号','名称','排序','状态','备注','是否启用','创建时间','修改时间','创建者','修改者','密码','邮箱','qq号','github地址']
         };
     }

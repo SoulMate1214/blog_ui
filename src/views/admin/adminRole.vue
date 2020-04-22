@@ -33,9 +33,9 @@
             tableTitle: "角色表",
             tableName: "sysRoles",
             associatedTableName :["sysRoles"],
-            tableUrl: "http://118.25.221.201:1111/role/searchAll",
-            tableDeleteUrl:"http://118.25.221.201:1111/role/batchDelete",
-            tableSaveUrl:"http://118.25.221.201:1111/role/save",
+            tableUrl: "http://127.0.0.1:1111/role/searchAll",
+            tableDeleteUrl:"http://127.0.0.1:1111/role/batchDelete",
+            tableSaveUrl:"http://127.0.0.1:1111/role/save",
             tableHeader: ['编号','名称','排序','状态','备注','是否启用','创建时间','修改时间','创建者','修改者','父级编号','描述','图标','父级详情']
         };
     }

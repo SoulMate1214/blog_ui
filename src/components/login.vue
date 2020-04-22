@@ -83,7 +83,7 @@
                 Message.warning("密码不能为空");
                 return;
             }
-            this.$https.post("http://118.25.221.201:1111/user/login", this.params)
+            this.$https.post("http://127.0.0.1:1111/user/login", this.params)
                 .then((reponse: any) => {
                     this.$message({
                         message: "信息正确,登录成功!",

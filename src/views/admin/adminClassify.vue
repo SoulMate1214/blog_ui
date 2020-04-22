@@ -33,9 +33,9 @@
             tableTitle: "分类表",
             tableName: "sysClassifies",
             associatedTableName :[],
-            tableUrl: "http://118.25.221.201:1111/classify/searchAll",
-            tableDeleteUrl:"http://118.25.221.201:1111/classify/batchDelete",
-            tableSaveUrl:"http://118.25.221.201:1111/classify/save",
+            tableUrl: "http://127.0.0.1:1111/classify/searchAll",
+            tableDeleteUrl:"http://127.0.0.1:1111/classify/batchDelete",
+            tableSaveUrl:"http://127.0.0.1:1111/classify/save",
             tableHeader: ['编号','名称','排序','状态','备注','是否启用','创建时间','修改时间','创建者','修改者']
         };
     }

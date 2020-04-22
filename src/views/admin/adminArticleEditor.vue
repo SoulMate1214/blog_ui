@@ -100,7 +100,7 @@
       async $imgAdd(pos, $file) {
         let  formdata = new FormData();
         formdata.append("image", $file)
-        this.$https.post("http://118.25.221.201:1111/file/saveFile", formdata,{
+        this.$https.post("http://127.0.0.1:1111/file/saveFile", formdata,{
                 headers: {"Content-Type": "multipart/form-data"}
               })
           .then((reponse) => {
@@ -124,7 +124,7 @@
         this.isLoading = true
         this.form.status = this.form.imageUrl[this.form.imageUrl.length-1]
         console.log(this.form.status)
-        const res = await this.$https.post("http://118.25.221.201:1111/article/saveArticle",this.form)
+        const res = await this.$https.post("http://127.0.0.1:1111/article/saveArticle",this.form)
         this.isLoading = false
         if (res.status === 200) {
           this.$message({
@@ -144,7 +144,7 @@
        */
       async handleLabelSearch() {
         this.isLoading = true
-        const res = await this.$https.get("http://118.25.221.201:1111/sysLabels")
+        const res = await this.$https.get("http://127.0.0.1:1111/sysLabels")
         this.isLoading = false
         if (res.status === 200) {
           const data = res.data._embedded
@@ -163,7 +163,7 @@
        */
       async handleArticleClassSearch() {
         this.isLoading = true
-        const res = await this.$https.get("http://118.25.221.201:1111/sysClassifies")
+        const res = await this.$https.get("http://127.0.0.1:1111/sysClassifies")
         this.isLoading = false
         if (res.status === 200) {
           const data = res.data._embedded

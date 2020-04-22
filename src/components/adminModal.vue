@@ -248,7 +248,7 @@
         async $imgAdd(pos:any, $file:any) {
             let  formdata = new FormData();
             formdata.append("image", $file)
-            const res: any = await this.$https.post("http://118.25.221.201:1111/file/saveFile", formdata,{
+            const res: any = await this.$https.post("http://127.0.0.1:1111/file/saveFile", formdata,{
                 headers: {"Content-Type": "multipart/form-data"}
             });
             if (res.status === 200) {
@@ -429,7 +429,7 @@
          * 获取关联数据
          */
         async handleDataList(value: any, index: any) {
-            const res = await this.$https.get("http://118.25.221.201:1111/" + value + "/");
+            const res = await this.$https.get("http://127.0.0.1:1111/" + value + "/");
             if (res.status === 200) {
                 const data = res.data._embedded
                 if (index === 0) {

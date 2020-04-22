@@ -4,7 +4,7 @@ import Router from "vue-router"
 Vue.use(Router)
 
 const route = new Router({
-    mode: "hash",
+    mode: "history",
     routes: [
         //  前台
         {

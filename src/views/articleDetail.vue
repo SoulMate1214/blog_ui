@@ -85,7 +85,7 @@
     import {Component, Vue} from "vue-property-decorator";
     import marked from 'marked'
     import hljs from "highlight.js";
-    import 'highlight.js/styles/monokai-sublime.css';
+    import 'highlight.js/styles/a11y-dark.css';
     import {
         timestampToTime,
         isMobileOrPc
@@ -160,7 +160,7 @@
          */
         async handleSearch() {
             this.isLoading = true;
-            const res: any = await this.$https.get('http://118.25.221.201:1111/article/findSysArticleById?articleId=' + this.params.articleId);
+            const res: any = await this.$https.get('http://127.0.0.1:1111/article/findSysArticleById?articleId=' + this.params.articleId);
             this.isLoading = false;
             if (res.status === 200) {
                 this.articleDetail = res.data;
@@ -192,7 +192,7 @@
          */
         async discussSearch() {
             this.isLoading = true;
-            const res: any = await this.$https.get('http://118.25.221.201:1111/discuss/findDiscussByArticleId?articleId=' + this.params.articleId);
+            const res: any = await this.$https.get('http://127.0.0.1:1111/discuss/findDiscussByArticleId?articleId=' + this.params.articleId);
             this.isLoading = false;
             if (res.status === 200) {
                 const data: any = res.data;
@@ -211,7 +211,7 @@
          */
         async labelSearch() {
             this.isLoading = true;
-            const res: any = await this.$https.get('http://118.25.221.201:1111/articleLabel/findLabelByArticleId?articleId=' + this.params.articleId);
+            const res: any = await this.$https.get('http://127.0.0.1:1111/articleLabel/findLabelByArticleId?articleId=' + this.params.articleId);
             this.isLoading = false;
             if (res.status === 200) {
                 const data: any = res.data;
@@ -237,7 +237,7 @@
                 return;
             }
             this.btnLoading = true;
-            const res: any = await this.$https.post('http://118.25.221.201:1111/article/saveLikeCount', this.params);
+            const res: any = await this.$https.post('http://127.0.0.1:1111/article/saveLikeCount', this.params);
             this.btnLoading = false;
             if (res.status === 200) {
                 this.$message({
@@ -272,7 +272,7 @@
             }
             this.btnLoading = true;
             this.params.message = this.content;
-            const res: any = await this.$https.post("http://118.25.221.201:1111/discuss/saveDiscuss", this.params);
+            const res: any = await this.$https.post("http://127.0.0.1:1111/discuss/saveDiscuss", this.params);
             this.btnLoading = false;
             if (res.status === 200) {
                 this.content = "";

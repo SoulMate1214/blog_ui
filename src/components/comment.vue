@@ -94,7 +94,7 @@
             }
             this.btnLoading = true;
             this.params.message = this.content;
-            const res: any = await this.$https.post("http://118.25.221.201:1111/discuss/saveReplyDiscuss", this.params);
+            const res: any = await this.$https.post("http://127.0.0.1:1111/discuss/saveReplyDiscuss", this.params);
             this.btnLoading = false;
             if (res.status === 200) {
                 this.content = "";

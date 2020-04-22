@@ -67,7 +67,7 @@
          */
         async handleArticleSearch() {
             this.isLoading = true;
-            const res: any = await this.$https.get('http://118.25.221.201:1111/article/findSysArticles');
+            const res: any = await this.$https.get('http://127.0.0.1:1111/article/findSysArticles');
             this.isLoading = false;
             if (res.status === 200) {
                 const data: any = res.data;
@@ -85,7 +85,7 @@
          */
         async handleLabelSearch() {
             this.isLoading = true;
-            const res: any = await this.$https.get("http://118.25.221.201:1111/sysLabels");
+            const res: any = await this.$https.get("http://127.0.0.1:1111/sysLabels");
             this.isLoading = false;
             if (res.status === 200) {
                 const data: any = res.data._embedded;
@@ -104,7 +104,7 @@
          */
         async handleArticleClassSearch() {
             this.isLoading = true;
-            const res: any = await this.$https.get('http://118.25.221.201:1111/sysClassifies');
+            const res: any = await this.$https.get('http://127.0.0.1:1111/sysClassifies');
             this.isLoading = false;
             if (res.status === 200) {
                 const data: any = res.data._embedded;

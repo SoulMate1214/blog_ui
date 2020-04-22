@@ -33,9 +33,9 @@
             tableTitle: "评论表",
             tableName: "sysDiscusses",
             associatedTableName :["sysDiscusses","sysArticles"],
-            tableUrl: "http://118.25.221.201:1111/discuss/searchAll",
-            tableDeleteUrl:"http://118.25.221.201:1111/discuss/batchDelete",
-            tableSaveUrl:"http://118.25.221.201:1111/discuss/save",
+            tableUrl: "http://127.0.0.1:1111/discuss/searchAll",
+            tableDeleteUrl:"http://127.0.0.1:1111/discuss/batchDelete",
+            tableSaveUrl:"http://127.0.0.1:1111/discuss/save",
             tableHeader: ['编号','名称','排序','状态','备注','是否启用','创建时间','修改时间','创建者','修改者','父级编号','文章编号','评论内容','文章详情','父级详情']
         };
     }

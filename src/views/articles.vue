@@ -104,9 +104,9 @@
         articleDetail(id: string) {
             let url: string = "";
             if (process.env.NODE_ENV === "development") {
-                url = "http://118.25.221.201/#/articleDetail?";
+                url = "http://127.0.0.1:2222/articleDetail?";
             } else {
-                url = "http://118.25.221.201/#/articleDetail?";
+                url = "http://127.0.0.1:2222/articleDetail?";
             }
             window.open(url + `sysArticles=${id}`);
         }
@@ -123,7 +123,7 @@
          */
         async handleSearch() {
             this.isLoading = true;
-            const res: any = await this.$https.get('http://118.25.221.201:1111/article/findSysArticles');
+            const res: any = await this.$https.get('http://127.0.0.1:1111/article/findSysArticles');
             this.isLoading = false;
             if (res.status === 200) {
                 const data: any = res.data;
