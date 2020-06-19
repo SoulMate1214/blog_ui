@@ -8,7 +8,7 @@
                  background-color="#545c64"
                  text-color="#fff"
                  active-text-color="#ffd04b">
-            <el-menu-item index="1" id="navTitle"><a href="http://127.0.0.1" target="_blank">冫Soul丶</a></el-menu-item>
+            <el-menu-item index="1" id="navTitle"><a href="http://127.0.0.1:2222" target="_blank">冫Soul丶</a></el-menu-item>
 
             <el-submenu index="2">
                 <template slot="title" class="navChild">我的工作台</template>
