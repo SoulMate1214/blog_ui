@@ -22,7 +22,7 @@
       return {
         isMobile:  isMobileOrPc(),
         title:["Japoul","EchoCow","Rmosdon","Rainss","纯洁的微笑","江南一点雨","小柒","匠心零度"],
-        message:["热爱的事情应当不留余力","念念不忘，必有回响","I Never Try , I Make It Happen","雨落凋殇","分享技术，品味人生","专注于 Spring Boot + 微服务","偶尔聊聊生活的地方","以匠心，铸非凡！"],
+        message:["热爱的事情应当不留余力","念念不忘，必有回响","I Make It Happen","雨落凋殇","分享技术，品味人生","专注于 Spring Boot + 微服务","偶尔聊聊生活的地方","以匠心，铸非凡！"],
         url:["http://japoul.cn/","https://echocow.cn/","http://rmosdon.cn/","https://rainss.cn/","http://www.ityouknow.com/","https://www.javaboy.org/","https://blog.52itstyle.vip/","http://www.jiangxinlingdu.com/"],
       };
     },
